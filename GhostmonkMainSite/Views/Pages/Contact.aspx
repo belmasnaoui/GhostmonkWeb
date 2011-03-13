@@ -1,11 +1,34 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Contact
+<asp:Content ID="Title" ContentPlaceHolderID="TitleContent" runat="server">
+    Ghostmonk: Contact
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Body" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2>Contact</h2>
+    <h1>CONTACT</h1>
+              
+    <p>If you would like to reach me, send me an email to <a href="mailto:nicholas@ghostmonk.com">nicholas@ghostmonk.com</a>
+    or use any of the social sites I frequent in the lower right hand corner.</p>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 
 </asp:Content>

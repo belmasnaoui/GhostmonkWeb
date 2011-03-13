@@ -2,26 +2,33 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head runat="server">
-    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
-    <meta name='description' content='Ghostmonk is the personal project, blog and protfolio of Nicholas Hillier, a programmer and technologist living in Montreal QC, Canada.' /> 
-    <meta name='keywords' content='programming, art, interactive, experiment, web development, technology, maker, technologist' /> 
-    <meta name='robots' content='index,follow,archive' /> 
- 
-    <meta name='geo.position' content='45.508867,-73.554242' /> 
-    <meta name='geo.placename' content='Montreal' /> 
-    <meta name='geo.region' content='CA-QC' /> 
 
-    <link href="../../Content/Styles/blueprint/screen.css" rel="stylesheet" type="text/css" />
-    <link href="../../Content/Styles/blueprint/print.css" rel="stylesheet" type="text/css" />
+<head runat="server">
     
-    <!--[if IE]>
-       <link href="../../Content/Styles/blueprint/ie.css" rel="stylesheet" type="text/css" />
-    <![endif]--> 
-    <script src="../../Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
-    <script src="../../Scripts/cufon-yui.js" type="text/javascript"></script>
-    <script src="../../Scripts/HelveticaNeue_LT_57_Cn_400.font.js" type="text/javascript"></script>
-    <script src="../../Scripts/navigationEffect.js" type="text/javascript"></script>
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    
+    <meta name='description' content='Ghostmonk is the personal project, blog and protfolio of Nicholas Hillier, a programmer and technologist living in Montreal QC, Canada.' />
+    <meta name='keywords' content='programming, art, interactive, experiment, web development, technology, maker, technologist' />
+    <meta name='robots' content='index,follow,archive' />
+    <meta name='geo.position' content='45.508867,-73.554242' />
+    <meta name='geo.placename' content='Montreal' />
+    <meta name='geo.region' content='CA-QC' />
+
+    <asp:ContentPlaceHolder ID="ScriptsAndStylesIncludes" runat="server">
+    
+        <%: Html.CssLink( "~/Content/Styles/blueprint/screen.css", "screen" )%>
+        <%: Html.CssLink( "~/Content/Styles/blueprint/print.css", "print" )%>
+    
+        <!--[if IE]>
+            <%: Html.CssLink( "~/Content/Styles/blueprint/ie.css", "screen" )%>
+        <![endif]--> 
+    
+        <%: Html.JsScriptLink( "~/Scripts/jquery-1.4.1.min.js" )%>
+        <%: Html.JsScriptLink( "~/Scripts/cufon-yui.js" )%>
+        <%: Html.JsScriptLink( "~/Scripts/HelveticaNeue_LT_57_Cn_400.font.js" )%>
+        <%: Html.JsScriptLink( "~/Scripts/navigationEffect.js" )%>
+
+    </asp:ContentPlaceHolder>
 
     <script type="text/javascript">
         $(document).ready(function ()
@@ -37,124 +44,67 @@
 </head>
 
 <body>
-    <form id="Form1" runat="server">
-        <div id="TopStretch"></div>
 
-        <div id="OuterContainer" class="container">
+    <div id="TopStretch"></div>
+
+    <div id="OuterContainer" class="container">
         
-            <div id="Navigation" class="span-27 last">
-                <ul>
-                    <li><%: Html.ActionLink( "Ghostmonk", "Index", "Pages" )%></li>
-                    <li><%: Html.ActionLink( "Inspiration", "Inspiration", "Pages" )%></li>
-                    <li><%: Html.ActionLink( "Mood", "Mood", "Pages" )%></li>
-                    <li><%: Html.ActionLink( "Features", "Features", "Pages" )%></li>
-                    <li><%: Html.ActionLink( "About", "About", "Pages" )%></li>
-                    <li><%: Html.ActionLink( "Contact", "Contact", "Pages" )%></li>
-                </ul>
-            </div>
+        <div id="Navigation" class="span-27 last">
+            <ul>
+                <li class="current"><%: Html.ActionLink( "Ghostmonk", "Index", "Pages" ) %></li>
+                <li><%: Html.ActionLink( "Inspiration", "Inspiration", "Pages" ) %></li>
+                <li><%: Html.ActionLink( "Mood", "Mood", "Pages" ) %></li>
+                <li><%: Html.ActionLink( "Features", "Features", "Pages" ) %></li>
+                <li><%: Html.ActionLink( "About", "About", "Pages" ) %></li>
+                <li><%: Html.ActionLink( "Contact", "Contact", "Pages" ) %></li>
+            </ul>
+        </div>
         
-            <div id="TopEdge" class="span-26 prepend-1 last"><img src="/App_Themes/Ghostmonk/Images/structure/top-bg-border.jpg" /></div>
+        <div id="TopEdge" class="span-26 prepend-1 last"><%: Html.Image( "~/App_Themes/Ghostmonk/Images/structure/top-bg-border.jpg", "border" )%></div>
 
-            <div class="span-1"><img src="/App_Themes/Ghostmonk/Images/structure/spacer.gif" /></div>
-
-            <div id="MainSiteBody" class="container span-25 last">
+        <div class="span-1"><%: Html.Image( "~/App_Themes/Ghostmonk/Images/structure/spacer.gif", "spacer" )%></div>
+        <div id="MainSiteBody" class="container span-25 last">
             
-                <div id="MainArticleColumn" class="span-17">
+            <div id="MainArticleColumn" class="span-17">
                 
-                    <div id="Featured" class="span-12 push-3 last">
-                        <br /><br />
-                        <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+                <div id="Featured" class="span-12 push-3 last">
+                    <br /><br />
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
         
-                    </div>
+                </div>
                 
-                    <div id="ProgrammingArticles" class="span-8 push-half"></div>
+                <div id="ProgrammingArticles" class="span-8 push-half"></div>
 
-                    <div id="Experiments" class="span-8 last"></div>
+                <div id="Experiments" class="span-8 last"></div>
 
-                    <div id="BookReviews" class="span-8 push-half"></div>
+                <div id="BookReviews" class="span-8 push-half"></div>
 
-                    <div id="LatesImage" class="span-8 last"></div>
+                <div id="LatesImage" class="span-8 last"></div>
 
+            </div>
+
+            <div id="ModuleColumn" class="span-7">
+
+                <div id="Twitter" class="push-half"></div>
+
+                <div id="CurrentWork" class="push-half">
+                    <h2>Currently I am...</h2>
+                    <p>Playing with ASP.NET and trying to understand the architectural decisions made by the engineers at Microsoft.</p>
                 </div>
 
-                <div id="ModuleColumn" class="span-7">
+                <div id="BlogRoll" class="push-half">
+                    <% Html.RenderPartial( "BlogRoll" ); %>
+                </div>
 
-                    <div id="Twitter" class="push-half"></div>
+                <div id="GoodReads" class="push-half">
+                        
+                </div>
 
-                    <div id="CurrentWork" class="push-half">
-                        <h2>Currently I am...</h2>
-                        <p>Playing with ASP.NET and trying to understand the architectural decisions made by the engineers at Microsoft.</p>
+                <div id="socialWidget">
+
+                    <div id="SocialMedia" class="push-half">
+                        <% Html.RenderPartial( "SocialMediaLinks" ); %>
                     </div>
-
-                    <div id="BlogRoll" class="push-half">
-                        <h2>Players</h2>
-                        <ul>
-                            <li>
-                                <a href="http://www.notsosimpleton.com">Not So Simpleton</a>
-                            </li>
-                            <li>
-                                <a href="http://www.struct.ca">Matt Rixx</a>
-                            </li>
-                            <li>
-                                <a href="http://www.champagnevalentine.com">Champagne Valentine</a>
-                            </li>
-                            <li>
-                                <a href="http://www.skullbee.com">Pelletron</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div id="GoodReads" class="push-half">
-                    
-                    </div>
-
-                    <asp:Panel runat="server" ID="socialWidget">
-                        <div id="SocialMedia" class="push-half">
-                            <h2>Interwebs</h2>
-                            <ul>
-                                <li>
-                                    <a href="http://www.goodreads.com/ghostmonk">
-                                        <img src="/Images/social-icons/goodreads.png" class="active" alt="Good Reads" />
-                                        <img src="/Images/social-icons/goodreads-out.png" class="inactive" alt="Good Reads" /></a>
-                                </li>
-                                <li>
-                                    <a href="http://ca.linkedin.com/in/ghostmonk">
-                                        <img src="/Images/social-icons/linked-in.png" class="active" alt="LinkedIn" />
-                                        <img src="/Images/social-icons/linked-in-out.png" class="inactive" alt="LinkedIn" /></a>
-                                </li>
-                                <li>
-                                    <a href="http://github.com/ghostmonk">
-                                        <img src="/Images/social-icons/github.png" class="active" alt="GIT" />
-                                        <img src="/Images/social-icons/github-out.png" class="inactive" alt="GIT" /></a>
-                                </li>
-                                <li>
-                                    <a href="http://www.flickr.com/ghostmonk">
-                                        <img src="/Images/social-icons/flickr.png" class="active" alt="Flickr" />
-                                        <img src="/Images/social-icons/flickr-out.png" class="inactive" alt="Flickr" /></a>
-                                </li>
-                                <li>
-                                    <a href="http://www.facebook.com/ghostmonk">
-                                        <img src="/Images/social-icons/facebook.png" class="active" alt="facebook" />
-                                        <img src="/Images/social-icons/facebook-out.png" class="inactive" alt="facebook" /></a>    
-                                </li>
-                                <li>
-                                    <a href="http://www.google.com/profiles/logossuck">
-                                        <img src="/Images/social-icons/google.png" class="active" alt="google" />
-                                        <img src="/Images/social-icons/google-out.png" class="inactive" alt="google" /></a>
-                                </li>
-                                <li>
-                                    <a href="http://www.last.fm/user/monasticphantom">
-                                        <img src="/Images/social-icons/lastfm.png" class="active" alt="last fm" />
-                                        <img src="/Images/social-icons/lastfm-out.png" class="inactive" alt="last fm" /></a>
-                                </li>
-                                <li>
-                                    <a href="http://twitter.com/ghostmonk">
-                                        <img src="/Images/social-icons/twitter.png" class="active" alt="twitter" />
-                                        <img src="/Images/social-icons/twitter-out.png" class="inactive" alt="twitter" /></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </asp:Panel>
 
                 </div>
 
@@ -162,25 +112,26 @@
 
         </div>
 
-        <div id="BottomStretch">
+    </div>
 
-            <div class="container">
+    <div id="BottomStretch">
+
+        <div class="container">
             
-                <div id="Tags"></div>
+            <div id="Tags"></div>
             
-                <div id="Archives">
-                   <br />
-                   <br />
-                   <br />
-                   <br />
-                   <br />
-                   <br />
-                   <br />
-                   <br />
-                   <br />
-                </div>
+            <div id="Archives">
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
             </div>
         </div>
-    </form>
+    </div>
 </body>
 </html>

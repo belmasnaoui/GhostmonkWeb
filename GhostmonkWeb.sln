@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhostmonkLib", "GhostmonkLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhostmonkMainSiteModel", "GhostmonkMainSiteModel\GhostmonkMainSiteModel.csproj", "{434400D9-0687-44D9-BF2F-49CDD3076854}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhostmonkLib.Tests", "GhostmonkLib.Tests\GhostmonkLib.Tests.csproj", "{6991347E-567E-4FFE-9931-0B4D7F0226EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{434400D9-0687-44D9-BF2F-49CDD3076854}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{434400D9-0687-44D9-BF2F-49CDD3076854}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{434400D9-0687-44D9-BF2F-49CDD3076854}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6991347E-567E-4FFE-9931-0B4D7F0226EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6991347E-567E-4FFE-9931-0B4D7F0226EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6991347E-567E-4FFE-9931-0B4D7F0226EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6991347E-567E-4FFE-9931-0B4D7F0226EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

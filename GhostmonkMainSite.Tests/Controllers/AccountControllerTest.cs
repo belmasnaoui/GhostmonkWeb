@@ -7,7 +7,6 @@ using System.Web.Security;
 using NUnit.Framework;
 using GhostmonkMainSite;
 using GhostmonkMainSite.Controllers;
-using GhostmonkMainSite.Models;
 
 namespace GhostmonkMainSite.Tests.Controllers
 {

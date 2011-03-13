@@ -1,4 +1,4 @@
-﻿namespace GhostmonkSite
+﻿namespace GhostmonkMainSite.Models
 {
     public class CustomSettings
     {
