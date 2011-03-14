@@ -18,7 +18,7 @@
     
         <%: Html.CssLink( "~/Content/Styles/blueprint/screen.css", "screen" )%>
         <%: Html.CssLink( "~/Content/Styles/blueprint/print.css", "print" )%>
-    
+        
         <!--[if IE]>
             <%: Html.CssLink( "~/Content/Styles/blueprint/ie.css", "screen" )%>
         <![endif]--> 
@@ -52,11 +52,11 @@
         <div id="Navigation" class="span-27 last">
             <ul>
                 <li class="current"><%: Html.ActionLink( "Ghostmonk", "Index", "Pages" ) %></li>
-                <li><%: Html.ActionLink( "Inspiration", "Inspiration", "Pages" ) %></li>
-                <li><%: Html.ActionLink( "Mood", "Mood", "Pages" ) %></li>
-                <li><%: Html.ActionLink( "Features", "Features", "Pages" ) %></li>
-                <li><%: Html.ActionLink( "About", "About", "Pages" ) %></li>
-                <li><%: Html.ActionLink( "Contact", "Contact", "Pages" ) %></li>
+                <li><%: Html.ActionLink( "Inspiration", "Page", "Pages", new { id = 4 }, null ) %></li>
+                <li><%: Html.ActionLink( "Mood", "Page", "Pages", new { id = 2 }, null )%></li>
+                <li><%: Html.ActionLink( "Features", "Page", "Pages", new { id = 3 }, null )%></li>
+                <li><%: Html.ActionLink( "About", "Page", "Pages", new { id = 1 }, null )%></li>
+                <li><%: Html.ActionLink( "Contact", "Page", "Pages", new { id = 5 }, null )%></li>
             </ul>
         </div>
         

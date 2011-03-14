@@ -59,6 +59,19 @@
   <ItemGroup>
     <None Include="App.Config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="GhostmonkMainSiteModelContainer.edmx.sql" />
+    <Content Include="inserts\categories.sql" />
+    <Content Include="inserts\cvs.sql" />
+    <Content Include="inserts\journalentries.sql" />
+    <Content Include="inserts\journals.sql" />
+    <Content Include="inserts\pages.sql" />
+    <Content Include="inserts\skills.sql" />
+    <Content Include="inserts\tags.sql" />
+    <Content Include="inserts\users.sql" />
+    <Content Include="inserts\workexperience.sql" />
+    <Content Include="inserts\workexperienceskill.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

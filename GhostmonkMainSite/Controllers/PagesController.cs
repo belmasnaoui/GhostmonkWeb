@@ -1,19 +1,23 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
+using GhostmonkMainSiteModel;
 
 namespace GhostmonkMainSite.Controllers
 {
     public class PagesController : Controller
     {
-        public ActionResult Index() { return View(); }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
-        public ActionResult Inspiration() { return View(); }
-
-        public ActionResult Mood() { return View(); }
-
-        public ActionResult Features() { return View(); }
-
-        public ActionResult About() { return View(); }
-
-        public ActionResult Contact() { return View(); }
+        public ActionResult Page( int id )
+        {
+            using( var container = new GhostmonkMainSiteModelContainer() )
+            {
+                Page target = container.Pages.Where( page => page.Id == id ).First();
+                return View( target );
+            }
+        }
     }
 }
