@@ -8,8 +8,10 @@
 
     <h2><%: Model.Title %></h2>
 
-    <%: Html.Image( Model.MainImage, Model.Title ) + "<br />" %>
+    <%  if( Model.MainImage != null ) { %>
+            <%= Html.Image( Model.MainImage, Model.Title ) + "<br />" %>
+    <% } %>
 
-    <%: Server.UrlDecode( Model.Body ) %>
+    <%= Server.UrlDecode( Model.Body ) %>
 
 </asp:Content>
