@@ -14,7 +14,7 @@ VALUES ('HUMBLE PROGRAMMING, AND OTHER ZENFUL CONNECTIONS',
 <p>And so, by centering myself, I was able to forge ahead and achieve a large conceptual breakthrough in building Ghostmonk. Now I have Master Pages, have implemented Themes and Skins and have started building custom user controls. Much of these concepts where unknown to me even yesterday.</p>',
 '02/12/2011', '~/Content/Images/bank/posts/blaze.jpg', 1, 1 )
 
-INSERT INTO [GhostmonkMainSite].[dbo].[JournalEntries]([Title],[Body],[PublishDate],[MainImage],[Journal_Id],[Category_Id])
+INSERT INTO [GhostmonkMainSite].[dbo].[JournalEntries]([Title],[Body],[PublishDate],[MainImage],[Journal_Id],[Category_Id],[Summary])
 VALUES ('FOR THE LOVE OF.... JUST RELEASE ME ALREADY',
 '<p>Ok, this site is nowhere near completition, but I''ve made a fair bit of progress on the design. Unfortunately, that was the easy part....</p>
 <p>What you are experiencing here is the embryonic stage of a much larger genesis.</p>
@@ -26,4 +26,5 @@ VALUES ('FOR THE LOVE OF.... JUST RELEASE ME ALREADY',
 <p>It may take a long long time to achieve something closer to what I have envisioned, but it''s not really about the destination.</p>
 <p>If you are rocking Adobe Flash on your Box, then you can take a look at some of my older work here -><a href="http://selectedWork.ghostmonk.com">selectedWork.ghostmonk.com</a></p>
 <p>Thanks for the interest!</p>',
-'12/30/2010', '~/Content/Images/bank/posts/rhino.jpg', 1, 1 )
+'12/30/2010', '~/Content/Images/bank/posts/rhino.jpg', 1, 1, 
+'<p>Ok, this site is nowhere near completition, but I''ve made a fair bit of progress on the design. Unfortunately, that was the easy part....</p>' )

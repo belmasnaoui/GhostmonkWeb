@@ -137,6 +137,7 @@
     <Content Include="Scripts\navigationEffect.js" />
     <Content Include="Views\Pages\Index.aspx" />
     <Content Include="Views\Pages\Page.aspx" />
+    <Content Include="Views\Posts\FullPost.aspx" />
     <Content Include="Views\Posts\HtmlFeed.ascx" />
     <Content Include="Views\Widgets\BlogRoll.ascx" />
     <Content Include="Views\Widgets\SocialMediaLinks.ascx" />

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 03/13/2011 21:16:28
+-- Date Created: 03/15/2011 21:06:25
 -- Generated from EDMX file: D:\Projects\ghostmonk\GhostmonkWeb\GhostmonkMainSiteModel\GhostmonkMainSiteModelContainer.edmx
 -- --------------------------------------------------
 
@@ -94,6 +94,7 @@ CREATE TABLE [dbo].[JournalEntries] (
     [Body] nvarchar(max)  NOT NULL,
     [PublishDate] datetime  NOT NULL,
     [MainImage] nvarchar(max)  NULL,
+    [Summary] nvarchar(max)  NULL,
     [Journal_Id] int  NOT NULL,
     [Category_Id] int  NOT NULL
 );
@@ -172,6 +173,15 @@ CREATE TABLE [dbo].[Pages] (
 );
 GO
 
+-- Creating table 'PullQuotes'
+CREATE TABLE [dbo].[PullQuotes] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Text] nvarchar(max)  NOT NULL,
+    [Priority] int  NOT NULL,
+    [JournalEntry_Id] int  NOT NULL
+);
+GO
+
 -- Creating table 'WorkExperienceSkill'
 CREATE TABLE [dbo].[WorkExperienceSkill] (
     [WorkExperience_Id] int  NOT NULL,
@@ -234,6 +244,12 @@ GO
 -- Creating primary key on [Id] in table 'Pages'
 ALTER TABLE [dbo].[Pages]
 ADD CONSTRAINT [PK_Pages]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'PullQuotes'
+ALTER TABLE [dbo].[PullQuotes]
+ADD CONSTRAINT [PK_PullQuotes]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -380,6 +396,20 @@ ADD CONSTRAINT [FK_WorkExperienceSkill_Skill]
 CREATE INDEX [IX_FK_WorkExperienceSkill_Skill]
 ON [dbo].[WorkExperienceSkill]
     ([Skills_Id]);
+GO
+
+-- Creating foreign key on [JournalEntry_Id] in table 'PullQuotes'
+ALTER TABLE [dbo].[PullQuotes]
+ADD CONSTRAINT [FK_JournalEntryPullQuote]
+    FOREIGN KEY ([JournalEntry_Id])
+    REFERENCES [dbo].[JournalEntries]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_JournalEntryPullQuote'
+CREATE INDEX [IX_FK_JournalEntryPullQuote]
+ON [dbo].[PullQuotes]
+    ([JournalEntry_Id]);
 GO
 
 -- --------------------------------------------------

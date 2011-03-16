@@ -15,6 +15,7 @@
     <EntitySet Name="WorkExperiences" EntityType="GhostmonkMainSiteModel.Store.WorkExperiences" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Skills" EntityType="GhostmonkMainSiteModel.Store.Skills" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Pages" EntityType="GhostmonkMainSiteModel.Store.Pages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PullQuotes" EntityType="GhostmonkMainSiteModel.Store.PullQuotes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WorkExperienceSkill" EntityType="GhostmonkMainSiteModel.Store.WorkExperienceSkill" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="JournalJournalEntry" Association="GhostmonkMainSiteModel.Store.JournalJournalEntry">
       <End Role="Journal" EntitySet="Journals" />
@@ -56,6 +57,10 @@
       <End Role="Skill" EntitySet="Skills" />
       <End Role="WorkExperienceSkill" EntitySet="WorkExperienceSkill" />
     </AssociationSet>
+    <AssociationSet Name="JournalEntryPullQuote" Association="GhostmonkMainSiteModel.Store.JournalEntryPullQuote">
+      <End Role="JournalEntry" EntitySet="JournalEntries" />
+      <End Role="PullQuote" EntitySet="PullQuotes" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="JournalEntries">
     <Key>
@@ -66,6 +71,7 @@
     <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PublishDate" Type="datetime" Nullable="false" />
     <Property Name="MainImage" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Summary" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Journal_Id" Type="int" Nullable="false" />
     <Property Name="Category_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -141,6 +147,15 @@
     <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
     <Property Name="MainImage" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="PullQuotes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Priority" Type="int" Nullable="false" DefaultValue="1" />
+    <Property Name="JournalEntry_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="WorkExperienceSkill">
     <Key>
@@ -246,6 +261,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="JournalEntryPullQuote">
+    <End Role="JournalEntry" Type="GhostmonkMainSiteModel.Store.JournalEntries" Multiplicity="1" />
+    <End Role="PullQuote" Type="GhostmonkMainSiteModel.Store.PullQuotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JournalEntry">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PullQuote">
+        <PropertyRef Name="JournalEntry_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_WorkExperienceSkill_WorkExperience">
     <End Role="WorkExperience" Type="GhostmonkMainSiteModel.Store.WorkExperiences" Multiplicity="1" />
     <End Role="WorkExperienceSkill" Type="GhostmonkMainSiteModel.Store.WorkExperienceSkill" Multiplicity="*" />
@@ -320,6 +347,11 @@
             <End Role="Skill" EntitySet="Skills" />
           </AssociationSet>
           <EntitySet Name="Pages" EntityType="GhostmonkMainSiteModel.Page" />
+          <EntitySet Name="PullQuotes" EntityType="GhostmonkMainSiteModel.PullQuote" />
+          <AssociationSet Name="JournalEntryPullQuote" Association="GhostmonkMainSiteModel.JournalEntryPullQuote">
+            <End Role="JournalEntry" EntitySet="JournalEntries" />
+            <End Role="PullQuote" EntitySet="PullQuotes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="JournalEntry">
           <Key>
@@ -333,6 +365,8 @@
           <NavigationProperty Name="Journal" Relationship="GhostmonkMainSiteModel.JournalJournalEntry" FromRole="JournalEntry" ToRole="Journal" />
           <NavigationProperty Name="Tags" Relationship="GhostmonkMainSiteModel.JournalEntryTag" FromRole="JournalEntry" ToRole="Tag" />
           <NavigationProperty Name="Category" Relationship="GhostmonkMainSiteModel.CategoryJournalEntry" FromRole="JournalEntry" ToRole="Category" />
+          <Property Type="String" Name="Summary" Nullable="true" />
+          <NavigationProperty Name="PullQuotes" Relationship="GhostmonkMainSiteModel.JournalEntryPullQuote" FromRole="JournalEntry" ToRole="PullQuote" />
         </EntityType>
         <EntityType Name="Journal">
           <Key>
@@ -452,6 +486,19 @@
           <Property Type="String" Name="Body" Nullable="false" />
           <Property Type="String" Name="MainImage" Nullable="true" />
         </EntityType>
+        <EntityType Name="PullQuote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Text" Nullable="false" />
+          <NavigationProperty Name="JournalEntry" Relationship="GhostmonkMainSiteModel.JournalEntryPullQuote" FromRole="PullQuote" ToRole="JournalEntry" />
+          <Property Type="Int32" Name="Priority" Nullable="false" DefaultValue="1" />
+        </EntityType>
+        <Association Name="JournalEntryPullQuote">
+          <End Type="GhostmonkMainSiteModel.JournalEntry" Role="JournalEntry" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.PullQuote" Role="PullQuote" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -466,6 +513,7 @@
           <ScalarProperty Name="Body" ColumnName="Body" />
           <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
           <ScalarProperty Name="MainImage" ColumnName="MainImage" />
+          <ScalarProperty Name="Summary" ColumnName="Summary" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -544,6 +592,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PullQuotes">
+      <EntityTypeMapping TypeName="IsTypeOf(GhostmonkMainSiteModel.PullQuote)">
+        <MappingFragment StoreEntitySet="PullQuotes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="JournalJournalEntry" TypeName="GhostmonkMainSiteModel.JournalJournalEntry" StoreEntitySet="JournalEntries">
       <EndProperty Name="Journal">
         <ScalarProperty Name="Id" ColumnName="Journal_Id" />
@@ -616,6 +673,14 @@
         <ScalarProperty Name="Id" ColumnName="Skills_Id" />
       </EndProperty>
     </AssociationSetMapping>
+    <AssociationSetMapping Name="JournalEntryPullQuote" TypeName="GhostmonkMainSiteModel.JournalEntryPullQuote" StoreEntitySet="PullQuotes">
+      <EndProperty Name="JournalEntry">
+        <ScalarProperty Name="Id" ColumnName="JournalEntry_Id" />
+      </EndProperty>
+      <EndProperty Name="PullQuote">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -635,26 +700,31 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="GhostmonkMainSiteModelContainer" >
-        <EntityTypeShape EntityType="GhostmonkMainSiteModel.JournalEntry" Width="1.5" PointX="4.625" PointY="3.875" Height="2.5571907552083326" />
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.JournalEntry" Width="1.5" PointX="4.625" PointY="3.875" Height="2.7494921874999996" />
         <EntityTypeShape EntityType="GhostmonkMainSiteModel.Journal" Width="1.5" PointX="2.5" PointY="0.75" Height="1.9802864583333331" IsExpanded="true" />
-        <AssociationConnector Association="GhostmonkMainSiteModel.JournalJournalEntry">
-          <ConnectorPoint PointX="3.5275859524671747" PointY="2.7302864583333326" />
-          <ConnectorPoint PointX="3.5275859524671747" PointY="3.5" />
-          <ConnectorPoint PointX="5.2283365838615437" PointY="3.5" />
-          <ConnectorPoint PointX="5.2283365838615437" PointY="3.8749999999999996" />
+        <AssociationConnector Association="GhostmonkMainSiteModel.JournalJournalEntry" ManuallyRouted="true">
+          <ConnectorPoint PointX="4" PointY="2.7302864583333331" />
+          <ConnectorPoint PointX="4" PointY="2.8540364583333329" />
+          <ConnectorPoint PointX="4.15625" PointY="2.8540364583333329" />
+          <ConnectorPoint PointX="4.53125" PointY="3.1052864583333331" />
+          <ConnectorPoint PointX="5.4375" PointY="3.1052864583333331" />
+          <ConnectorPoint PointX="5.4375" PointY="3.572916666666667" />
+          <ConnectorPoint PointX="5.3645833333333339" PointY="3.572916666666667" />
+          <ConnectorPoint PointX="5.3645833333333339" PointY="3.5" />
+          <ConnectorPoint PointX="4.25" PointY="3.5" />
+          <ConnectorPoint PointX="5.5316803873982856" PointY="3.875" />
         </AssociationConnector>
         <EntityTypeShape EntityType="GhostmonkMainSiteModel.User" Width="1.75" PointX="5.75" PointY="0.5" Height="2.5571907552083331" />
         <EntityTypeShape EntityType="GhostmonkMainSiteModel.Tag" Width="1.5" PointX="0.5" PointY="3.875" Height="1.7879850260416657" />
         <EntityTypeShape EntityType="GhostmonkMainSiteModel.Category" Width="1.5" PointX="2.5" PointY="3.875" Height="1.7879850260416661" />
         <AssociationConnector Association="GhostmonkMainSiteModel.JournalEntryTag">
-          <ConnectorPoint PointX="4.625" PointY="6.2001482281292457" />
-          <ConnectorPoint PointX="1.25" PointY="6.2001482281292457" />
+          <ConnectorPoint PointX="4.625" PointY="6.1437391067708322" />
+          <ConnectorPoint PointX="1.25" PointY="6.1437391067708322" />
           <ConnectorPoint PointX="1.25" PointY="5.6629850260416656" />
         </AssociationConnector>
-        <AssociationConnector Association="GhostmonkMainSiteModel.CategoryJournalEntry" ManuallyRouted="true">
-          <ConnectorPoint PointX="3.25" PointY="5.6629850260416656" />
-          <ConnectorPoint PointX="3.25" PointY="5.9751892304002183" />
-          <ConnectorPoint PointX="4.625" PointY="5.9751892304002183" />
+        <AssociationConnector Association="GhostmonkMainSiteModel.CategoryJournalEntry" ManuallyRouted="false">
+          <ConnectorPoint PointX="4" PointY="4.8002450130208327" />
+          <ConnectorPoint PointX="4.625" PointY="4.8002450130208327" />
         </AssociationConnector>
         <AssociationConnector Association="GhostmonkMainSiteModel.JournalCategory" ManuallyRouted="false">
           <ConnectorPoint PointX="3.2411330746040279" PointY="2.7302864583333331" />
@@ -686,6 +756,12 @@
           <ConnectorPoint PointX="11.5625" PointY="3.875" />
         </AssociationConnector>
         <EntityTypeShape EntityType="GhostmonkMainSiteModel.Page" Width="1.5" PointX="8" PointY="3.875" Height="1.7879850260416665" />
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.PullQuote" Width="1.5" PointX="6.625" PointY="6.75" Height="1.7879850260416657" />
+        <AssociationConnector Association="GhostmonkMainSiteModel.JournalEntryPullQuote">
+          <ConnectorPoint PointX="5.375" PointY="6.8167936197916665" />
+          <ConnectorPoint PointX="5.375" PointY="7.6439925130208337" />
+          <ConnectorPoint PointX="6.625" PointY="7.6439925130208337" />
+        </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

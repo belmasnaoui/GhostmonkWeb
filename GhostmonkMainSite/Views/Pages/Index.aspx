@@ -6,6 +6,6 @@
 
 <asp:Content ID="Body" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h1>INDEX</h1>
+    <% Html.RenderAction( "HtmlPostsFeed", "Posts" ); %>
 
 </asp:Content>

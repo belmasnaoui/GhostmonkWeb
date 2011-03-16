@@ -8,8 +8,18 @@
     
     <%: Html.Image( entry.MainImage, entry.Title ) %>
 
-    <%: entry.Body %>
-    
+    <% if( entry.Summary == null ) { %>
+       
+       <%= entry.Body.Substring( 0, 200 ) %>
+        
+    <% } else { %>
+        
+        <%= entry.Summary %>
+
+    <% } %>
+
+    <%: Html.ActionLink( "Read More...", "FullPost", "Posts", new { id = entry.Id }, null ) %>
+
     <hr />
 
 <% }  %>
