@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 03/15/2011 21:06:25
+-- Date Created: 03/17/2011 18:16:36
 -- Generated from EDMX file: D:\Projects\ghostmonk\GhostmonkWeb\GhostmonkMainSiteModel\GhostmonkMainSiteModelContainer.edmx
 -- --------------------------------------------------
 
@@ -47,6 +47,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_WorkExperienceSkill_Skill]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[WorkExperienceSkill] DROP CONSTRAINT [FK_WorkExperienceSkill_Skill];
 GO
+IF OBJECT_ID(N'[dbo].[FK_JournalEntryPullQuote]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PullQuotes] DROP CONSTRAINT [FK_JournalEntryPullQuote];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -79,6 +82,9 @@ GO
 IF OBJECT_ID(N'[dbo].[Pages]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Pages];
 GO
+IF OBJECT_ID(N'[dbo].[PullQuotes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PullQuotes];
+GO
 IF OBJECT_ID(N'[dbo].[WorkExperienceSkill]', 'U') IS NOT NULL
     DROP TABLE [dbo].[WorkExperienceSkill];
 GO
@@ -95,6 +101,7 @@ CREATE TABLE [dbo].[JournalEntries] (
     [PublishDate] datetime  NOT NULL,
     [MainImage] nvarchar(max)  NULL,
     [Summary] nvarchar(max)  NULL,
+    [LinkText] nvarchar(max)  NOT NULL,
     [Journal_Id] int  NOT NULL,
     [Category_Id] int  NOT NULL
 );
@@ -169,7 +176,8 @@ CREATE TABLE [dbo].[Pages] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Title] nvarchar(max)  NOT NULL,
     [Body] nvarchar(max)  NOT NULL,
-    [MainImage] nvarchar(max)  NULL
+    [MainImage] nvarchar(max)  NULL,
+    [LinkText] nvarchar(max)  NULL
 );
 GO
 

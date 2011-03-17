@@ -1,5 +1,5 @@
-INSERT INTO [GhostmonkMainSite].[dbo].[Pages] ([Title],[Body])
-VALUES ( 'INSPIRATION', 
+INSERT INTO [GhostmonkMainSite].[dbo].[Pages] ([Title],[LinkText],[Body])
+VALUES ( 'INSPIRATION', 'inspiration',
 '<p>The following links have have given me some level of inspiration in designing this site.</p>
 <ul>
     <li><a href="http://wiki.github.com/sorccu/cufon">Cufon - html text replacement</a></li>
@@ -51,8 +51,8 @@ VALUES ( 'INSPIRATION',
 </ul>
 ' )
 
-INSERT INTO [GhostmonkMainSite].[dbo].[Pages] ([Title],[Body],[MainImage])
-VALUES ( 'MOOD BOARD', 
+INSERT INTO [GhostmonkMainSite].[dbo].[Pages] ([Title],[LinkText],[Body],[MainImage])
+VALUES ( 'MOOD BOARD', 'mood-board',
 '<p>This mood board helped me visually bring together some of my ideas... Click to see a bigger version</p>
 <br />
 <br />
@@ -65,8 +65,8 @@ VALUES ( 'MOOD BOARD',
 <br />', 
 '~/Content/Images/bank/moodBoardthumb.jpg')
 
-INSERT INTO [GhostmonkMainSite].[dbo].[Pages] ([Title],[Body])
-VALUES ( 'FEATURES', 
+INSERT INTO [GhostmonkMainSite].[dbo].[Pages] ([Title],[LinkText],[Body])
+VALUES ( 'FEATURES', 'features',
 '<p>The following list are planned features - an evolving task list.</p> 
  <ol>
     <li style="text-decoration:line-through">Design</li>
@@ -88,8 +88,8 @@ VALUES ( 'FEATURES',
 <br />
 <br />')
 
-INSERT INTO [GhostmonkMainSite].[dbo].[Pages] ([Title],[Body],[MainImage])
-VALUES ('ABOUT',
+INSERT INTO [GhostmonkMainSite].[dbo].[Pages] ([Title],[LinkText],[Body],[MainImage])
+VALUES ('ABOUT','about',
 '<p>For the last seven years plus I have been developing a mix of important abilities in communications, from web programming &amp; design to photography and writing.
 As an expressive and driven person I find this realm of work best fits my personality, and I am constantly on the move, aiming for that sweet spot of having something to say, and being able to make it memorable (maybe even look good).&lt;/p&gt;
 <p>I was pretty much born and raised all across Canada. I mean, I was born in the far east, at the Northern tip of Cape Breton Island where my father learned to become a carpenter in the mid 70&#39;s. Now I live in the vibrant Canadian MEGA-City of Toronto, but not before traipsing back and forth across this country, from Halifax to Vancouver, about eight times or so. I&#39;ve pretty much lost count.&lt;/p&gt;
@@ -97,8 +97,8 @@ As an expressive and driven person I find this realm of work best fits my person
 <p>Spending a good portion of my life soaking up the enormity of Canada, I have made prolonged pit stops in Barrie Ontario, Fort McMurray Alberta, Calgary Alberta, Banff Alberta, Halifax Nova Scotia, Port Hawkesbury Nova Scotia, Montreal Quebec, Toronto and now Montreal Again. I live here with my beautiful girlfriend Tracey and my amazing 4-year-old son Lucas-Ray, 1-year-old Logan-John and … Oh, I should also mention that we have three cats: Toro, Urban and Frankie, and a hundred pound Rottweiler/Shepherd cross named Teddy. He&#39;s a German monstrosity… but I love him just the same.&lt;/p&gt;',
 '~/Content/Images/bank/nicholas.gif')
 
-INSERT INTO [GhostmonkMainSite].[dbo].[Pages] ([Title],[Body])
-VALUES ('CONTACT',
+INSERT INTO [GhostmonkMainSite].[dbo].[Pages] ([Title],[LinkText],[Body])
+VALUES ('CONTACT','contact',
 '<p>If you would like to reach me, send me an email to <a href="mailto:nicholas@ghostmonk.com">nicholas@ghostmonk.com</a> or use any of the social sites I frequent in the lower right hand corner.</p>
 <br />
 <br />

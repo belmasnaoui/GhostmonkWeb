@@ -11,11 +11,11 @@ namespace GhostmonkMainSite.Controllers
             return View();
         }
 
-        public ActionResult Page( int id )
+        public ActionResult Page( string linkText )
         {
             using( var container = new GhostmonkMainSiteModelContainer() )
             {
-                Page target = container.Pages.Where( page => page.Id == id ).First();
+                Page target = container.Pages.Where( page => page.LinkText == linkText ).First();
                 return View( target );
             }
         }

@@ -1,5 +1,5 @@
-INSERT INTO [GhostmonkMainSite].[dbo].[JournalEntries]([Title],[Body],[PublishDate],[MainImage],[Journal_Id],[Category_Id])
-VALUES ('HUMBLE PROGRAMMING, AND OTHER ZENFUL CONNECTIONS',
+INSERT INTO [GhostmonkMainSite].[dbo].[JournalEntries]([Title],[LinkText],[Body],[PublishDate],[MainImage],[Journal_Id],[Category_Id])
+VALUES ('HUMBLE PROGRAMMING, AND OTHER ZENFUL CONNECTIONS','humble-programming-zenful-connections',
 '<p>Project statgnation can be as common as rust to a creative worker embarking on a personal project. Professional projects can often take on a fervorous pitch that is hard to duplicate when you are your own client. Unfortunately I was experiencing this malaise.</p>
 <p>Lack of ASP.NET knowledge, ambitious goals and the reality of a part-time commitment is making progress on Ghostmonk simlar to that of oceans forming carverns into the side of the cliff.</p>
 <p>However, the journey has always been the main goal, and like the sea I try to be relentless.</p>
@@ -14,8 +14,8 @@ VALUES ('HUMBLE PROGRAMMING, AND OTHER ZENFUL CONNECTIONS',
 <p>And so, by centering myself, I was able to forge ahead and achieve a large conceptual breakthrough in building Ghostmonk. Now I have Master Pages, have implemented Themes and Skins and have started building custom user controls. Much of these concepts where unknown to me even yesterday.</p>',
 '02/12/2011', '~/Content/Images/bank/posts/blaze.jpg', 1, 1 )
 
-INSERT INTO [GhostmonkMainSite].[dbo].[JournalEntries]([Title],[Body],[PublishDate],[MainImage],[Journal_Id],[Category_Id],[Summary])
-VALUES ('FOR THE LOVE OF.... JUST RELEASE ME ALREADY',
+INSERT INTO [GhostmonkMainSite].[dbo].[JournalEntries]([Title],[LinkText],[Body],[PublishDate],[MainImage],[Journal_Id],[Category_Id],[Summary])
+VALUES ('FOR THE LOVE OF.... JUST RELEASE ME ALREADY','just-release-me-already',
 '<p>Ok, this site is nowhere near completition, but I''ve made a fair bit of progress on the design. Unfortunately, that was the easy part....</p>
 <p>What you are experiencing here is the embryonic stage of a much larger genesis.</p>
 <p>No matter how much I study, practice and train, buidling a website from scratch is a serious endeavour. To stem this fact, I am iteratively releasing every aspect of this creation.</p>

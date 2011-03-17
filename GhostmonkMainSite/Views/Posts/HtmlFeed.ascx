@@ -4,21 +4,13 @@
     
     <h1><%: entry.Title %></h1>
     
-    <p><%: entry.PublishDate %></p>
+    <p><%: entry.PublishDate.ToString( "MMMM dd, yyyy" ) %></p>
     
     <%: Html.Image( entry.MainImage, entry.Title ) %>
 
-    <% if( entry.Summary == null ) { %>
-       
-       <%= entry.Body.Substring( 0, 200 ) %>
-        
-    <% } else { %>
-        
-        <%= entry.Summary %>
+    <%= entry.Summary ?? entry.Body.Substring( 0, 200 ) %>
 
-    <% } %>
-
-    <%: Html.ActionLink( "Read More...", "FullPost", "Posts", new { id = entry.Id }, null ) %>
+    <p><%: Html.ActionLink( "Read More...", "FullPost", "Posts", new { linkText = entry.LinkText }, null ) %></p>
 
     <hr />
 

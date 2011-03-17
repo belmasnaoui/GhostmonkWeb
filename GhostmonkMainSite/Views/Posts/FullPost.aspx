@@ -8,7 +8,7 @@
 
     <h1><%: Model.Title %></h1>
     
-    <p><%: Model.PublishDate %></p>
+    <p><%: Model.PublishDate.ToString( "MMMM dd, yyyy" ) %></p>
     
     <%: Html.Image( Model.MainImage, Model.Title ) %>
 

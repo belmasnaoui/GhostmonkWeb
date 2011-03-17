@@ -16,11 +16,15 @@ namespace GhostmonkMainSite.Controllers
             }
         }
 
-        public ActionResult FullPost( int id )
+        public ActionResult FullPost( string linkText )
         {
             using( var container = new GhostmonkMainSiteModelContainer() )
             {
-                return View( container.JournalEntries.Where( post => post.Id == id ).First() );
+                var entries = container.JournalEntries;
+                var entry = string.IsNullOrEmpty( linkText ) 
+                    ? entries.First() 
+                    : entries.Where( post => post.LinkText == linkText ).First();
+                return View( entry ?? entries.First() );
             }
         }
     }

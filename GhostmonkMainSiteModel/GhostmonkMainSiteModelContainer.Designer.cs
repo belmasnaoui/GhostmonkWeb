@@ -875,13 +875,15 @@ namespace GhostmonkMainSiteModel
         /// <param name="title">Initial value of the Title property.</param>
         /// <param name="body">Initial value of the Body property.</param>
         /// <param name="publishDate">Initial value of the PublishDate property.</param>
-        public static JournalEntry CreateJournalEntry(global::System.Int32 id, global::System.String title, global::System.String body, global::System.DateTime publishDate)
+        /// <param name="linkText">Initial value of the LinkText property.</param>
+        public static JournalEntry CreateJournalEntry(global::System.Int32 id, global::System.String title, global::System.String body, global::System.DateTime publishDate, global::System.String linkText)
         {
             JournalEntry journalEntry = new JournalEntry();
             journalEntry.Id = id;
             journalEntry.Title = title;
             journalEntry.Body = body;
             journalEntry.PublishDate = publishDate;
+            journalEntry.LinkText = linkText;
             return journalEntry;
         }
 
@@ -1034,6 +1036,30 @@ namespace GhostmonkMainSiteModel
         private global::System.String _Summary;
         partial void OnSummaryChanging(global::System.String value);
         partial void OnSummaryChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String LinkText
+        {
+            get
+            {
+                return _LinkText;
+            }
+            set
+            {
+                OnLinkTextChanging(value);
+                ReportPropertyChanging("LinkText");
+                _LinkText = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("LinkText");
+                OnLinkTextChanged();
+            }
+        }
+        private global::System.String _LinkText;
+        partial void OnLinkTextChanging(global::System.String value);
+        partial void OnLinkTextChanged();
 
         #endregion
     
@@ -1288,6 +1314,30 @@ namespace GhostmonkMainSiteModel
         private global::System.String _MainImage;
         partial void OnMainImageChanging(global::System.String value);
         partial void OnMainImageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String LinkText
+        {
+            get
+            {
+                return _LinkText;
+            }
+            set
+            {
+                OnLinkTextChanging(value);
+                ReportPropertyChanging("LinkText");
+                _LinkText = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("LinkText");
+                OnLinkTextChanged();
+            }
+        }
+        private global::System.String _LinkText;
+        partial void OnLinkTextChanging(global::System.String value);
+        partial void OnLinkTextChanged();
 
         #endregion
     

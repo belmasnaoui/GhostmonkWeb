@@ -14,11 +14,25 @@ namespace GhostmonkMainSite
         {
             routes.IgnoreRoute( "{resource}.axd/{*pathInfo}" );
 
+            routes.MapRoute( 
+                "Home", 
+                "home", 
+                new { controller = "Pages", action = "Index" } );
+
+            routes.MapRoute( 
+                "Pages",
+                "pages/{linkText}",
+                new { controller = "Pages", action = "Page", linkText = "home" } );
+
+            routes.MapRoute(
+                "FullPost",
+                "full-post/{linkText}",
+                new { controller = "Posts", action = "FullPost", linkText = string.Empty } );
+
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}/{id}",
-                new { controller = "Pages", action = "Index", id = UrlParameter.Optional }
-            );
+                new { controller = "Pages", action = "Index", id = UrlParameter.Optional } );
         }
 
         protected void Application_Start()
