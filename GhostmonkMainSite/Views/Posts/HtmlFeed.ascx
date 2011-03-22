@@ -2,7 +2,7 @@
 
 <% foreach (var entry in Model) { %>
     
-    <h1><%: entry.Title %></h1>
+    <h1><%: Html.ActionLink( entry.Title, "FullPost", "Posts", new { linkText = entry.LinkText }, null )%></h1>
     
     <p><%: entry.PublishDate.ToString( "MMMM dd, yyyy" ) %></p>
     
