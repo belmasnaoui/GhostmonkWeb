@@ -6,7 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="GhostmonkMainSiteModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="GhostmonkMainSiteModelStoreContainer">
-    <EntitySet Name="JournalEntries" EntityType="GhostmonkMainSiteModel.Store.JournalEntries" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Articles" EntityType="GhostmonkMainSiteModel.Store.Articles" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Journals" EntityType="GhostmonkMainSiteModel.Store.Journals" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Users" EntityType="GhostmonkMainSiteModel.Store.Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Tags" EntityType="GhostmonkMainSiteModel.Store.Tags" store:Type="Tables" Schema="dbo" />
@@ -14,26 +14,34 @@
     <EntitySet Name="CVs" EntityType="GhostmonkMainSiteModel.Store.CVs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WorkExperiences" EntityType="GhostmonkMainSiteModel.Store.WorkExperiences" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Skills" EntityType="GhostmonkMainSiteModel.Store.Skills" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Pages" EntityType="GhostmonkMainSiteModel.Store.Pages" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PullQuotes" EntityType="GhostmonkMainSiteModel.Store.PullQuotes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="WorkExperienceSkill" EntityType="GhostmonkMainSiteModel.Store.WorkExperienceSkill" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="JournalJournalEntry" Association="GhostmonkMainSiteModel.Store.JournalJournalEntry">
+    <EntitySet Name="Projects" EntityType="GhostmonkMainSiteModel.Store.Projects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Assets" EntityType="GhostmonkMainSiteModel.Store.Assets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Comments" EntityType="GhostmonkMainSiteModel.Store.Comments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ArticlesTags" EntityType="GhostmonkMainSiteModel.Store.ArticlesTags" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WorkExperienceSkills" EntityType="GhostmonkMainSiteModel.Store.WorkExperienceSkills" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SkillsProjects" EntityType="GhostmonkMainSiteModel.Store.SkillsProjects" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="JournalArticles" Association="GhostmonkMainSiteModel.Store.JournalArticles">
       <End Role="Journal" EntitySet="Journals" />
-      <End Role="JournalEntry" EntitySet="JournalEntries" />
+      <End Role="Article" EntitySet="Articles" />
     </AssociationSet>
-    <AssociationSet Name="JournalEntryTag" Association="GhostmonkMainSiteModel.Store.JournalEntryTag">
-      <End Role="JournalEntry" EntitySet="JournalEntries" />
+    <AssociationSet Name="FK_ArticlesTags_Article" Association="GhostmonkMainSiteModel.Store.FK_ArticlesTags_Article">
+      <End Role="Article" EntitySet="Articles" />
+      <End Role="ArticlesTags" EntitySet="ArticlesTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticlesTags_Tag" Association="GhostmonkMainSiteModel.Store.FK_ArticlesTags_Tag">
       <End Role="Tag" EntitySet="Tags" />
+      <End Role="ArticlesTags" EntitySet="ArticlesTags" />
     </AssociationSet>
-    <AssociationSet Name="CategoryJournalEntry" Association="GhostmonkMainSiteModel.Store.CategoryJournalEntry">
+    <AssociationSet Name="CategoryArticles" Association="GhostmonkMainSiteModel.Store.CategoryArticles">
       <End Role="Category" EntitySet="Categories" />
-      <End Role="JournalEntry" EntitySet="JournalEntries" />
+      <End Role="Article" EntitySet="Articles" />
     </AssociationSet>
-    <AssociationSet Name="JournalCategory" Association="GhostmonkMainSiteModel.Store.JournalCategory">
+    <AssociationSet Name="JournalCategories" Association="GhostmonkMainSiteModel.Store.JournalCategories">
       <End Role="Journal" EntitySet="Journals" />
       <End Role="Category" EntitySet="Categories" />
     </AssociationSet>
-    <AssociationSet Name="JournalTag" Association="GhostmonkMainSiteModel.Store.JournalTag">
+    <AssociationSet Name="JournalTags" Association="GhostmonkMainSiteModel.Store.JournalTag">
       <End Role="Journal" EntitySet="Journals" />
       <End Role="Tag" EntitySet="Tags" />
     </AssociationSet>
@@ -45,24 +53,64 @@
       <End Role="User" EntitySet="Users" />
       <End Role="CV" EntitySet="CVs" />
     </AssociationSet>
-    <AssociationSet Name="CVWorkExperience" Association="GhostmonkMainSiteModel.Store.CVWorkExperience">
+    <AssociationSet Name="CVWorkExperiences" Association="GhostmonkMainSiteModel.Store.CVWorkExperiences">
       <End Role="CV" EntitySet="CVs" />
       <End Role="WorkExperience" EntitySet="WorkExperiences" />
     </AssociationSet>
-    <AssociationSet Name="FK_WorkExperienceSkill_WorkExperience" Association="GhostmonkMainSiteModel.Store.FK_WorkExperienceSkill_WorkExperience">
+    <AssociationSet Name="FK_WorkExperienceSkills_WorkExperience" Association="GhostmonkMainSiteModel.Store.FK_WorkExperienceSkills_WorkExperience">
       <End Role="WorkExperience" EntitySet="WorkExperiences" />
-      <End Role="WorkExperienceSkill" EntitySet="WorkExperienceSkill" />
+      <End Role="WorkExperienceSkills" EntitySet="WorkExperienceSkills" />
     </AssociationSet>
-    <AssociationSet Name="FK_WorkExperienceSkill_Skill" Association="GhostmonkMainSiteModel.Store.FK_WorkExperienceSkill_Skill">
+    <AssociationSet Name="FK_WorkExperienceSkills_Skill" Association="GhostmonkMainSiteModel.Store.FK_WorkExperienceSkills_Skill">
       <End Role="Skill" EntitySet="Skills" />
-      <End Role="WorkExperienceSkill" EntitySet="WorkExperienceSkill" />
+      <End Role="WorkExperienceSkills" EntitySet="WorkExperienceSkills" />
     </AssociationSet>
-    <AssociationSet Name="JournalEntryPullQuote" Association="GhostmonkMainSiteModel.Store.JournalEntryPullQuote">
-      <End Role="JournalEntry" EntitySet="JournalEntries" />
+    <AssociationSet Name="ArticlePullQuotes" Association="GhostmonkMainSiteModel.Store.ArticlePullQuotes">
+      <End Role="Article" EntitySet="Articles" />
       <End Role="PullQuote" EntitySet="PullQuotes" />
     </AssociationSet>
+    <AssociationSet Name="ProjectAssets" Association="GhostmonkMainSiteModel.Store.ProjectAssets">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="Asset" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="UserProjects" Association="GhostmonkMainSiteModel.Store.UserProjects">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="WorkExperienceProjects" Association="GhostmonkMainSiteModel.Store.WorkExperienceProject">
+      <End Role="WorkExperience" EntitySet="WorkExperiences" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SkillsProjects_Skill" Association="GhostmonkMainSiteModel.Store.FK_SkillsProjects_Skill">
+      <End Role="Skill" EntitySet="Skills" />
+      <End Role="SkillsProjects" EntitySet="SkillsProjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SkillsProjects_Project" Association="GhostmonkMainSiteModel.Store.FK_SkillsProjects_Project">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="SkillsProjects" EntitySet="SkillsProjects" />
+    </AssociationSet>
+    <AssociationSet Name="ArticleAssets" Association="GhostmonkMainSiteModel.Store.ArticleAssets">
+      <End Role="Article" EntitySet="Articles" />
+      <End Role="Asset" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="CVSkills" Association="GhostmonkMainSiteModel.Store.CVSkills">
+      <End Role="CV" EntitySet="CVs" />
+      <End Role="Skill" EntitySet="Skills" />
+    </AssociationSet>
+    <AssociationSet Name="ArticleComments" Association="GhostmonkMainSiteModel.Store.ArticleComments">
+      <End Role="Article" EntitySet="Articles" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="UserComments" Association="GhostmonkMainSiteModel.Store.UserComments">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectComments" Association="GhostmonkMainSiteModel.Store.ProjectComments">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="JournalEntries">
+  <EntityType Name="Articles">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -70,9 +118,9 @@
     <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PublishDate" Type="datetime" Nullable="false" />
-    <Property Name="MainImage" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Summary" Type="nvarchar(max)" Nullable="true" />
     <Property Name="LinkText" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NumberOfPages" Type="smallint" Nullable="false" DefaultValue="1" />
     <Property Name="Journal_Id" Type="int" Nullable="false" />
     <Property Name="Category_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -92,7 +140,9 @@
     <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ScreenName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="AuthorizationLevel" Type="int" Nullable="false" />
+    <Property Name="AuthorizationLevel" Type="smallint" Nullable="false" />
+    <Property Name="LoginName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CV_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Tags">
@@ -101,7 +151,6 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="JournalEntry_Id" Type="int" Nullable="false" />
     <Property Name="Journal_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Categories">
@@ -131,6 +180,7 @@
     <Property Name="StartDate" Type="datetime" Nullable="false" />
     <Property Name="EndDate" Type="datetime" Nullable="true" />
     <Property Name="Summary" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Uri" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CV_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Skills">
@@ -139,16 +189,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Pages">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="MainImage" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="LinkText" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CV_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PullQuotes">
     <Key>
@@ -156,54 +197,94 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Priority" Type="int" Nullable="false" DefaultValue="1" />
-    <Property Name="JournalEntry_Id" Type="int" Nullable="false" />
+    <Property Name="Priority" Type="smallint" Nullable="false" DefaultValue="1" />
+    <Property Name="Article_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="WorkExperienceSkill">
+  <EntityType Name="Projects">
     <Key>
-      <PropertyRef Name="WorkExperience_Id" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Summary" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Company" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FullText" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="WorkExperience_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Assets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Uri" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Project_Id" Type="int" Nullable="false" />
+    <Property Name="Article_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Article_Id" Type="int" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="Project_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArticlesTags">
+    <Key>
+      <PropertyRef Name="Articles_Id" />
+      <PropertyRef Name="Tags_Id" />
+    </Key>
+    <Property Name="Articles_Id" Type="int" Nullable="false" />
+    <Property Name="Tags_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WorkExperienceSkills">
+    <Key>
+      <PropertyRef Name="WorkExperiences_Id" />
       <PropertyRef Name="Skills_Id" />
     </Key>
-    <Property Name="WorkExperience_Id" Type="int" Nullable="false" />
+    <Property Name="WorkExperiences_Id" Type="int" Nullable="false" />
     <Property Name="Skills_Id" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="JournalJournalEntry">
+  <EntityType Name="SkillsProjects">
+    <Key>
+      <PropertyRef Name="Skills_Id" />
+      <PropertyRef Name="Projects_Id" />
+    </Key>
+    <Property Name="Skills_Id" Type="int" Nullable="false" />
+    <Property Name="Projects_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="JournalArticles">
     <End Role="Journal" Type="GhostmonkMainSiteModel.Store.Journals" Multiplicity="1" />
-    <End Role="JournalEntry" Type="GhostmonkMainSiteModel.Store.JournalEntries" Multiplicity="*" />
+    <End Role="Article" Type="GhostmonkMainSiteModel.Store.Articles" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Journal">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="JournalEntry">
+      <Dependent Role="Article">
         <PropertyRef Name="Journal_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="JournalEntryTag">
-    <End Role="JournalEntry" Type="GhostmonkMainSiteModel.Store.JournalEntries" Multiplicity="1" />
-    <End Role="Tag" Type="GhostmonkMainSiteModel.Store.Tags" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="JournalEntry">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Tag">
-        <PropertyRef Name="JournalEntry_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CategoryJournalEntry">
+  <Association Name="CategoryArticles">
     <End Role="Category" Type="GhostmonkMainSiteModel.Store.Categories" Multiplicity="1" />
-    <End Role="JournalEntry" Type="GhostmonkMainSiteModel.Store.JournalEntries" Multiplicity="*" />
+    <End Role="Article" Type="GhostmonkMainSiteModel.Store.Articles" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Category">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="JournalEntry">
+      <Dependent Role="Article">
         <PropertyRef Name="Category_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="JournalCategory">
+  <Association Name="JournalCategories">
     <End Role="Journal" Type="GhostmonkMainSiteModel.Store.Journals" Multiplicity="1" />
     <End Role="Category" Type="GhostmonkMainSiteModel.Store.Categories" Multiplicity="*" />
     <ReferentialConstraint>
@@ -251,7 +332,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="CVWorkExperience">
+  <Association Name="CVWorkExperiences">
     <End Role="CV" Type="GhostmonkMainSiteModel.Store.CVs" Multiplicity="1" />
     <End Role="WorkExperience" Type="GhostmonkMainSiteModel.Store.WorkExperiences" Multiplicity="*" />
     <ReferentialConstraint>
@@ -263,39 +344,183 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="JournalEntryPullQuote">
-    <End Role="JournalEntry" Type="GhostmonkMainSiteModel.Store.JournalEntries" Multiplicity="1" />
+  <Association Name="ArticlePullQuotes">
+    <End Role="Article" Type="GhostmonkMainSiteModel.Store.Articles" Multiplicity="1" />
     <End Role="PullQuote" Type="GhostmonkMainSiteModel.Store.PullQuotes" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="JournalEntry">
+      <Principal Role="Article">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="PullQuote">
-        <PropertyRef Name="JournalEntry_Id" />
+        <PropertyRef Name="Article_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_WorkExperienceSkill_WorkExperience">
+  <Association Name="ProjectAssets">
+    <End Role="Project" Type="GhostmonkMainSiteModel.Store.Projects" Multiplicity="1" />
+    <End Role="Asset" Type="GhostmonkMainSiteModel.Store.Assets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="Project_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProjects">
+    <End Role="User" Type="GhostmonkMainSiteModel.Store.Users" Multiplicity="1" />
+    <End Role="Project" Type="GhostmonkMainSiteModel.Store.Projects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="WorkExperienceProject">
     <End Role="WorkExperience" Type="GhostmonkMainSiteModel.Store.WorkExperiences" Multiplicity="1" />
-    <End Role="WorkExperienceSkill" Type="GhostmonkMainSiteModel.Store.WorkExperienceSkill" Multiplicity="*" />
+    <End Role="Project" Type="GhostmonkMainSiteModel.Store.Projects" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="WorkExperience">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="WorkExperienceSkill">
+      <Dependent Role="Project">
         <PropertyRef Name="WorkExperience_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_WorkExperienceSkill_Skill">
-    <End Role="WorkExperienceSkill" Type="GhostmonkMainSiteModel.Store.WorkExperienceSkill" Multiplicity="*" />
+  <Association Name="ArticleAssets">
+    <End Role="Article" Type="GhostmonkMainSiteModel.Store.Articles" Multiplicity="1" />
+    <End Role="Asset" Type="GhostmonkMainSiteModel.Store.Assets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="Article_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CVSkills">
+    <End Role="CV" Type="GhostmonkMainSiteModel.Store.CVs" Multiplicity="1" />
+    <End Role="Skill" Type="GhostmonkMainSiteModel.Store.Skills" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CV">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Skill">
+        <PropertyRef Name="CV_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ArticleComments">
+    <End Role="Article" Type="GhostmonkMainSiteModel.Store.Articles" Multiplicity="1" />
+    <End Role="Comment" Type="GhostmonkMainSiteModel.Store.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="Article_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserComments">
+    <End Role="User" Type="GhostmonkMainSiteModel.Store.Users" Multiplicity="1" />
+    <End Role="Comment" Type="GhostmonkMainSiteModel.Store.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectComments">
+    <End Role="Project" Type="GhostmonkMainSiteModel.Store.Projects" Multiplicity="1" />
+    <End Role="Comment" Type="GhostmonkMainSiteModel.Store.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="Project_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticlesTags_Article">
+    <End Role="Article" Type="GhostmonkMainSiteModel.Store.Articles" Multiplicity="1" />
+    <End Role="ArticlesTags" Type="GhostmonkMainSiteModel.Store.ArticlesTags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArticlesTags">
+        <PropertyRef Name="Articles_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticlesTags_Tag">
+    <End Role="ArticlesTags" Type="GhostmonkMainSiteModel.Store.ArticlesTags" Multiplicity="*" />
+    <End Role="Tag" Type="GhostmonkMainSiteModel.Store.Tags" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArticlesTags">
+        <PropertyRef Name="Tags_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkExperienceSkills_WorkExperience">
+    <End Role="WorkExperience" Type="GhostmonkMainSiteModel.Store.WorkExperiences" Multiplicity="1" />
+    <End Role="WorkExperienceSkills" Type="GhostmonkMainSiteModel.Store.WorkExperienceSkills" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkExperience">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkExperienceSkills">
+        <PropertyRef Name="WorkExperiences_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkExperienceSkills_Skill">
+    <End Role="WorkExperienceSkills" Type="GhostmonkMainSiteModel.Store.WorkExperienceSkills" Multiplicity="*" />
     <End Role="Skill" Type="GhostmonkMainSiteModel.Store.Skills" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Skill">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="WorkExperienceSkill">
+      <Dependent Role="WorkExperienceSkills">
         <PropertyRef Name="Skills_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SkillsProjects_Skill">
+    <End Role="Skill" Type="GhostmonkMainSiteModel.Store.Skills" Multiplicity="1" />
+    <End Role="SkillsProjects" Type="GhostmonkMainSiteModel.Store.SkillsProjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Skill">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SkillsProjects">
+        <PropertyRef Name="Skills_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SkillsProjects_Project">
+    <End Role="SkillsProjects" Type="GhostmonkMainSiteModel.Store.SkillsProjects" Multiplicity="*" />
+    <End Role="Project" Type="GhostmonkMainSiteModel.Store.Projects" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SkillsProjects">
+        <PropertyRef Name="Projects_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -304,28 +529,28 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="GhostmonkMainSiteModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="GhostmonkMainSiteModelContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="JournalEntries" EntityType="GhostmonkMainSiteModel.JournalEntry" />
+          <EntitySet Name="Articles" EntityType="GhostmonkMainSiteModel.Article" />
           <EntitySet Name="Journals" EntityType="GhostmonkMainSiteModel.Journal" />
-          <AssociationSet Name="JournalJournalEntry" Association="GhostmonkMainSiteModel.JournalJournalEntry">
+          <AssociationSet Name="JournalArticles" Association="GhostmonkMainSiteModel.JournalArticles">
             <End Role="Journal" EntitySet="Journals" />
-            <End Role="JournalEntry" EntitySet="JournalEntries" />
+            <End Role="Article" EntitySet="Articles" />
           </AssociationSet>
           <EntitySet Name="Users" EntityType="GhostmonkMainSiteModel.User" />
           <EntitySet Name="Tags" EntityType="GhostmonkMainSiteModel.Tag" />
           <EntitySet Name="Categories" EntityType="GhostmonkMainSiteModel.Category" />
-          <AssociationSet Name="JournalEntryTag" Association="GhostmonkMainSiteModel.JournalEntryTag">
-            <End Role="JournalEntry" EntitySet="JournalEntries" />
+          <AssociationSet Name="ArticlesTags" Association="GhostmonkMainSiteModel.ArticlesTags">
+            <End Role="Article" EntitySet="Articles" />
             <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
-          <AssociationSet Name="CategoryJournalEntry" Association="GhostmonkMainSiteModel.CategoryJournalEntry">
+          <AssociationSet Name="CategoryArticles" Association="GhostmonkMainSiteModel.CategoryArticles">
             <End Role="Category" EntitySet="Categories" />
-            <End Role="JournalEntry" EntitySet="JournalEntries" />
+            <End Role="Article" EntitySet="Articles" />
           </AssociationSet>
-          <AssociationSet Name="JournalCategory" Association="GhostmonkMainSiteModel.JournalCategory">
+          <AssociationSet Name="JournalCategories" Association="GhostmonkMainSiteModel.JournalCategories">
             <End Role="Journal" EntitySet="Journals" />
             <End Role="Category" EntitySet="Categories" />
           </AssociationSet>
-          <AssociationSet Name="JournalTag" Association="GhostmonkMainSiteModel.JournalTag">
+          <AssociationSet Name="JournalTags" Association="GhostmonkMainSiteModel.JournalTag">
             <End Role="Journal" EntitySet="Journals" />
             <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
@@ -339,92 +564,200 @@
             <End Role="CV" EntitySet="CVs" />
           </AssociationSet>
           <EntitySet Name="WorkExperiences" EntityType="GhostmonkMainSiteModel.WorkExperience" />
-          <AssociationSet Name="CVWorkExperience" Association="GhostmonkMainSiteModel.CVWorkExperience">
+          <AssociationSet Name="CVWorkExperiences" Association="GhostmonkMainSiteModel.CVWorkExperiences">
             <End Role="CV" EntitySet="CVs" />
             <End Role="WorkExperience" EntitySet="WorkExperiences" />
           </AssociationSet>
           <EntitySet Name="Skills" EntityType="GhostmonkMainSiteModel.Skill" />
-          <AssociationSet Name="WorkExperienceSkill" Association="GhostmonkMainSiteModel.WorkExperienceSkill">
+          <AssociationSet Name="WorkExperienceSkills" Association="GhostmonkMainSiteModel.WorkExperienceSkills">
             <End Role="WorkExperience" EntitySet="WorkExperiences" />
             <End Role="Skill" EntitySet="Skills" />
           </AssociationSet>
-          <EntitySet Name="Pages" EntityType="GhostmonkMainSiteModel.Page" />
           <EntitySet Name="PullQuotes" EntityType="GhostmonkMainSiteModel.PullQuote" />
-          <AssociationSet Name="JournalEntryPullQuote" Association="GhostmonkMainSiteModel.JournalEntryPullQuote">
-            <End Role="JournalEntry" EntitySet="JournalEntries" />
+          <AssociationSet Name="ArticlePullQuotes" Association="GhostmonkMainSiteModel.ArticlePullQuotes">
+            <End Role="Article" EntitySet="Articles" />
             <End Role="PullQuote" EntitySet="PullQuotes" />
           </AssociationSet>
+          <EntitySet Name="Projects" EntityType="GhostmonkMainSiteModel.Project" />
+          <EntitySet Name="Assets" EntityType="GhostmonkMainSiteModel.Asset" />
+          <AssociationSet Name="ProjectAssets" Association="GhostmonkMainSiteModel.ProjectAssets">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Asset" EntitySet="Assets" />
+          </AssociationSet>
+          <AssociationSet Name="UserProjects" Association="GhostmonkMainSiteModel.UserProjects">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="WorkExperienceProjects" Association="GhostmonkMainSiteModel.WorkExperienceProject">
+            <End Role="WorkExperience" EntitySet="WorkExperiences" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="SkillsProjects" Association="GhostmonkMainSiteModel.SkillsProjects">
+            <End Role="Skill" EntitySet="Skills" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="ArticleAssets" Association="GhostmonkMainSiteModel.ArticleAssets">
+            <End Role="Article" EntitySet="Articles" />
+            <End Role="Asset" EntitySet="Assets" />
+          </AssociationSet>
+          <AssociationSet Name="CVSkills" Association="GhostmonkMainSiteModel.CVSkills">
+            <End Role="CV" EntitySet="CVs" />
+            <End Role="Skill" EntitySet="Skills" />
+          </AssociationSet>
+          <EntitySet Name="Comments" EntityType="GhostmonkMainSiteModel.Comment" />
+          <AssociationSet Name="ArticleComments" Association="GhostmonkMainSiteModel.ArticleComments">
+            <End Role="Article" EntitySet="Articles" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="UserComments" Association="GhostmonkMainSiteModel.UserComments">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectComments" Association="GhostmonkMainSiteModel.ProjectComments">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="JournalEntry">
+        <EntityType Name="Article">
+          <Documentation>
+            <LongDescription>Articles can be of many types and are defined on a top level  by categories. For instance, a pages category could represent web-pages in a site, while the rest could be defined as blog entries. The article schema is intentially left open to allow for a broad interpretation.</LongDescription>
+          </Documentation>
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Title" Nullable="false" />
-          <Property Type="String" Name="Body" Nullable="false" />
-          <Property Type="DateTime" Name="PublishDate" Nullable="false" />
-          <Property Type="String" Name="MainImage" Nullable="true" />
-          <NavigationProperty Name="Journal" Relationship="GhostmonkMainSiteModel.JournalJournalEntry" FromRole="JournalEntry" ToRole="Journal" />
-          <NavigationProperty Name="Tags" Relationship="GhostmonkMainSiteModel.JournalEntryTag" FromRole="JournalEntry" ToRole="Tag" />
-          <NavigationProperty Name="Category" Relationship="GhostmonkMainSiteModel.CategoryJournalEntry" FromRole="JournalEntry" ToRole="Category" />
-          <Property Type="String" Name="Summary" Nullable="true" />
-          <NavigationProperty Name="PullQuotes" Relationship="GhostmonkMainSiteModel.JournalEntryPullQuote" FromRole="JournalEntry" ToRole="PullQuote" />
-          <Property Type="String" Name="LinkText" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" >
+            <Documentation>
+              <LongDescription>Self explanitory.</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Body" Nullable="false" >
+            <Documentation>
+              <LongDescription>The full body of the article. Should be valid markup.</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="PublishDate" Nullable="false" >
+            <Documentation>
+              <LongDescription>The date the article was published.</LongDescription>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Journal" Relationship="GhostmonkMainSiteModel.JournalArticles" FromRole="Article" ToRole="Journal" >
+            <Documentation>
+              <LongDescription>A Journal can have multiple articles</LongDescription>
+            </Documentation>
+          </NavigationProperty>
+          <NavigationProperty Name="Tags" Relationship="GhostmonkMainSiteModel.ArticlesTags" FromRole="Article" ToRole="Tag" />
+          <NavigationProperty Name="Category" Relationship="GhostmonkMainSiteModel.CategoryArticles" FromRole="Article" ToRole="Category" />
+          <Property Type="String" Name="Summary" Nullable="true" >
+            <Documentation>
+              <LongDescription>Short description of the article. Typically the first paragraph or couple sentences. Can be a description if desired.</LongDescription>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="PullQuotes" Relationship="GhostmonkMainSiteModel.ArticlePullQuotes" FromRole="Article" ToRole="PullQuote" />
+          <Property Type="String" Name="LinkText" Nullable="false" >
+            <Documentation>
+              <LongDescription>The text to use in the url. This should be unique.</LongDescription>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Assets" Relationship="GhostmonkMainSiteModel.ArticleAssets" FromRole="Article" ToRole="Asset" />
+          <Property Type="Int16" Name="NumberOfPages" Nullable="false" DefaultValue="1" >
+            <Documentation>
+              <LongDescription>The number of pages to split the entry into.</LongDescription>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Comments" Relationship="GhostmonkMainSiteModel.ArticleComments" FromRole="Article" ToRole="Comment" />
         </EntityType>
         <EntityType Name="Journal">
+          <Documentation>
+            <LongDescription>Each user has one journal</LongDescription>
+          </Documentation>
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="JournalEntries" Relationship="GhostmonkMainSiteModel.JournalJournalEntry" FromRole="Journal" ToRole="JournalEntry" />
-          <NavigationProperty Name="Categories" Relationship="GhostmonkMainSiteModel.JournalCategory" FromRole="Journal" ToRole="Category" />
+          <NavigationProperty Name="Articles" Relationship="GhostmonkMainSiteModel.JournalArticles" FromRole="Journal" ToRole="Article" />
+          <NavigationProperty Name="Categories" Relationship="GhostmonkMainSiteModel.JournalCategories" FromRole="Journal" ToRole="Category" />
           <NavigationProperty Name="Tags" Relationship="GhostmonkMainSiteModel.JournalTag" FromRole="Journal" ToRole="Tag" />
           <NavigationProperty Name="User" Relationship="GhostmonkMainSiteModel.JournalUser" FromRole="Journal" ToRole="User" />
         </EntityType>
-        <Association Name="JournalJournalEntry">
+        <Association Name="JournalArticles">
           <End Type="GhostmonkMainSiteModel.Journal" Role="Journal" Multiplicity="1" />
-          <End Type="GhostmonkMainSiteModel.JournalEntry" Role="JournalEntry" Multiplicity="*" />
+          <End Type="GhostmonkMainSiteModel.Article" Role="Article" Multiplicity="*" />
         </Association>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+            <Documentation>
+              <LongDescription>An authorized user of the application.</LongDescription>
+            </Documentation>
+          </Property>
           <Property Type="String" Name="FirstName" Nullable="false" />
           <Property Type="String" Name="LastName" Nullable="false" />
-          <Property Type="String" Name="ScreenName" Nullable="false" />
+          <Property Type="String" Name="ScreenName" Nullable="false" >
+            <Documentation>
+              <LongDescription>The name used for display.</LongDescription>
+            </Documentation>
+          </Property>
           <Property Type="String" Name="Email" Nullable="false" />
-          <Property Type="Int32" Name="AuthorizationLevel" Nullable="false" />
+          <Property Type="Int16" Name="AuthorizationLevel" Nullable="false" >
+            <Documentation>
+              <LongDescription>The access level of the user. A simple integer. The smaller the higher the priviledges.</LongDescription>
+            </Documentation>
+          </Property>
           <NavigationProperty Name="Journal" Relationship="GhostmonkMainSiteModel.JournalUser" FromRole="User" ToRole="Journal" />
           <NavigationProperty Name="CV" Relationship="GhostmonkMainSiteModel.UserCV" FromRole="User" ToRole="CV" />
+          <NavigationProperty Name="Projects" Relationship="GhostmonkMainSiteModel.UserProjects" FromRole="User" ToRole="Project" />
+          <NavigationProperty Name="Comments" Relationship="GhostmonkMainSiteModel.UserComments" FromRole="User" ToRole="Comment" >
+            <Documentation>
+              <LongDescription>A user's comments are associated to a user.</LongDescription>
+            </Documentation>
+          </NavigationProperty>
+          <Property Type="String" Name="LoginName" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" />
         </EntityType>
         <EntityType Name="Tag">
+          <Documentation>
+            <LongDescription>Tags are sorting mechanisms, useful for defining journal entries. Journal entries can have zero to many tags.</LongDescription>
+          </Documentation>
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Value" Nullable="false" />
-          <NavigationProperty Name="JournalEntry" Relationship="GhostmonkMainSiteModel.JournalEntryTag" FromRole="Tag" ToRole="JournalEntry" />
+          <Property Type="String" Name="Value" Nullable="false" >
+            <Documentation>
+              <LongDescription>Simple, preferably single word, descriptor of an article.</LongDescription>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Articles" Relationship="GhostmonkMainSiteModel.ArticlesTags" FromRole="Tag" ToRole="Article" />
           <NavigationProperty Name="Journal" Relationship="GhostmonkMainSiteModel.JournalTag" FromRole="Tag" ToRole="Journal" />
         </EntityType>
         <EntityType Name="Category">
+          <Documentation>
+            <LongDescription>Top level sorting and categorization mechanism. Journal Entries can only have on category.</LongDescription>
+          </Documentation>
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Value" Nullable="false" />
-          <NavigationProperty Name="JournalEntries" Relationship="GhostmonkMainSiteModel.CategoryJournalEntry" FromRole="Category" ToRole="JournalEntry" />
-          <NavigationProperty Name="Journal" Relationship="GhostmonkMainSiteModel.JournalCategory" FromRole="Category" ToRole="Journal" />
+          <Property Type="String" Name="Value" Nullable="false" >
+            <Documentation>
+              <LongDescription>Simple very short, categorization of a collection of articles.</LongDescription>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Articles" Relationship="GhostmonkMainSiteModel.CategoryArticles" FromRole="Category" ToRole="Article" />
+          <NavigationProperty Name="Journal" Relationship="GhostmonkMainSiteModel.JournalCategories" FromRole="Category" ToRole="Journal" />
         </EntityType>
-        <Association Name="JournalEntryTag">
-          <End Type="GhostmonkMainSiteModel.JournalEntry" Role="JournalEntry" Multiplicity="1" />
+        <Association Name="ArticlesTags">
+          <End Type="GhostmonkMainSiteModel.Article" Role="Article" Multiplicity="*" />
           <End Type="GhostmonkMainSiteModel.Tag" Role="Tag" Multiplicity="*" />
         </Association>
-        <Association Name="CategoryJournalEntry">
+        <Association Name="CategoryArticles">
           <End Type="GhostmonkMainSiteModel.Category" Role="Category" Multiplicity="1" />
-          <End Type="GhostmonkMainSiteModel.JournalEntry" Role="JournalEntry" Multiplicity="*" />
+          <End Type="GhostmonkMainSiteModel.Article" Role="Article" Multiplicity="*" />
         </Association>
-        <Association Name="JournalCategory">
+        <Association Name="JournalCategories">
           <End Type="GhostmonkMainSiteModel.Journal" Role="Journal" Multiplicity="1" />
           <End Type="GhostmonkMainSiteModel.Category" Role="Category" Multiplicity="*" />
         </Association>
@@ -439,10 +772,19 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="User" Relationship="GhostmonkMainSiteModel.UserCV" FromRole="CV" ToRole="User" />
           <Property Type="String" Name="City" Nullable="false" />
-          <Property Type="String" Name="Area" Nullable="false" />
+          <Property Type="String" Name="Area" Nullable="false" >
+            <Documentation>
+              <LongDescription>Province, state or other </LongDescription>
+            </Documentation>
+          </Property>
           <Property Type="String" Name="Country" Nullable="false" />
-          <Property Type="String" Name="Summary" Nullable="false" />
-          <NavigationProperty Name="WorkExperiences" Relationship="GhostmonkMainSiteModel.CVWorkExperience" FromRole="CV" ToRole="WorkExperience" />
+          <Property Type="String" Name="Summary" Nullable="false" >
+            <Documentation>
+              <LongDescription>Usually the objective or aim of the CV.</LongDescription>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="WorkExperiences" Relationship="GhostmonkMainSiteModel.CVWorkExperiences" FromRole="CV" ToRole="WorkExperience" />
+          <NavigationProperty Name="Skills" Relationship="GhostmonkMainSiteModel.CVSkills" FromRole="CV" ToRole="Skill" />
         </EntityType>
         <Association Name="JournalUser">
           <End Type="GhostmonkMainSiteModel.Journal" Role="Journal" Multiplicity="1" />
@@ -461,10 +803,12 @@
           <Property Type="DateTime" Name="StartDate" Nullable="false" />
           <Property Type="DateTime" Name="EndDate" Nullable="true" />
           <Property Type="String" Name="Summary" Nullable="false" />
-          <NavigationProperty Name="CV" Relationship="GhostmonkMainSiteModel.CVWorkExperience" FromRole="WorkExperience" ToRole="CV" />
-          <NavigationProperty Name="Skills" Relationship="GhostmonkMainSiteModel.WorkExperienceSkill" FromRole="WorkExperience" ToRole="Skill" />
+          <NavigationProperty Name="CV" Relationship="GhostmonkMainSiteModel.CVWorkExperiences" FromRole="WorkExperience" ToRole="CV" />
+          <NavigationProperty Name="Skills" Relationship="GhostmonkMainSiteModel.WorkExperienceSkills" FromRole="WorkExperience" ToRole="Skill" />
+          <NavigationProperty Name="Projects" Relationship="GhostmonkMainSiteModel.WorkExperienceProject" FromRole="WorkExperience" ToRole="Project" />
+          <Property Type="String" Name="Uri" Nullable="true" />
         </EntityType>
-        <Association Name="CVWorkExperience">
+        <Association Name="CVWorkExperiences">
           <End Type="GhostmonkMainSiteModel.CV" Role="CV" Multiplicity="1" />
           <End Type="GhostmonkMainSiteModel.WorkExperience" Role="WorkExperience" Multiplicity="*" />
         </Association>
@@ -474,34 +818,116 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" />
-          <NavigationProperty Name="WorkExperience" Relationship="GhostmonkMainSiteModel.WorkExperienceSkill" FromRole="Skill" ToRole="WorkExperience" />
+          <NavigationProperty Name="WorkExperiences" Relationship="GhostmonkMainSiteModel.WorkExperienceSkills" FromRole="Skill" ToRole="WorkExperience" />
+          <NavigationProperty Name="Projects" Relationship="GhostmonkMainSiteModel.SkillsProjects" FromRole="Skill" ToRole="Project" />
+          <NavigationProperty Name="CV" Relationship="GhostmonkMainSiteModel.CVSkills" FromRole="Skill" ToRole="CV" />
         </EntityType>
-        <Association Name="WorkExperienceSkill">
+        <Association Name="WorkExperienceSkills">
           <End Type="GhostmonkMainSiteModel.WorkExperience" Role="WorkExperience" Multiplicity="*" />
           <End Type="GhostmonkMainSiteModel.Skill" Role="Skill" Multiplicity="*" />
         </Association>
-        <EntityType Name="Page">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Title" Nullable="false" />
-          <Property Type="String" Name="Body" Nullable="false" />
-          <Property Type="String" Name="MainImage" Nullable="true" />
-          <Property Type="String" Name="LinkText" Nullable="true" />
-        </EntityType>
         <EntityType Name="PullQuote">
+          <Documentation>
+            <LongDescription>Pullquotes are useful high-lighting sections of text. Articles can have more than one PullQuote.</LongDescription>
+          </Documentation>
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Text" Nullable="false" />
-          <NavigationProperty Name="JournalEntry" Relationship="GhostmonkMainSiteModel.JournalEntryPullQuote" FromRole="PullQuote" ToRole="JournalEntry" />
-          <Property Type="Int32" Name="Priority" Nullable="false" DefaultValue="1" />
+          <Property Type="String" Name="Text" Nullable="false" >
+            <Documentation>
+              <LongDescription>This text should be found within the assiciated article.</LongDescription>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Article" Relationship="GhostmonkMainSiteModel.ArticlePullQuotes" FromRole="PullQuote" ToRole="Article" />
+          <Property Type="Int16" Name="Priority" Nullable="false" DefaultValue="1" >
+            <Documentation>
+              <LongDescription>A priority rating of a collection of quotes. Useful for placing a higher precedence on certain entries.</LongDescription>
+            </Documentation>
+          </Property>
         </EntityType>
-        <Association Name="JournalEntryPullQuote">
-          <End Type="GhostmonkMainSiteModel.JournalEntry" Role="JournalEntry" Multiplicity="1" />
+        <Association Name="ArticlePullQuotes">
+          <End Type="GhostmonkMainSiteModel.Article" Role="Article" Multiplicity="1" />
           <End Type="GhostmonkMainSiteModel.PullQuote" Role="PullQuote" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Assets" Relationship="GhostmonkMainSiteModel.ProjectAssets" FromRole="Project" ToRole="Asset" />
+          <NavigationProperty Name="User" Relationship="GhostmonkMainSiteModel.UserProjects" FromRole="Project" ToRole="User" />
+          <NavigationProperty Name="WorkExperience" Relationship="GhostmonkMainSiteModel.WorkExperienceProject" FromRole="Project" ToRole="WorkExperience" />
+          <Property Type="String" Name="Summary" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="String" Name="Company" Nullable="false" />
+          <NavigationProperty Name="Skills" Relationship="GhostmonkMainSiteModel.SkillsProjects" FromRole="Project" ToRole="Skill" />
+          <Property Type="String" Name="FullText" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="GhostmonkMainSiteModel.ProjectComments" FromRole="Project" ToRole="Comment" />
+        </EntityType>
+        <EntityType Name="Asset">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Project" Relationship="GhostmonkMainSiteModel.ProjectAssets" FromRole="Asset" ToRole="Project" />
+          <Property Type="String" Name="Type" Nullable="false" >
+            <Documentation>
+              <LongDescription>The content type of the asset</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Uri" Nullable="false" />
+          <NavigationProperty Name="Article" Relationship="GhostmonkMainSiteModel.ArticleAssets" FromRole="Asset" ToRole="Article" />
+        </EntityType>
+        <Association Name="ProjectAssets">
+          <End Type="GhostmonkMainSiteModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.Asset" Role="Asset" Multiplicity="*" />
+        </Association>
+        <Association Name="UserProjects">
+          <End Type="GhostmonkMainSiteModel.User" Role="User" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.Project" Role="Project" Multiplicity="*" />
+        </Association>
+        <Association Name="WorkExperienceProject">
+          <End Type="GhostmonkMainSiteModel.WorkExperience" Role="WorkExperience" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.Project" Role="Project" Multiplicity="*" />
+        </Association>
+        <Association Name="SkillsProjects">
+          <End Type="GhostmonkMainSiteModel.Skill" Role="Skill" Multiplicity="*" />
+          <End Type="GhostmonkMainSiteModel.Project" Role="Project" Multiplicity="*" />
+        </Association>
+        <Association Name="ArticleAssets">
+          <End Type="GhostmonkMainSiteModel.Article" Role="Article" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.Asset" Role="Asset" Multiplicity="*" />
+        </Association>
+        <Association Name="CVSkills">
+          <End Type="GhostmonkMainSiteModel.CV" Role="CV" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.Skill" Role="Skill" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Article" Relationship="GhostmonkMainSiteModel.ArticleComments" FromRole="Comment" ToRole="Article" />
+          <NavigationProperty Name="User" Relationship="GhostmonkMainSiteModel.UserComments" FromRole="Comment" ToRole="User" />
+          <NavigationProperty Name="Project" Relationship="GhostmonkMainSiteModel.ProjectComments" FromRole="Comment" ToRole="Project" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="String" Name="Url" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" />
+          <Property Type="String" Name="Content" Nullable="false" />
+        </EntityType>
+        <Association Name="ArticleComments">
+          <End Type="GhostmonkMainSiteModel.Article" Role="Article" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.Comment" Role="Comment" Multiplicity="*" />
+        </Association>
+        <Association Name="UserComments">
+          <End Type="GhostmonkMainSiteModel.User" Role="User" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.Comment" Role="Comment" Multiplicity="*" />
+        </Association>
+        <Association Name="ProjectComments">
+          <End Type="GhostmonkMainSiteModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.Comment" Role="Comment" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -509,16 +935,16 @@
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="GhostmonkMainSiteModelStoreContainer" CdmEntityContainer="GhostmonkMainSiteModelContainer">
-    <EntitySetMapping Name="JournalEntries">
-      <EntityTypeMapping TypeName="IsTypeOf(GhostmonkMainSiteModel.JournalEntry)">
-        <MappingFragment StoreEntitySet="JournalEntries">
+    <EntitySetMapping Name="Articles">
+      <EntityTypeMapping TypeName="IsTypeOf(GhostmonkMainSiteModel.Article)">
+        <MappingFragment StoreEntitySet="Articles">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Body" ColumnName="Body" />
           <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
-          <ScalarProperty Name="MainImage" ColumnName="MainImage" />
           <ScalarProperty Name="Summary" ColumnName="Summary" />
           <ScalarProperty Name="LinkText" ColumnName="LinkText" />
+          <ScalarProperty Name="NumberOfPages" ColumnName="NumberOfPages" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -538,6 +964,8 @@
           <ScalarProperty Name="ScreenName" ColumnName="ScreenName" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="AuthorizationLevel" ColumnName="AuthorizationLevel" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -576,6 +1004,7 @@
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="EndDate" ColumnName="EndDate" />
           <ScalarProperty Name="Summary" ColumnName="Summary" />
+          <ScalarProperty Name="Uri" ColumnName="Uri" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -584,17 +1013,6 @@
         <MappingFragment StoreEntitySet="Skills">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Pages">
-      <EntityTypeMapping TypeName="IsTypeOf(GhostmonkMainSiteModel.Page)">
-        <MappingFragment StoreEntitySet="Pages">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Body" ColumnName="Body" />
-          <ScalarProperty Name="MainImage" ColumnName="MainImage" />
-          <ScalarProperty Name="LinkText" ColumnName="LinkText" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -607,31 +1025,63 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="JournalJournalEntry" TypeName="GhostmonkMainSiteModel.JournalJournalEntry" StoreEntitySet="JournalEntries">
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="IsTypeOf(GhostmonkMainSiteModel.Project)">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Summary" ColumnName="Summary" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="FullText" ColumnName="FullText" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Assets">
+      <EntityTypeMapping TypeName="IsTypeOf(GhostmonkMainSiteModel.Asset)">
+        <MappingFragment StoreEntitySet="Assets">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Uri" ColumnName="Uri" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="IsTypeOf(GhostmonkMainSiteModel.Comment)">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="JournalArticles" TypeName="GhostmonkMainSiteModel.JournalArticles" StoreEntitySet="Articles">
       <EndProperty Name="Journal">
         <ScalarProperty Name="Id" ColumnName="Journal_Id" />
       </EndProperty>
-      <EndProperty Name="JournalEntry">
+      <EndProperty Name="Article">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="JournalEntryTag" TypeName="GhostmonkMainSiteModel.JournalEntryTag" StoreEntitySet="Tags">
-      <EndProperty Name="JournalEntry">
-        <ScalarProperty Name="Id" ColumnName="JournalEntry_Id" />
+    <AssociationSetMapping Name="ArticlesTags" TypeName="GhostmonkMainSiteModel.ArticlesTags" StoreEntitySet="ArticlesTags">
+      <EndProperty Name="Article">
+        <ScalarProperty Name="Id" ColumnName="Articles_Id" />
       </EndProperty>
       <EndProperty Name="Tag">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="Id" ColumnName="Tags_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="CategoryJournalEntry" TypeName="GhostmonkMainSiteModel.CategoryJournalEntry" StoreEntitySet="JournalEntries">
+    <AssociationSetMapping Name="CategoryArticles" TypeName="GhostmonkMainSiteModel.CategoryArticles" StoreEntitySet="Articles">
       <EndProperty Name="Category">
         <ScalarProperty Name="Id" ColumnName="Category_Id" />
       </EndProperty>
-      <EndProperty Name="JournalEntry">
+      <EndProperty Name="Article">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="JournalCategory" TypeName="GhostmonkMainSiteModel.JournalCategory" StoreEntitySet="Categories">
+    <AssociationSetMapping Name="JournalCategories" TypeName="GhostmonkMainSiteModel.JournalCategories" StoreEntitySet="Categories">
       <EndProperty Name="Journal">
         <ScalarProperty Name="Id" ColumnName="Journal_Id" />
       </EndProperty>
@@ -639,7 +1089,7 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="JournalTag" TypeName="GhostmonkMainSiteModel.JournalTag" StoreEntitySet="Tags">
+    <AssociationSetMapping Name="JournalTags" TypeName="GhostmonkMainSiteModel.JournalTag" StoreEntitySet="Tags">
       <EndProperty Name="Journal">
         <ScalarProperty Name="Id" ColumnName="Journal_Id" />
       </EndProperty>
@@ -663,7 +1113,7 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="CVWorkExperience" TypeName="GhostmonkMainSiteModel.CVWorkExperience" StoreEntitySet="WorkExperiences">
+    <AssociationSetMapping Name="CVWorkExperiences" TypeName="GhostmonkMainSiteModel.CVWorkExperiences" StoreEntitySet="WorkExperiences">
       <EndProperty Name="CV">
         <ScalarProperty Name="Id" ColumnName="CV_Id" />
       </EndProperty>
@@ -671,19 +1121,91 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="WorkExperienceSkill" TypeName="GhostmonkMainSiteModel.WorkExperienceSkill" StoreEntitySet="WorkExperienceSkill">
+    <AssociationSetMapping Name="WorkExperienceSkills" TypeName="GhostmonkMainSiteModel.WorkExperienceSkills" StoreEntitySet="WorkExperienceSkills">
       <EndProperty Name="WorkExperience">
-        <ScalarProperty Name="Id" ColumnName="WorkExperience_Id" />
+        <ScalarProperty Name="Id" ColumnName="WorkExperiences_Id" />
       </EndProperty>
       <EndProperty Name="Skill">
         <ScalarProperty Name="Id" ColumnName="Skills_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="JournalEntryPullQuote" TypeName="GhostmonkMainSiteModel.JournalEntryPullQuote" StoreEntitySet="PullQuotes">
-      <EndProperty Name="JournalEntry">
-        <ScalarProperty Name="Id" ColumnName="JournalEntry_Id" />
+    <AssociationSetMapping Name="ArticlePullQuotes" TypeName="GhostmonkMainSiteModel.ArticlePullQuotes" StoreEntitySet="PullQuotes">
+      <EndProperty Name="Article">
+        <ScalarProperty Name="Id" ColumnName="Article_Id" />
       </EndProperty>
       <EndProperty Name="PullQuote">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProjectAssets" TypeName="GhostmonkMainSiteModel.ProjectAssets" StoreEntitySet="Assets">
+      <EndProperty Name="Project">
+        <ScalarProperty Name="Id" ColumnName="Project_Id" />
+      </EndProperty>
+      <EndProperty Name="Asset">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserProjects" TypeName="GhostmonkMainSiteModel.UserProjects" StoreEntitySet="Projects">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Project">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="WorkExperienceProjects" TypeName="GhostmonkMainSiteModel.WorkExperienceProject" StoreEntitySet="Projects">
+      <EndProperty Name="WorkExperience">
+        <ScalarProperty Name="Id" ColumnName="WorkExperience_Id" />
+      </EndProperty>
+      <EndProperty Name="Project">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SkillsProjects" TypeName="GhostmonkMainSiteModel.SkillsProjects" StoreEntitySet="SkillsProjects">
+      <EndProperty Name="Skill">
+        <ScalarProperty Name="Id" ColumnName="Skills_Id" />
+      </EndProperty>
+      <EndProperty Name="Project">
+        <ScalarProperty Name="Id" ColumnName="Projects_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ArticleAssets" TypeName="GhostmonkMainSiteModel.ArticleAssets" StoreEntitySet="Assets">
+      <EndProperty Name="Article">
+        <ScalarProperty Name="Id" ColumnName="Article_Id" />
+      </EndProperty>
+      <EndProperty Name="Asset">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CVSkills" TypeName="GhostmonkMainSiteModel.CVSkills" StoreEntitySet="Skills">
+      <EndProperty Name="CV">
+        <ScalarProperty Name="Id" ColumnName="CV_Id" />
+      </EndProperty>
+      <EndProperty Name="Skill">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ArticleComments" TypeName="GhostmonkMainSiteModel.ArticleComments" StoreEntitySet="Comments">
+      <EndProperty Name="Article">
+        <ScalarProperty Name="Id" ColumnName="Article_Id" />
+      </EndProperty>
+      <EndProperty Name="Comment">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserComments" TypeName="GhostmonkMainSiteModel.UserComments" StoreEntitySet="Comments">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Comment">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProjectComments" TypeName="GhostmonkMainSiteModel.ProjectComments" StoreEntitySet="Comments">
+      <EndProperty Name="Project">
+        <ScalarProperty Name="Id" ColumnName="Project_Id" />
+      </EndProperty>
+      <EndProperty Name="Comment">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
@@ -706,61 +1228,108 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="GhostmonkMainSiteModelContainer" >
-        <EntityTypeShape EntityType="GhostmonkMainSiteModel.JournalEntry" Width="1.5" PointX="4.625" PointY="3.875" Height="3.1340950520833317" />
-        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Journal" Width="1.5" PointX="2.5" PointY="0.75" Height="1.9802864583333331" IsExpanded="true" />
-        <AssociationConnector Association="GhostmonkMainSiteModel.JournalJournalEntry" ManuallyRouted="true">
-          <ConnectorPoint PointX="3.6521533479037931" PointY="2.7302864583333331" />
-          <ConnectorPoint PointX="3.6521533479037931" PointY="3.4386197916666665" />
-          <ConnectorPoint PointX="5.3959819241169154" PointY="3.4386197916666665" />
-          <ConnectorPoint PointX="5.3959819241169154" PointY="3.875" />
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Article" Width="1.5" PointX="4.625" PointY="4.75" Height="3.5186979166666656" />
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Journal" Width="1.5" PointX="2.5" PointY="0.875" Height="1.9802864583333331" IsExpanded="true" />
+        <AssociationConnector Association="GhostmonkMainSiteModel.JournalArticles" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.7236894645162724" PointY="2.8552864583333335" />
+          <ConnectorPoint PointX="3.7236894645162724" PointY="4.375" />
+          <ConnectorPoint PointX="5.1355622631838012" PointY="4.375" />
+          <ConnectorPoint PointX="5.1355622631838012" PointY="4.75" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="GhostmonkMainSiteModel.User" Width="1.75" PointX="5.75" PointY="0.5" Height="2.5571907552083331" />
-        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Tag" Width="1.5" PointX="0.5" PointY="3.875" Height="1.7879850260416657" />
-        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Category" Width="1.5" PointX="2.5" PointY="3.875" Height="1.7879850260416661" />
-        <AssociationConnector Association="GhostmonkMainSiteModel.JournalEntryTag">
-          <ConnectorPoint PointX="4.625" PointY="6.3360405390624983" />
-          <ConnectorPoint PointX="1.25" PointY="6.3360405390624983" />
-          <ConnectorPoint PointX="1.25" PointY="5.6629850260416656" />
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.User" Width="1.75" PointX="5.75" PointY="0.75" Height="3.3263964843749996" />
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Tag" Width="1.5" PointX="0.5" PointY="4.75" Height="1.7879850260416657" />
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Category" Width="1.5" PointX="2.5" PointY="4.75" Height="1.7879850260416661" />
+        <AssociationConnector Association="GhostmonkMainSiteModel.ArticlesTags">
+          <ConnectorPoint PointX="4.625" PointY="7.1414437859195408" />
+          <ConnectorPoint PointX="1.25" PointY="7.1414437859195408" />
+          <ConnectorPoint PointX="1.25" PointY="6.5379850260416656" />
         </AssociationConnector>
-        <AssociationConnector Association="GhostmonkMainSiteModel.CategoryJournalEntry" ManuallyRouted="false">
-          <ConnectorPoint PointX="4" PointY="4.7689925130208328" />
-          <ConnectorPoint PointX="4.625" PointY="4.7689925130208328" />
+        <AssociationConnector Association="GhostmonkMainSiteModel.CategoryArticles" ManuallyRouted="false">
+          <ConnectorPoint PointX="4" PointY="5.6439925130208328" />
+          <ConnectorPoint PointX="4.625" PointY="5.6439925130208328" />
         </AssociationConnector>
-        <AssociationConnector Association="GhostmonkMainSiteModel.JournalCategory" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.2411330746040279" PointY="2.7302864583333331" />
-          <ConnectorPoint PointX="3.2411330746040279" PointY="3.875" />
+        <AssociationConnector Association="GhostmonkMainSiteModel.JournalCategories" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.25" PointY="2.8552864583333331" />
+          <ConnectorPoint PointX="3.25" PointY="4.75" />
         </AssociationConnector>
         <AssociationConnector Association="GhostmonkMainSiteModel.JournalTag">
-          <ConnectorPoint PointX="2.8347103105230995" PointY="2.7302864583333326" />
-          <ConnectorPoint PointX="2.8347103105230995" PointY="3.5" />
-          <ConnectorPoint PointX="1.4046653637923046" PointY="3.5" />
-          <ConnectorPoint PointX="1.4046653637923046" PointY="3.875" />
+          <ConnectorPoint PointX="2.8734146280544732" PointY="2.8552864583333331" />
+          <ConnectorPoint PointX="2.8734146280544732" PointY="4.375" />
+          <ConnectorPoint PointX="1.2162080970289009" PointY="4.375" />
+          <ConnectorPoint PointX="1.2162080970289009" PointY="4.75" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="GhostmonkMainSiteModel.CV" Width="1.5" PointX="8.75" PointY="0.75" Height="2.172587890625" />
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.CV" Width="1.5" PointX="8.5" PointY="0.5" Height="2.5571907552083331" />
         <AssociationConnector Association="GhostmonkMainSiteModel.JournalUser">
-          <ConnectorPoint PointX="4" PointY="1.7401432291666665" />
-          <ConnectorPoint PointX="5.75" PointY="1.7401432291666665" />
+          <ConnectorPoint PointX="4" PointY="1.8651432291666663" />
+          <ConnectorPoint PointX="5.75" PointY="1.8651432291666663" />
         </AssociationConnector>
         <AssociationConnector Association="GhostmonkMainSiteModel.UserCV">
-          <ConnectorPoint PointX="7.5" PointY="1.8362939453125" />
-          <ConnectorPoint PointX="8.75" PointY="1.8362939453125" />
+          <ConnectorPoint PointX="7.5" PointY="2.062632040964739" />
+          <ConnectorPoint PointX="8.5" PointY="2.062632040964739" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="GhostmonkMainSiteModel.WorkExperience" Width="1.5" PointX="10.875" PointY="0.75" Height="2.3648893229166656" />
-        <AssociationConnector Association="GhostmonkMainSiteModel.CVWorkExperience">
-          <ConnectorPoint PointX="10.25" PointY="1.9324446614583328" />
-          <ConnectorPoint PointX="10.875" PointY="1.9324446614583328" />
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.WorkExperience" Width="1.5" PointX="10.875" PointY="1.625" Height="2.7494921875" />
+        <AssociationConnector Association="GhostmonkMainSiteModel.CVWorkExperiences">
+          <ConnectorPoint PointX="10" PointY="2.3410953776041667" />
+          <ConnectorPoint PointX="10.875" PointY="2.3410953776041667" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Skill" Width="1.5" PointX="10.75" PointY="3.875" Height="1.5956835937499996" />
-        <AssociationConnector Association="GhostmonkMainSiteModel.WorkExperienceSkill">
-          <ConnectorPoint PointX="11.5625" PointY="3.1148893229166656" />
-          <ConnectorPoint PointX="11.5625" PointY="3.875" />
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Skill" Width="1.5" PointX="13.25" PointY="0.5" Height="1.9802864583333326" />
+        <AssociationConnector Association="GhostmonkMainSiteModel.WorkExperienceSkills">
+          <ConnectorPoint PointX="12.375" PointY="2.0526432291666663" />
+          <ConnectorPoint PointX="13.25" PointY="2.0526432291666663" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Page" Width="1.5" PointX="8" PointY="3.875" Height="1.9802864583333326" />
-        <EntityTypeShape EntityType="GhostmonkMainSiteModel.PullQuote" Width="1.5" PointX="6.625" PointY="6.75" Height="1.7879850260416657" />
-        <AssociationConnector Association="GhostmonkMainSiteModel.JournalEntryPullQuote">
-          <ConnectorPoint PointX="5.375" PointY="7.0090950520833317" />
-          <ConnectorPoint PointX="5.375" PointY="7.6439925130208337" />
-          <ConnectorPoint PointX="6.625" PointY="7.6439925130208337" />
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.PullQuote" Width="1.5" PointX="6.875" PointY="6.5" Height="1.7879850260416657" />
+        <AssociationConnector Association="GhostmonkMainSiteModel.ArticlePullQuotes">
+          <ConnectorPoint PointX="6.125" PointY="7.3591307979559755" />
+          <ConnectorPoint PointX="6.5" PointY="7.3591307979559755" />
+          <ConnectorPoint PointX="6.5" PointY="7.36537817602759" />
+          <ConnectorPoint PointX="6.875" PointY="7.36537817602759" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Project" Width="1.5" PointX="13.25" PointY="3.25" Height="3.1340950520833335" />
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Asset" Width="1.5" PointX="11.5" PointY="7.125" Height="1.9802864583333335" />
+        <AssociationConnector Association="GhostmonkMainSiteModel.ProjectAssets">
+          <ConnectorPoint PointX="14.059673013647281" PointY="6.3840950520833335" />
+          <ConnectorPoint PointX="14.059673013647281" PointY="7.9958996946839074" />
+          <ConnectorPoint PointX="13" PointY="7.9958996946839074" />
+        </AssociationConnector>
+        <AssociationConnector Association="GhostmonkMainSiteModel.UserProjects" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.21944699229337" PointY="4.076396484375" />
+          <ConnectorPoint PointX="7.21944699229337" PointY="4.7406444866581046" />
+          <ConnectorPoint PointX="13.25" PointY="4.7406444866581046" />
+        </AssociationConnector>
+        <AssociationConnector Association="GhostmonkMainSiteModel.WorkExperienceProject" ManuallyRouted="false">
+          <ConnectorPoint PointX="12.375" PointY="3.7699898437499995" />
+          <ConnectorPoint PointX="12.75" PointY="3.7699898437499995" />
+          <ConnectorPoint PointX="12.75" PointY="3.770833333333333" />
+          <ConnectorPoint PointX="13.25" PointY="3.770833333333333" />
+        </AssociationConnector>
+        <AssociationConnector Association="GhostmonkMainSiteModel.SkillsProjects" ManuallyRouted="false">
+          <ConnectorPoint PointX="14" PointY="2.4802864583333326" />
+          <ConnectorPoint PointX="14" PointY="3.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="GhostmonkMainSiteModel.ArticleAssets" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.5767794848513814" PointY="8.2686979166666656" />
+          <ConnectorPoint PointX="5.5767794848513814" PointY="8.8125" />
+          <ConnectorPoint PointX="11.5" PointY="8.8125" />
+        </AssociationConnector>
+        <AssociationConnector Association="GhostmonkMainSiteModel.CVSkills">
+          <ConnectorPoint PointX="10" PointY="1.1354166666666661" />
+          <ConnectorPoint PointX="13.25" PointY="1.1354166666666661" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Comment" Width="1.5" PointX="9" PointY="5" Height="2.5571907552083326" />
+        <AssociationConnector Association="GhostmonkMainSiteModel.ArticleComments">
+          <ConnectorPoint PointX="6.125" PointY="6.0761499451754375" />
+          <ConnectorPoint PointX="9" PointY="6.0761499451754375" />
+        </AssociationConnector>
+        <AssociationConnector Association="GhostmonkMainSiteModel.UserComments">
+          <ConnectorPoint PointX="6.5528941382047181" PointY="4.076396484375" />
+          <ConnectorPoint PointX="6.5528941382047181" PointY="5.5068224725877188" />
+          <ConnectorPoint PointX="9" PointY="5.5068224725877188" />
+        </AssociationConnector>
+        <AssociationConnector Association="GhostmonkMainSiteModel.ProjectComments">
+          <ConnectorPoint PointX="13.25" PointY="5.39497618558114" />
+          <ConnectorPoint PointX="12.875" PointY="5.39497618558114" />
+          <ConnectorPoint PointX="12.875" PointY="5.3931959836614238" />
+          <ConnectorPoint PointX="10.5" PointY="5.3931959836614238" />
         </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>

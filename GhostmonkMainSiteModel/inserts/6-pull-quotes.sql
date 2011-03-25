@@ -4,7 +4,7 @@ INSERT INTO [GhostmonkMainSite].[dbo].[PullQuotes]
            ,[JournalEntry_Id])
      VALUES
            (<Text, nvarchar(max),>
-           ,<Priority, int,>
+           ,<Priority, smallint,>
            ,<JournalEntry_Id, int,>)
 GO
 
