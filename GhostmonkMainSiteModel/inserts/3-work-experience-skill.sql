@@ -1,3 +1,3 @@
-INSERT INTO [GhostmonkMainSite].[dbo].[WorkExperienceSkill] ([WorkExperience_Id],[Skills_Id])
+INSERT INTO [GhostmonkMainSite].[dbo].[WorkExperienceSkill] ([WorkExperience_Id],[Skill_Id])
 VALUES('','')
 GO

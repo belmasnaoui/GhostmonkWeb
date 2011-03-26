@@ -11,8 +11,9 @@ namespace GhostmonkMainSite.Controllers
         {
             using( var container = new GhostmonkMainSiteModelContainer() )
             {
-                var entries = container.JournalEntries.ToList();
-                return PartialView( "HtmlFeed", entries );       
+                var entries = container.Articles.Where( article => article.Category.Id == 4 ).ToList();
+                entries.ForEach( entry => entry.Assets.ToList() );
+                return PartialView( "HtmlFeed", entries );
             }
         }
 
@@ -20,11 +21,14 @@ namespace GhostmonkMainSite.Controllers
         {
             using( var container = new GhostmonkMainSiteModelContainer() )
             {
-                var entries = container.JournalEntries;
+                var entries = container.Articles;
                 var entry = string.IsNullOrEmpty( linkText ) 
-                    ? entries.First() 
-                    : entries.Where( post => post.LinkText == linkText ).First();
-                return View( entry ?? entries.First() );
+                    ? entries.First()
+                    : entries.Where( article => article.LinkText == linkText ).First();
+
+                entry = entry ?? entries.First();
+                var images = entry.Assets.ToList();
+                return View( entry );
             }
         }
     }

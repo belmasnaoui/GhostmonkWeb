@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<GhostmonkMainSiteModel.Page>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<GhostmonkMainSiteModel.Article>" %>
 
 <asp:Content ID="Title" ContentPlaceHolderID="TitleContent" runat="server">
     Ghostmonk: <%: Model.Title %>
@@ -8,8 +8,8 @@
 
     <h2><%: Model.Title %></h2>
 
-    <%  if( Model.MainImage != null ) { %>
-            <%= Html.Image( Model.MainImage, Model.Title ) + "<br />" %>
+    <%  if( Model.Assets.Count > 0 ) { %>
+            <%= Html.Image( Model.Assets.First().Uri, Model.Title ) + "<br />" %>
     <% } %>
 
     <%= Server.UrlDecode( Model.Body ) %>

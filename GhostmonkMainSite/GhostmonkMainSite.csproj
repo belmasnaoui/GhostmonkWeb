@@ -89,7 +89,7 @@
     <Content Include="App_Themes\Ghostmonk\Images\structure\transparentBG.png" />
     <Content Include="App_Themes\Ghostmonk\Site.css" />
     <Content Include="Content\Images\bank\moodBoard.jpg" />
-    <Content Include="Content\Images\bank\moodBoardthumb.jpg" />
+    <Content Include="Content\Images\bank\moodBoardThumb.jpg" />
     <Content Include="Content\Images\bank\nicholas.gif" />
     <Content Include="Content\Images\bank\posts\blaze.jpg" />
     <Content Include="Content\Images\bank\posts\rhino.jpg" />
@@ -141,7 +141,9 @@
     <Content Include="Views\Posts\HtmlFeed.ascx" />
     <Content Include="Views\Widgets\BlogRoll.ascx" />
     <Content Include="Views\Widgets\SocialMediaLinks.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

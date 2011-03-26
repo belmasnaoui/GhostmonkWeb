@@ -15,7 +15,8 @@ namespace GhostmonkMainSite.Controllers
         {
             using( var container = new GhostmonkMainSiteModelContainer() )
             {
-                Page target = container.Pages.Where( page => page.LinkText == linkText ).First();
+                Article target = container.Articles.Where( article => article.LinkText == linkText ).First();
+                var images = target.Assets.ToList();
                 return View( target );
             }
         }

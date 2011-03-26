@@ -26,17 +26,17 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalUser", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "UserCV", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User), "CV", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.CV))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "CVWorkExperiences", "CV", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.CV), "WorkExperience", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.WorkExperience))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "WorkExperienceSkills", "WorkExperience", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.WorkExperience), "Skill", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Skill))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "WorkExperiencesSkills", "WorkExperience", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.WorkExperience), "Skill", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Skill))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticlePullQuotes", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Article), "PullQuote", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.PullQuote))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ProjectAssets", "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Project), "Asset", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Asset))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ProjectAssets", "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GhostmonkMainSiteModel.Project), "Asset", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Asset))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "UserProjects", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User), "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Project))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "WorkExperienceProject", "WorkExperience", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.WorkExperience), "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Project))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "SkillsProjects", "Skill", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Skill), "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Project))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticleAssets", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Article), "Asset", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Asset))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticleAssets", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GhostmonkMainSiteModel.Article), "Asset", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Asset))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "CVSkills", "CV", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.CV), "Skill", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Skill))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticleComments", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Article), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Comment))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "UserComments", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Comment))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ProjectComments", "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Project), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Comment))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticleComments", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GhostmonkMainSiteModel.Article), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Comment))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "UserComments", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GhostmonkMainSiteModel.User), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Comment))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ProjectComments", "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GhostmonkMainSiteModel.Project), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Comment))]
 
 #endregion
 
@@ -666,7 +666,7 @@ namespace GhostmonkMainSiteModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticlesTags", "Tag")]
-        public EntityCollection<Tag> Tags
+        public EntityCollection<Tag> Tag
         {
             get
             {
@@ -2108,7 +2108,7 @@ namespace GhostmonkMainSiteModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "SkillsProjects", "Skill")]
-        public EntityCollection<Skill> Skills
+        public EntityCollection<Skill> Skill
         {
             get
             {
@@ -2390,18 +2390,18 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "WorkExperienceSkills", "WorkExperience")]
-        public EntityCollection<WorkExperience> WorkExperiences
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "WorkExperiencesSkills", "WorkExperience")]
+        public EntityCollection<WorkExperience> WorkExperience
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WorkExperience>("GhostmonkMainSiteModel.WorkExperienceSkills", "WorkExperience");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WorkExperience>("GhostmonkMainSiteModel.WorkExperiencesSkills", "WorkExperience");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkExperience>("GhostmonkMainSiteModel.WorkExperienceSkills", "WorkExperience", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkExperience>("GhostmonkMainSiteModel.WorkExperiencesSkills", "WorkExperience", value);
                 }
             }
         }
@@ -2413,7 +2413,7 @@ namespace GhostmonkMainSiteModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "SkillsProjects", "Project")]
-        public EntityCollection<Project> Projects
+        public EntityCollection<Project> Project
         {
             get
             {
@@ -2563,7 +2563,7 @@ namespace GhostmonkMainSiteModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticlesTags", "Article")]
-        public EntityCollection<Article> Articles
+        public EntityCollection<Article> Article
         {
             get
             {
@@ -3216,18 +3216,18 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "WorkExperienceSkills", "Skill")]
-        public EntityCollection<Skill> Skills
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "WorkExperiencesSkills", "Skill")]
+        public EntityCollection<Skill> Skill
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Skill>("GhostmonkMainSiteModel.WorkExperienceSkills", "Skill");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Skill>("GhostmonkMainSiteModel.WorkExperiencesSkills", "Skill");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Skill>("GhostmonkMainSiteModel.WorkExperienceSkills", "Skill", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Skill>("GhostmonkMainSiteModel.WorkExperiencesSkills", "Skill", value);
                 }
             }
         }

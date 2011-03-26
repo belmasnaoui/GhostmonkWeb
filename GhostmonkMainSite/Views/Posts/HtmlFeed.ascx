@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<IEnumerable<GhostmonkMainSiteModel.JournalEntry>>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<IEnumerable<GhostmonkMainSiteModel.Article>>" %>
 
 <% foreach (var entry in Model) { %>
     
@@ -6,7 +6,7 @@
     
     <p><%: entry.PublishDate.ToString( "MMMM dd, yyyy" ) %></p>
     
-    <%: Html.Image( entry.MainImage, entry.Title ) %>
+    <%: Html.Image( entry.Assets.First().Uri, entry.Title ) %>
 
     <%= entry.Summary ?? entry.Body.Substring( 0, 200 ) %>
 

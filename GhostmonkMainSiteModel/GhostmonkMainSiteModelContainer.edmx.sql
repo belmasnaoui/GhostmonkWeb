@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 03/25/2011 00:13:07
+-- Date Created: 03/26/2011 08:34:07
 -- Generated from EDMX file: D:\Projects\ghostmonk\GhostmonkWeb\GhostmonkMainSiteModel\GhostmonkMainSiteModelContainer.edmx
 -- --------------------------------------------------
 
@@ -17,20 +17,20 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_JournalJournalEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Articles] DROP CONSTRAINT [FK_JournalJournalEntry];
+IF OBJECT_ID(N'[dbo].[FK_JournalArticles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Articles] DROP CONSTRAINT [FK_JournalArticles];
 GO
-IF OBJECT_ID(N'[dbo].[FK_JournalEntryTag_JournalEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[JournalEntryTag] DROP CONSTRAINT [FK_JournalEntryTag_JournalEntry];
+IF OBJECT_ID(N'[dbo].[FK_ArticlesTags_Article]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ArticlesTags] DROP CONSTRAINT [FK_ArticlesTags_Article];
 GO
-IF OBJECT_ID(N'[dbo].[FK_JournalEntryTag_Tag]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[JournalEntryTag] DROP CONSTRAINT [FK_JournalEntryTag_Tag];
+IF OBJECT_ID(N'[dbo].[FK_ArticlesTags_Tag]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ArticlesTags] DROP CONSTRAINT [FK_ArticlesTags_Tag];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CategoryJournalEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Articles] DROP CONSTRAINT [FK_CategoryJournalEntry];
+IF OBJECT_ID(N'[dbo].[FK_CategoryArticles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Articles] DROP CONSTRAINT [FK_CategoryArticles];
 GO
-IF OBJECT_ID(N'[dbo].[FK_JournalCategory]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Categories] DROP CONSTRAINT [FK_JournalCategory];
+IF OBJECT_ID(N'[dbo].[FK_JournalCategories]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Categories] DROP CONSTRAINT [FK_JournalCategories];
 GO
 IF OBJECT_ID(N'[dbo].[FK_JournalTag]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Tags] DROP CONSTRAINT [FK_JournalTag];
@@ -41,47 +41,47 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UserCV]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_UserCV];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CVWorkExperience]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WorkExperiences] DROP CONSTRAINT [FK_CVWorkExperience];
+IF OBJECT_ID(N'[dbo].[FK_CVWorkExperiences]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[WorkExperiences] DROP CONSTRAINT [FK_CVWorkExperiences];
 GO
-IF OBJECT_ID(N'[dbo].[FK_WorkExperienceSkill_WorkExperience]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WorkExperienceSkill] DROP CONSTRAINT [FK_WorkExperienceSkill_WorkExperience];
+IF OBJECT_ID(N'[dbo].[FK_WorkExperiencesSkills_WorkExperience]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[WorkExperiencesSkills] DROP CONSTRAINT [FK_WorkExperiencesSkills_WorkExperience];
 GO
-IF OBJECT_ID(N'[dbo].[FK_WorkExperienceSkill_Skill]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WorkExperienceSkill] DROP CONSTRAINT [FK_WorkExperienceSkill_Skill];
+IF OBJECT_ID(N'[dbo].[FK_WorkExperiencesSkills_Skill]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[WorkExperiencesSkills] DROP CONSTRAINT [FK_WorkExperiencesSkills_Skill];
 GO
-IF OBJECT_ID(N'[dbo].[FK_JournalEntryPullQuote]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PullQuotes] DROP CONSTRAINT [FK_JournalEntryPullQuote];
+IF OBJECT_ID(N'[dbo].[FK_ArticlePullQuotes]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PullQuotes] DROP CONSTRAINT [FK_ArticlePullQuotes];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ProjectProjectImages]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Assets] DROP CONSTRAINT [FK_ProjectProjectImages];
+IF OBJECT_ID(N'[dbo].[FK_ProjectAssets]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Assets] DROP CONSTRAINT [FK_ProjectAssets];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UserProject]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Projects] DROP CONSTRAINT [FK_UserProject];
+IF OBJECT_ID(N'[dbo].[FK_UserProjects]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Projects] DROP CONSTRAINT [FK_UserProjects];
 GO
 IF OBJECT_ID(N'[dbo].[FK_WorkExperienceProject]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Projects] DROP CONSTRAINT [FK_WorkExperienceProject];
 GO
-IF OBJECT_ID(N'[dbo].[FK_SkillProject_Skill]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SkillProject] DROP CONSTRAINT [FK_SkillProject_Skill];
+IF OBJECT_ID(N'[dbo].[FK_SkillsProjects_Skill]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SkillsProjects] DROP CONSTRAINT [FK_SkillsProjects_Skill];
 GO
-IF OBJECT_ID(N'[dbo].[FK_SkillProject_Project]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SkillProject] DROP CONSTRAINT [FK_SkillProject_Project];
+IF OBJECT_ID(N'[dbo].[FK_SkillsProjects_Project]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SkillsProjects] DROP CONSTRAINT [FK_SkillsProjects_Project];
 GO
-IF OBJECT_ID(N'[dbo].[FK_JournalEntryProjectAsset]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Assets] DROP CONSTRAINT [FK_JournalEntryProjectAsset];
+IF OBJECT_ID(N'[dbo].[FK_ArticleAssets]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Assets] DROP CONSTRAINT [FK_ArticleAssets];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CVSkill]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Skills] DROP CONSTRAINT [FK_CVSkill];
+IF OBJECT_ID(N'[dbo].[FK_CVSkills]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Skills] DROP CONSTRAINT [FK_CVSkills];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ArticleComment]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_ArticleComment];
+IF OBJECT_ID(N'[dbo].[FK_ArticleComments]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_ArticleComments];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UserComment]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_UserComment];
+IF OBJECT_ID(N'[dbo].[FK_UserComments]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_UserComments];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ProjectComment]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_ProjectComment];
+IF OBJECT_ID(N'[dbo].[FK_ProjectComments]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_ProjectComments];
 GO
 
 -- --------------------------------------------------
@@ -124,14 +124,14 @@ GO
 IF OBJECT_ID(N'[dbo].[Comments]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Comments];
 GO
-IF OBJECT_ID(N'[dbo].[JournalEntryTag]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[JournalEntryTag];
+IF OBJECT_ID(N'[dbo].[ArticlesTags]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ArticlesTags];
 GO
-IF OBJECT_ID(N'[dbo].[WorkExperienceSkill]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[WorkExperienceSkill];
+IF OBJECT_ID(N'[dbo].[WorkExperiencesSkills]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[WorkExperiencesSkills];
 GO
-IF OBJECT_ID(N'[dbo].[SkillProject]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SkillProject];
+IF OBJECT_ID(N'[dbo].[SkillsProjects]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SkillsProjects];
 GO
 
 -- --------------------------------------------------
@@ -246,8 +246,8 @@ CREATE TABLE [dbo].[Assets] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Type] nvarchar(max)  NOT NULL,
     [Uri] nvarchar(max)  NOT NULL,
-    [Project_Id] int  NOT NULL,
-    [Article_Id] int  NOT NULL
+    [Project_Id] int  NULL,
+    [Article_Id] int  NULL
 );
 GO
 
@@ -258,30 +258,30 @@ CREATE TABLE [dbo].[Comments] (
     [Url] nvarchar(max)  NOT NULL,
     [Email] nvarchar(max)  NOT NULL,
     [Content] nvarchar(max)  NOT NULL,
-    [Article_Id] int  NOT NULL,
-    [User_Id] int  NOT NULL,
-    [Project_Id] int  NOT NULL
+    [Article_Id] int  NULL,
+    [User_Id] int  NULL,
+    [Project_Id] int  NULL
 );
 GO
 
 -- Creating table 'ArticlesTags'
 CREATE TABLE [dbo].[ArticlesTags] (
-    [Articles_Id] int  NOT NULL,
-    [Tags_Id] int  NOT NULL
+    [Article_Id] int  NOT NULL,
+    [Tag_Id] int  NOT NULL
 );
 GO
 
--- Creating table 'WorkExperienceSkills'
-CREATE TABLE [dbo].[WorkExperienceSkills] (
-    [WorkExperiences_Id] int  NOT NULL,
-    [Skills_Id] int  NOT NULL
+-- Creating table 'WorkExperiencesSkills'
+CREATE TABLE [dbo].[WorkExperiencesSkills] (
+    [WorkExperience_Id] int  NOT NULL,
+    [Skill_Id] int  NOT NULL
 );
 GO
 
 -- Creating table 'SkillsProjects'
 CREATE TABLE [dbo].[SkillsProjects] (
-    [Skills_Id] int  NOT NULL,
-    [Projects_Id] int  NOT NULL
+    [Skill_Id] int  NOT NULL,
+    [Project_Id] int  NOT NULL
 );
 GO
 
@@ -361,22 +361,22 @@ ADD CONSTRAINT [PK_Comments]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Articles_Id], [Tags_Id] in table 'ArticlesTags'
+-- Creating primary key on [Article_Id], [Tag_Id] in table 'ArticlesTags'
 ALTER TABLE [dbo].[ArticlesTags]
 ADD CONSTRAINT [PK_ArticlesTags]
-    PRIMARY KEY NONCLUSTERED ([Articles_Id], [Tags_Id] ASC);
+    PRIMARY KEY NONCLUSTERED ([Article_Id], [Tag_Id] ASC);
 GO
 
--- Creating primary key on [WorkExperiences_Id], [Skills_Id] in table 'WorkExperienceSkills'
-ALTER TABLE [dbo].[WorkExperienceSkills]
-ADD CONSTRAINT [PK_WorkExperienceSkills]
-    PRIMARY KEY NONCLUSTERED ([WorkExperiences_Id], [Skills_Id] ASC);
+-- Creating primary key on [WorkExperience_Id], [Skill_Id] in table 'WorkExperiencesSkills'
+ALTER TABLE [dbo].[WorkExperiencesSkills]
+ADD CONSTRAINT [PK_WorkExperiencesSkills]
+    PRIMARY KEY NONCLUSTERED ([WorkExperience_Id], [Skill_Id] ASC);
 GO
 
--- Creating primary key on [Skills_Id], [Projects_Id] in table 'SkillsProjects'
+-- Creating primary key on [Skill_Id], [Project_Id] in table 'SkillsProjects'
 ALTER TABLE [dbo].[SkillsProjects]
 ADD CONSTRAINT [PK_SkillsProjects]
-    PRIMARY KEY NONCLUSTERED ([Skills_Id], [Projects_Id] ASC);
+    PRIMARY KEY NONCLUSTERED ([Skill_Id], [Project_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -397,19 +397,19 @@ ON [dbo].[Articles]
     ([Journal_Id]);
 GO
 
--- Creating foreign key on [Articles_Id] in table 'ArticlesTags'
+-- Creating foreign key on [Article_Id] in table 'ArticlesTags'
 ALTER TABLE [dbo].[ArticlesTags]
 ADD CONSTRAINT [FK_ArticlesTags_Article]
-    FOREIGN KEY ([Articles_Id])
+    FOREIGN KEY ([Article_Id])
     REFERENCES [dbo].[Articles]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Tags_Id] in table 'ArticlesTags'
+-- Creating foreign key on [Tag_Id] in table 'ArticlesTags'
 ALTER TABLE [dbo].[ArticlesTags]
 ADD CONSTRAINT [FK_ArticlesTags_Tag]
-    FOREIGN KEY ([Tags_Id])
+    FOREIGN KEY ([Tag_Id])
     REFERENCES [dbo].[Tags]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -417,7 +417,7 @@ ADD CONSTRAINT [FK_ArticlesTags_Tag]
 -- Creating non-clustered index for FOREIGN KEY 'FK_ArticlesTags_Tag'
 CREATE INDEX [IX_FK_ArticlesTags_Tag]
 ON [dbo].[ArticlesTags]
-    ([Tags_Id]);
+    ([Tag_Id]);
 GO
 
 -- Creating foreign key on [Category_Id] in table 'Articles'
@@ -504,27 +504,27 @@ ON [dbo].[WorkExperiences]
     ([CV_Id]);
 GO
 
--- Creating foreign key on [WorkExperiences_Id] in table 'WorkExperienceSkills'
-ALTER TABLE [dbo].[WorkExperienceSkills]
-ADD CONSTRAINT [FK_WorkExperienceSkills_WorkExperience]
-    FOREIGN KEY ([WorkExperiences_Id])
+-- Creating foreign key on [WorkExperience_Id] in table 'WorkExperiencesSkills'
+ALTER TABLE [dbo].[WorkExperiencesSkills]
+ADD CONSTRAINT [FK_WorkExperiencesSkills_WorkExperience]
+    FOREIGN KEY ([WorkExperience_Id])
     REFERENCES [dbo].[WorkExperiences]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Skills_Id] in table 'WorkExperienceSkills'
-ALTER TABLE [dbo].[WorkExperienceSkills]
-ADD CONSTRAINT [FK_WorkExperienceSkills_Skill]
-    FOREIGN KEY ([Skills_Id])
+-- Creating foreign key on [Skill_Id] in table 'WorkExperiencesSkills'
+ALTER TABLE [dbo].[WorkExperiencesSkills]
+ADD CONSTRAINT [FK_WorkExperiencesSkills_Skill]
+    FOREIGN KEY ([Skill_Id])
     REFERENCES [dbo].[Skills]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_WorkExperienceSkills_Skill'
-CREATE INDEX [IX_FK_WorkExperienceSkills_Skill]
-ON [dbo].[WorkExperienceSkills]
-    ([Skills_Id]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_WorkExperiencesSkills_Skill'
+CREATE INDEX [IX_FK_WorkExperiencesSkills_Skill]
+ON [dbo].[WorkExperiencesSkills]
+    ([Skill_Id]);
 GO
 
 -- Creating foreign key on [Article_Id] in table 'PullQuotes'
@@ -583,19 +583,19 @@ ON [dbo].[Projects]
     ([WorkExperience_Id]);
 GO
 
--- Creating foreign key on [Skills_Id] in table 'SkillsProjects'
+-- Creating foreign key on [Skill_Id] in table 'SkillsProjects'
 ALTER TABLE [dbo].[SkillsProjects]
 ADD CONSTRAINT [FK_SkillsProjects_Skill]
-    FOREIGN KEY ([Skills_Id])
+    FOREIGN KEY ([Skill_Id])
     REFERENCES [dbo].[Skills]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Projects_Id] in table 'SkillsProjects'
+-- Creating foreign key on [Project_Id] in table 'SkillsProjects'
 ALTER TABLE [dbo].[SkillsProjects]
 ADD CONSTRAINT [FK_SkillsProjects_Project]
-    FOREIGN KEY ([Projects_Id])
+    FOREIGN KEY ([Project_Id])
     REFERENCES [dbo].[Projects]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -603,7 +603,7 @@ ADD CONSTRAINT [FK_SkillsProjects_Project]
 -- Creating non-clustered index for FOREIGN KEY 'FK_SkillsProjects_Project'
 CREATE INDEX [IX_FK_SkillsProjects_Project]
 ON [dbo].[SkillsProjects]
-    ([Projects_Id]);
+    ([Project_Id]);
 GO
 
 -- Creating foreign key on [Article_Id] in table 'Assets'

@@ -19,7 +19,7 @@
     <EntitySet Name="Assets" EntityType="GhostmonkMainSiteModel.Store.Assets" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Comments" EntityType="GhostmonkMainSiteModel.Store.Comments" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ArticlesTags" EntityType="GhostmonkMainSiteModel.Store.ArticlesTags" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="WorkExperienceSkills" EntityType="GhostmonkMainSiteModel.Store.WorkExperienceSkills" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WorkExperiencesSkills" EntityType="GhostmonkMainSiteModel.Store.WorkExperiencesSkills" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SkillsProjects" EntityType="GhostmonkMainSiteModel.Store.SkillsProjects" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="JournalArticles" Association="GhostmonkMainSiteModel.Store.JournalArticles">
       <End Role="Journal" EntitySet="Journals" />
@@ -57,13 +57,13 @@
       <End Role="CV" EntitySet="CVs" />
       <End Role="WorkExperience" EntitySet="WorkExperiences" />
     </AssociationSet>
-    <AssociationSet Name="FK_WorkExperienceSkills_WorkExperience" Association="GhostmonkMainSiteModel.Store.FK_WorkExperienceSkills_WorkExperience">
+    <AssociationSet Name="FK_WorkExperiencesSkills_WorkExperience" Association="GhostmonkMainSiteModel.Store.FK_WorkExperiencesSkills_WorkExperience">
       <End Role="WorkExperience" EntitySet="WorkExperiences" />
-      <End Role="WorkExperienceSkills" EntitySet="WorkExperienceSkills" />
+      <End Role="WorkExperiencesSkills" EntitySet="WorkExperiencesSkills" />
     </AssociationSet>
-    <AssociationSet Name="FK_WorkExperienceSkills_Skill" Association="GhostmonkMainSiteModel.Store.FK_WorkExperienceSkills_Skill">
+    <AssociationSet Name="FK_WorkExperiencesSkills_Skill" Association="GhostmonkMainSiteModel.Store.FK_WorkExperiencesSkills_Skill">
       <End Role="Skill" EntitySet="Skills" />
-      <End Role="WorkExperienceSkills" EntitySet="WorkExperienceSkills" />
+      <End Role="WorkExperiencesSkills" EntitySet="WorkExperiencesSkills" />
     </AssociationSet>
     <AssociationSet Name="ArticlePullQuotes" Association="GhostmonkMainSiteModel.Store.ArticlePullQuotes">
       <End Role="Article" EntitySet="Articles" />
@@ -220,8 +220,8 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Uri" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Project_Id" Type="int" Nullable="false" />
-    <Property Name="Article_Id" Type="int" Nullable="false" />
+    <Property Name="Project_Id" Type="int" Nullable="true" />
+    <Property Name="Article_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Comments">
     <Key>
@@ -232,33 +232,33 @@
     <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Article_Id" Type="int" Nullable="false" />
-    <Property Name="User_Id" Type="int" Nullable="false" />
-    <Property Name="Project_Id" Type="int" Nullable="false" />
+    <Property Name="Article_Id" Type="int" Nullable="true" />
+    <Property Name="User_Id" Type="int" Nullable="true" />
+    <Property Name="Project_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="ArticlesTags">
     <Key>
-      <PropertyRef Name="Articles_Id" />
-      <PropertyRef Name="Tags_Id" />
+      <PropertyRef Name="Article_Id" />
+      <PropertyRef Name="Tag_Id" />
     </Key>
-    <Property Name="Articles_Id" Type="int" Nullable="false" />
-    <Property Name="Tags_Id" Type="int" Nullable="false" />
+    <Property Name="Article_Id" Type="int" Nullable="false" />
+    <Property Name="Tag_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="WorkExperienceSkills">
+  <EntityType Name="WorkExperiencesSkills">
     <Key>
-      <PropertyRef Name="WorkExperiences_Id" />
-      <PropertyRef Name="Skills_Id" />
+      <PropertyRef Name="WorkExperience_Id" />
+      <PropertyRef Name="Skill_Id" />
     </Key>
-    <Property Name="WorkExperiences_Id" Type="int" Nullable="false" />
-    <Property Name="Skills_Id" Type="int" Nullable="false" />
+    <Property Name="WorkExperience_Id" Type="int" Nullable="false" />
+    <Property Name="Skill_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="SkillsProjects">
     <Key>
-      <PropertyRef Name="Skills_Id" />
-      <PropertyRef Name="Projects_Id" />
+      <PropertyRef Name="Skill_Id" />
+      <PropertyRef Name="Project_Id" />
     </Key>
-    <Property Name="Skills_Id" Type="int" Nullable="false" />
-    <Property Name="Projects_Id" Type="int" Nullable="false" />
+    <Property Name="Skill_Id" Type="int" Nullable="false" />
+    <Property Name="Project_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="JournalArticles">
     <End Role="Journal" Type="GhostmonkMainSiteModel.Store.Journals" Multiplicity="1" />
@@ -357,7 +357,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ProjectAssets">
-    <End Role="Project" Type="GhostmonkMainSiteModel.Store.Projects" Multiplicity="1" />
+    <End Role="Project" Type="GhostmonkMainSiteModel.Store.Projects" Multiplicity="0..1" />
     <End Role="Asset" Type="GhostmonkMainSiteModel.Store.Assets" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
@@ -393,7 +393,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ArticleAssets">
-    <End Role="Article" Type="GhostmonkMainSiteModel.Store.Articles" Multiplicity="1" />
+    <End Role="Article" Type="GhostmonkMainSiteModel.Store.Articles" Multiplicity="0..1" />
     <End Role="Asset" Type="GhostmonkMainSiteModel.Store.Assets" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Article">
@@ -417,7 +417,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ArticleComments">
-    <End Role="Article" Type="GhostmonkMainSiteModel.Store.Articles" Multiplicity="1" />
+    <End Role="Article" Type="GhostmonkMainSiteModel.Store.Articles" Multiplicity="0..1" />
     <End Role="Comment" Type="GhostmonkMainSiteModel.Store.Comments" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Article">
@@ -429,7 +429,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="UserComments">
-    <End Role="User" Type="GhostmonkMainSiteModel.Store.Users" Multiplicity="1" />
+    <End Role="User" Type="GhostmonkMainSiteModel.Store.Users" Multiplicity="0..1" />
     <End Role="Comment" Type="GhostmonkMainSiteModel.Store.Comments" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
@@ -441,7 +441,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ProjectComments">
-    <End Role="Project" Type="GhostmonkMainSiteModel.Store.Projects" Multiplicity="1" />
+    <End Role="Project" Type="GhostmonkMainSiteModel.Store.Projects" Multiplicity="0..1" />
     <End Role="Comment" Type="GhostmonkMainSiteModel.Store.Comments" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
@@ -460,7 +460,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ArticlesTags">
-        <PropertyRef Name="Articles_Id" />
+        <PropertyRef Name="Article_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -472,31 +472,31 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ArticlesTags">
-        <PropertyRef Name="Tags_Id" />
+        <PropertyRef Name="Tag_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_WorkExperienceSkills_WorkExperience">
+  <Association Name="FK_WorkExperiencesSkills_WorkExperience">
     <End Role="WorkExperience" Type="GhostmonkMainSiteModel.Store.WorkExperiences" Multiplicity="1" />
-    <End Role="WorkExperienceSkills" Type="GhostmonkMainSiteModel.Store.WorkExperienceSkills" Multiplicity="*" />
+    <End Role="WorkExperiencesSkills" Type="GhostmonkMainSiteModel.Store.WorkExperiencesSkills" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="WorkExperience">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="WorkExperienceSkills">
-        <PropertyRef Name="WorkExperiences_Id" />
+      <Dependent Role="WorkExperiencesSkills">
+        <PropertyRef Name="WorkExperience_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_WorkExperienceSkills_Skill">
-    <End Role="WorkExperienceSkills" Type="GhostmonkMainSiteModel.Store.WorkExperienceSkills" Multiplicity="*" />
+  <Association Name="FK_WorkExperiencesSkills_Skill">
+    <End Role="WorkExperiencesSkills" Type="GhostmonkMainSiteModel.Store.WorkExperiencesSkills" Multiplicity="*" />
     <End Role="Skill" Type="GhostmonkMainSiteModel.Store.Skills" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Skill">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="WorkExperienceSkills">
-        <PropertyRef Name="Skills_Id" />
+      <Dependent Role="WorkExperiencesSkills">
+        <PropertyRef Name="Skill_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -508,7 +508,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SkillsProjects">
-        <PropertyRef Name="Skills_Id" />
+        <PropertyRef Name="Skill_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -520,7 +520,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SkillsProjects">
-        <PropertyRef Name="Projects_Id" />
+        <PropertyRef Name="Project_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -569,7 +569,7 @@
             <End Role="WorkExperience" EntitySet="WorkExperiences" />
           </AssociationSet>
           <EntitySet Name="Skills" EntityType="GhostmonkMainSiteModel.Skill" />
-          <AssociationSet Name="WorkExperienceSkills" Association="GhostmonkMainSiteModel.WorkExperienceSkills">
+          <AssociationSet Name="WorkExperiencesSkills" Association="GhostmonkMainSiteModel.WorkExperiencesSkills">
             <End Role="WorkExperience" EntitySet="WorkExperiences" />
             <End Role="Skill" EntitySet="Skills" />
           </AssociationSet>
@@ -646,7 +646,7 @@
               <LongDescription>A Journal can have multiple articles</LongDescription>
             </Documentation>
           </NavigationProperty>
-          <NavigationProperty Name="Tags" Relationship="GhostmonkMainSiteModel.ArticlesTags" FromRole="Article" ToRole="Tag" />
+          <NavigationProperty Name="Tag" Relationship="GhostmonkMainSiteModel.ArticlesTags" FromRole="Article" ToRole="Tag" />
           <NavigationProperty Name="Category" Relationship="GhostmonkMainSiteModel.CategoryArticles" FromRole="Article" ToRole="Category" />
           <Property Type="String" Name="Summary" Nullable="true" >
             <Documentation>
@@ -730,7 +730,7 @@
               <LongDescription>Simple, preferably single word, descriptor of an article.</LongDescription>
             </Documentation>
           </Property>
-          <NavigationProperty Name="Articles" Relationship="GhostmonkMainSiteModel.ArticlesTags" FromRole="Tag" ToRole="Article" />
+          <NavigationProperty Name="Article" Relationship="GhostmonkMainSiteModel.ArticlesTags" FromRole="Tag" ToRole="Article" />
           <NavigationProperty Name="Journal" Relationship="GhostmonkMainSiteModel.JournalTag" FromRole="Tag" ToRole="Journal" />
         </EntityType>
         <EntityType Name="Category">
@@ -804,7 +804,7 @@
           <Property Type="DateTime" Name="EndDate" Nullable="true" />
           <Property Type="String" Name="Summary" Nullable="false" />
           <NavigationProperty Name="CV" Relationship="GhostmonkMainSiteModel.CVWorkExperiences" FromRole="WorkExperience" ToRole="CV" />
-          <NavigationProperty Name="Skills" Relationship="GhostmonkMainSiteModel.WorkExperienceSkills" FromRole="WorkExperience" ToRole="Skill" />
+          <NavigationProperty Name="Skill" Relationship="GhostmonkMainSiteModel.WorkExperiencesSkills" FromRole="WorkExperience" ToRole="Skill" />
           <NavigationProperty Name="Projects" Relationship="GhostmonkMainSiteModel.WorkExperienceProject" FromRole="WorkExperience" ToRole="Project" />
           <Property Type="String" Name="Uri" Nullable="true" />
         </EntityType>
@@ -818,11 +818,11 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" />
-          <NavigationProperty Name="WorkExperiences" Relationship="GhostmonkMainSiteModel.WorkExperienceSkills" FromRole="Skill" ToRole="WorkExperience" />
-          <NavigationProperty Name="Projects" Relationship="GhostmonkMainSiteModel.SkillsProjects" FromRole="Skill" ToRole="Project" />
+          <NavigationProperty Name="WorkExperience" Relationship="GhostmonkMainSiteModel.WorkExperiencesSkills" FromRole="Skill" ToRole="WorkExperience" />
+          <NavigationProperty Name="Project" Relationship="GhostmonkMainSiteModel.SkillsProjects" FromRole="Skill" ToRole="Project" />
           <NavigationProperty Name="CV" Relationship="GhostmonkMainSiteModel.CVSkills" FromRole="Skill" ToRole="CV" />
         </EntityType>
-        <Association Name="WorkExperienceSkills">
+        <Association Name="WorkExperiencesSkills">
           <End Type="GhostmonkMainSiteModel.WorkExperience" Role="WorkExperience" Multiplicity="*" />
           <End Type="GhostmonkMainSiteModel.Skill" Role="Skill" Multiplicity="*" />
         </Association>
@@ -862,7 +862,7 @@
           <Property Type="String" Name="Title" Nullable="false" />
           <Property Type="DateTime" Name="Date" Nullable="false" />
           <Property Type="String" Name="Company" Nullable="false" />
-          <NavigationProperty Name="Skills" Relationship="GhostmonkMainSiteModel.SkillsProjects" FromRole="Project" ToRole="Skill" />
+          <NavigationProperty Name="Skill" Relationship="GhostmonkMainSiteModel.SkillsProjects" FromRole="Project" ToRole="Skill" />
           <Property Type="String" Name="FullText" Nullable="false" />
           <NavigationProperty Name="Comments" Relationship="GhostmonkMainSiteModel.ProjectComments" FromRole="Project" ToRole="Comment" />
         </EntityType>
@@ -881,7 +881,7 @@
           <NavigationProperty Name="Article" Relationship="GhostmonkMainSiteModel.ArticleAssets" FromRole="Asset" ToRole="Article" />
         </EntityType>
         <Association Name="ProjectAssets">
-          <End Type="GhostmonkMainSiteModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.Project" Role="Project" Multiplicity="0..1" />
           <End Type="GhostmonkMainSiteModel.Asset" Role="Asset" Multiplicity="*" />
         </Association>
         <Association Name="UserProjects">
@@ -897,7 +897,7 @@
           <End Type="GhostmonkMainSiteModel.Project" Role="Project" Multiplicity="*" />
         </Association>
         <Association Name="ArticleAssets">
-          <End Type="GhostmonkMainSiteModel.Article" Role="Article" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.Article" Role="Article" Multiplicity="0..1" />
           <End Type="GhostmonkMainSiteModel.Asset" Role="Asset" Multiplicity="*" />
         </Association>
         <Association Name="CVSkills">
@@ -918,15 +918,15 @@
           <Property Type="String" Name="Content" Nullable="false" />
         </EntityType>
         <Association Name="ArticleComments">
-          <End Type="GhostmonkMainSiteModel.Article" Role="Article" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.Article" Role="Article" Multiplicity="0..1" />
           <End Type="GhostmonkMainSiteModel.Comment" Role="Comment" Multiplicity="*" />
         </Association>
         <Association Name="UserComments">
-          <End Type="GhostmonkMainSiteModel.User" Role="User" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.User" Role="User" Multiplicity="0..1" />
           <End Type="GhostmonkMainSiteModel.Comment" Role="Comment" Multiplicity="*" />
         </Association>
         <Association Name="ProjectComments">
-          <End Type="GhostmonkMainSiteModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.Project" Role="Project" Multiplicity="0..1" />
           <End Type="GhostmonkMainSiteModel.Comment" Role="Comment" Multiplicity="*" />
         </Association>
       </Schema>
@@ -1067,10 +1067,10 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="ArticlesTags" TypeName="GhostmonkMainSiteModel.ArticlesTags" StoreEntitySet="ArticlesTags">
       <EndProperty Name="Article">
-        <ScalarProperty Name="Id" ColumnName="Articles_Id" />
+        <ScalarProperty Name="Id" ColumnName="Article_Id" />
       </EndProperty>
       <EndProperty Name="Tag">
-        <ScalarProperty Name="Id" ColumnName="Tags_Id" />
+        <ScalarProperty Name="Id" ColumnName="Tag_Id" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="CategoryArticles" TypeName="GhostmonkMainSiteModel.CategoryArticles" StoreEntitySet="Articles">
@@ -1121,12 +1121,12 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="WorkExperienceSkills" TypeName="GhostmonkMainSiteModel.WorkExperienceSkills" StoreEntitySet="WorkExperienceSkills">
+    <AssociationSetMapping Name="WorkExperiencesSkills" TypeName="GhostmonkMainSiteModel.WorkExperiencesSkills" StoreEntitySet="WorkExperiencesSkills">
       <EndProperty Name="WorkExperience">
-        <ScalarProperty Name="Id" ColumnName="WorkExperiences_Id" />
+        <ScalarProperty Name="Id" ColumnName="WorkExperience_Id" />
       </EndProperty>
       <EndProperty Name="Skill">
-        <ScalarProperty Name="Id" ColumnName="Skills_Id" />
+        <ScalarProperty Name="Id" ColumnName="Skill_Id" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="ArticlePullQuotes" TypeName="GhostmonkMainSiteModel.ArticlePullQuotes" StoreEntitySet="PullQuotes">
@@ -1144,6 +1144,7 @@
       <EndProperty Name="Asset">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="Project_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="UserProjects" TypeName="GhostmonkMainSiteModel.UserProjects" StoreEntitySet="Projects">
       <EndProperty Name="User">
@@ -1163,10 +1164,10 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="SkillsProjects" TypeName="GhostmonkMainSiteModel.SkillsProjects" StoreEntitySet="SkillsProjects">
       <EndProperty Name="Skill">
-        <ScalarProperty Name="Id" ColumnName="Skills_Id" />
+        <ScalarProperty Name="Id" ColumnName="Skill_Id" />
       </EndProperty>
       <EndProperty Name="Project">
-        <ScalarProperty Name="Id" ColumnName="Projects_Id" />
+        <ScalarProperty Name="Id" ColumnName="Project_Id" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="ArticleAssets" TypeName="GhostmonkMainSiteModel.ArticleAssets" StoreEntitySet="Assets">
@@ -1176,6 +1177,7 @@
       <EndProperty Name="Asset">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="Article_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="CVSkills" TypeName="GhostmonkMainSiteModel.CVSkills" StoreEntitySet="Skills">
       <EndProperty Name="CV">
@@ -1192,6 +1194,7 @@
       <EndProperty Name="Comment">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="Article_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="UserComments" TypeName="GhostmonkMainSiteModel.UserComments" StoreEntitySet="Comments">
       <EndProperty Name="User">
@@ -1200,6 +1203,7 @@
       <EndProperty Name="Comment">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="User_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="ProjectComments" TypeName="GhostmonkMainSiteModel.ProjectComments" StoreEntitySet="Comments">
       <EndProperty Name="Project">
@@ -1208,6 +1212,7 @@
       <EndProperty Name="Comment">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="Project_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
@@ -1273,7 +1278,7 @@
           <ConnectorPoint PointX="10.875" PointY="2.3410953776041667" />
         </AssociationConnector>
         <EntityTypeShape EntityType="GhostmonkMainSiteModel.Skill" Width="1.5" PointX="13.25" PointY="0.5" Height="1.9802864583333326" />
-        <AssociationConnector Association="GhostmonkMainSiteModel.WorkExperienceSkills">
+        <AssociationConnector Association="GhostmonkMainSiteModel.WorkExperiencesSkills">
           <ConnectorPoint PointX="12.375" PointY="2.0526432291666663" />
           <ConnectorPoint PointX="13.25" PointY="2.0526432291666663" />
         </AssociationConnector>
@@ -1284,27 +1289,25 @@
           <ConnectorPoint PointX="6.5" PointY="7.36537817602759" />
           <ConnectorPoint PointX="6.875" PointY="7.36537817602759" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Project" Width="1.5" PointX="13.25" PointY="3.25" Height="3.1340950520833335" />
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Project" Width="1.5" PointX="13.5" PointY="3.25" Height="3.1340950520833335" />
         <EntityTypeShape EntityType="GhostmonkMainSiteModel.Asset" Width="1.5" PointX="11.5" PointY="7.125" Height="1.9802864583333335" />
         <AssociationConnector Association="GhostmonkMainSiteModel.ProjectAssets">
-          <ConnectorPoint PointX="14.059673013647281" PointY="6.3840950520833335" />
-          <ConnectorPoint PointX="14.059673013647281" PointY="7.9958996946839074" />
-          <ConnectorPoint PointX="13" PointY="7.9958996946839074" />
+          <ConnectorPoint PointX="14.25" PointY="6.3840950520833335" />
+          <ConnectorPoint PointX="14.25" PointY="8.1151432291666659" />
+          <ConnectorPoint PointX="13" PointY="8.1151432291666659" />
         </AssociationConnector>
         <AssociationConnector Association="GhostmonkMainSiteModel.UserProjects" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.21944699229337" PointY="4.076396484375" />
-          <ConnectorPoint PointX="7.21944699229337" PointY="4.7406444866581046" />
-          <ConnectorPoint PointX="13.25" PointY="4.7406444866581046" />
+          <ConnectorPoint PointX="7.0576995691023594" PointY="4.076396484375" />
+          <ConnectorPoint PointX="7.0576995691023594" PointY="4.7027785935599145" />
+          <ConnectorPoint PointX="13.5" PointY="4.7027785935599145" />
         </AssociationConnector>
         <AssociationConnector Association="GhostmonkMainSiteModel.WorkExperienceProject" ManuallyRouted="false">
-          <ConnectorPoint PointX="12.375" PointY="3.7699898437499995" />
-          <ConnectorPoint PointX="12.75" PointY="3.7699898437499995" />
-          <ConnectorPoint PointX="12.75" PointY="3.770833333333333" />
-          <ConnectorPoint PointX="13.25" PointY="3.770833333333333" />
+          <ConnectorPoint PointX="12.375" PointY="3.81224609375" />
+          <ConnectorPoint PointX="13.5" PointY="3.81224609375" />
         </AssociationConnector>
         <AssociationConnector Association="GhostmonkMainSiteModel.SkillsProjects" ManuallyRouted="false">
-          <ConnectorPoint PointX="14" PointY="2.4802864583333326" />
-          <ConnectorPoint PointX="14" PointY="3.25" />
+          <ConnectorPoint PointX="14.125" PointY="2.4802864583333326" />
+          <ConnectorPoint PointX="14.125" PointY="3.25" />
         </AssociationConnector>
         <AssociationConnector Association="GhostmonkMainSiteModel.ArticleAssets" ManuallyRouted="false">
           <ConnectorPoint PointX="5.5767794848513814" PointY="8.2686979166666656" />
@@ -1326,10 +1329,8 @@
           <ConnectorPoint PointX="9" PointY="5.5068224725877188" />
         </AssociationConnector>
         <AssociationConnector Association="GhostmonkMainSiteModel.ProjectComments">
-          <ConnectorPoint PointX="13.25" PointY="5.39497618558114" />
-          <ConnectorPoint PointX="12.875" PointY="5.39497618558114" />
-          <ConnectorPoint PointX="12.875" PointY="5.3931959836614238" />
-          <ConnectorPoint PointX="10.5" PointY="5.3931959836614238" />
+          <ConnectorPoint PointX="13.5" PointY="5.6920475260416667" />
+          <ConnectorPoint PointX="10.5" PointY="5.6920475260416667" />
         </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
