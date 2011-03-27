@@ -19,7 +19,10 @@ namespace GhostmonkMainSite
             routes.MapRoute(
                 "CategoryLink",
                 "{category}/{linkText}",
-                new { controller = "Article", action = "FullArticle", category = "BlogEntry", linkText = string.Empty } );
+                new { controller = "Article",
+                      action = "FullArticle",
+                      category = "Blog",
+                      linkText = string.Empty } );
 
             routes.MapRoute(
                 "Default",

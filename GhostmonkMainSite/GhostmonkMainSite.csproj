@@ -139,6 +139,7 @@
     <Content Include="Views\Article\FullArticle.aspx" />
     <Content Include="Views\Article\HtmlBlogFeed.ascx" />
     <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Home\Twitter.ascx" />
     <Content Include="Views\Widgets\BlogRoll.ascx" />
     <Content Include="Views\Widgets\SocialMediaLinks.ascx" />
     <Content Include="Web.config">

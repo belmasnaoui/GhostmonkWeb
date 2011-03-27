@@ -85,7 +85,10 @@
 
             <div id="ModuleColumn" class="span-7">
 
-                <div id="Twitter" class="push-half"></div>
+                <div id="Twitter" class="push-half">
+                    <h2>Twitter</h2>
+                    <% Html.RenderAction( "TwitterFeed", "Home" ); %>
+                </div>
 
                 <div id="CurrentWork" class="push-half">
                     <h2>Currently I am...</h2>

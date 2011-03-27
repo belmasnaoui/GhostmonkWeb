@@ -14,10 +14,10 @@ namespace GhostmonkMainSite.Controllers
         {
             using( var container = new GhostmonkMainSiteModelContainer() )
             {
-                var entries = ( from entry in container.Articles 
-                              from cat in entry.Categories
-                              where cat.Value == "BlogEntry"
-                              select entry ).ToList();
+                var entries = ( from entry in container.Articles
+                                from cat in entry.Categories
+                                where cat.Value == "Blog"
+                                select entry ).ToList();
                 entries.ForEach( article => article.Assets.ToList() );
                 return PartialView( "HtmlBlogFeed", entries );
             }
@@ -37,7 +37,8 @@ namespace GhostmonkMainSite.Controllers
                     : entries.Where( article => article.LinkText == linkText ).First();
 
                 target = target ?? entries.First();
-                var images = target.Assets.ToList();
+                target.Assets.ToList();
+
                 return View( target );
             }
         }

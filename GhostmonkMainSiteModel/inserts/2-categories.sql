@@ -1,5 +1,5 @@
 INSERT INTO [GhostmonkMainSite].[dbo].[Categories]([Value],[Journal_Id])
-VALUES ('BlogEntry',1)
+VALUES ('Blog',1)
 
 INSERT INTO [GhostmonkMainSite].[dbo].[Categories]([Value],[Journal_Id])
 VALUES ('Page',1)
