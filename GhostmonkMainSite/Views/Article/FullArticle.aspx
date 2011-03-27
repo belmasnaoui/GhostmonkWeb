@@ -10,7 +10,9 @@
     
     <p><%: Model.PublishDate.ToString( "MMMM dd, yyyy" ) %></p>
     
-    <%: Html.Image( Model.Assets.First().Uri, Model.Title ) %>
+    <%  if( Model.Assets.Count > 0 ) { %>
+            <%= Html.Image( Model.Assets.First().Uri, Model.Title ) + "<br />" %>
+    <% } %>
 
     <%= Model.Body %>
 

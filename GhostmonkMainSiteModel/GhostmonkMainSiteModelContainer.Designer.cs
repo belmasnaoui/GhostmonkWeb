@@ -20,11 +20,11 @@ using System.Runtime.Serialization;
 
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalArticles", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Article))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticlesTags", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Article), "Tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Tag))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "CategoryArticles", "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Category), "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Article))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "CategoriesArticles", "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Category), "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Article))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalCategories", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Category))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalTag", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "Tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Tag))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalUser", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "UserCV", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User), "CV", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.CV))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalUser", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.User))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "UserCV", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User), "CV", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GhostmonkMainSiteModel.CV))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "CVWorkExperiences", "CV", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.CV), "WorkExperience", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.WorkExperience))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "WorkExperiencesSkills", "WorkExperience", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.WorkExperience), "Skill", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Skill))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticlePullQuotes", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Article), "PullQuote", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.PullQuote))]
@@ -666,7 +666,7 @@ namespace GhostmonkMainSiteModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticlesTags", "Tag")]
-        public EntityCollection<Tag> Tag
+        public EntityCollection<Tag> Tags
         {
             get
             {
@@ -687,34 +687,18 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "CategoryArticles", "Category")]
-        public Category Category
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "CategoriesArticles", "Category")]
+        public EntityCollection<Category> Categories
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Category>("GhostmonkMainSiteModel.CategoryArticles", "Category").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Category>("GhostmonkMainSiteModel.CategoryArticles", "Category").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Category> CategoryReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Category>("GhostmonkMainSiteModel.CategoryArticles", "Category");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Category>("GhostmonkMainSiteModel.CategoriesArticles", "Category");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Category>("GhostmonkMainSiteModel.CategoryArticles", "Category", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Category>("GhostmonkMainSiteModel.CategoriesArticles", "Category", value);
                 }
             }
         }
@@ -981,7 +965,7 @@ namespace GhostmonkMainSiteModel
     /// 
     /// </summary>
     /// <LongDescription>
-    /// Top level sorting and categorization mechanism. Journal Entries can only have on category.
+    /// Top level sorting and categorization mechanism. Articles should not have too many categories.
     /// </LongDescription>
     [EdmEntityTypeAttribute(NamespaceName="GhostmonkMainSiteModel", Name="Category")]
     [Serializable()]
@@ -1070,18 +1054,18 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "CategoryArticles", "Article")]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "CategoriesArticles", "Article")]
         public EntityCollection<Article> Articles
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Article>("GhostmonkMainSiteModel.CategoryArticles", "Article");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Article>("GhostmonkMainSiteModel.CategoriesArticles", "Article");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Article>("GhostmonkMainSiteModel.CategoryArticles", "Article", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Article>("GhostmonkMainSiteModel.CategoriesArticles", "Article", value);
                 }
             }
         }
@@ -1670,10 +1654,12 @@ namespace GhostmonkMainSiteModel
         /// Create a new Journal object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        public static Journal CreateJournal(global::System.Int32 id)
+        /// <param name="title">Initial value of the Title property.</param>
+        public static Journal CreateJournal(global::System.Int32 id, global::System.String title)
         {
             Journal journal = new Journal();
             journal.Id = id;
+            journal.Title = title;
             return journal;
         }
 
@@ -1706,6 +1692,30 @@ namespace GhostmonkMainSiteModel
         private global::System.Int32 _Id;
         partial void OnIdChanging(global::System.Int32 value);
         partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
 
         #endregion
     
@@ -1784,33 +1794,17 @@ namespace GhostmonkMainSiteModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "JournalUser", "User")]
-        public User User
+        public EntityCollection<User> Users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.JournalUser", "User").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.JournalUser", "User").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<User> UserReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.JournalUser", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("GhostmonkMainSiteModel.JournalUser", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GhostmonkMainSiteModel.JournalUser", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("GhostmonkMainSiteModel.JournalUser", "User", value);
                 }
             }
         }
@@ -2108,7 +2102,7 @@ namespace GhostmonkMainSiteModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "SkillsProjects", "Skill")]
-        public EntityCollection<Skill> Skill
+        public EntityCollection<Skill> Skills
         {
             get
             {
@@ -2473,7 +2467,7 @@ namespace GhostmonkMainSiteModel
     /// 
     /// </summary>
     /// <LongDescription>
-    /// Tags are sorting mechanisms, useful for defining journal entries. Journal entries can have zero to many tags.
+    /// Tags are sorting mechanisms, useful for defining Articles. Articles can have zero to many tags, and should define as many as makes sense.
     /// </LongDescription>
     [EdmEntityTypeAttribute(NamespaceName="GhostmonkMainSiteModel", Name="Tag")]
     [Serializable()]
@@ -2563,7 +2557,7 @@ namespace GhostmonkMainSiteModel
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticlesTags", "Article")]
-        public EntityCollection<Article> Article
+        public EntityCollection<Article> Articles
         {
             get
             {

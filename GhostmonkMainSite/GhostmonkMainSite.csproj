@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LinqToTwitter, Version=2.0.20.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -66,8 +67,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\PagesController.cs" />
-    <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -135,10 +136,9 @@
     <Content Include="Scripts\cufon-yui.js" />
     <Content Include="Scripts\HelveticaNeue_LT_57_Cn_400.font.js" />
     <Content Include="Scripts\navigationEffect.js" />
-    <Content Include="Views\Pages\Index.aspx" />
-    <Content Include="Views\Pages\Page.aspx" />
-    <Content Include="Views\Posts\FullPost.aspx" />
-    <Content Include="Views\Posts\HtmlFeed.ascx" />
+    <Content Include="Views\Article\FullArticle.aspx" />
+    <Content Include="Views\Article\HtmlBlogFeed.ascx" />
+    <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Widgets\BlogRoll.ascx" />
     <Content Include="Views\Widgets\SocialMediaLinks.ascx" />
     <Content Include="Web.config">

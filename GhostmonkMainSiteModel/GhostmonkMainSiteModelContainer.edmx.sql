@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 03/26/2011 08:34:07
+-- Date Created: 03/26/2011 17:36:49
 -- Generated from EDMX file: D:\Projects\ghostmonk\GhostmonkWeb\GhostmonkMainSiteModel\GhostmonkMainSiteModelContainer.edmx
 -- --------------------------------------------------
 
@@ -26,8 +26,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ArticlesTags_Tag]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ArticlesTags] DROP CONSTRAINT [FK_ArticlesTags_Tag];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CategoryArticles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Articles] DROP CONSTRAINT [FK_CategoryArticles];
+IF OBJECT_ID(N'[dbo].[FK_CategoriesArticles_Category]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CategoriesArticles] DROP CONSTRAINT [FK_CategoriesArticles_Category];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CategoriesArticles_Article]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CategoriesArticles] DROP CONSTRAINT [FK_CategoriesArticles_Article];
 GO
 IF OBJECT_ID(N'[dbo].[FK_JournalCategories]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Categories] DROP CONSTRAINT [FK_JournalCategories];
@@ -36,7 +39,7 @@ IF OBJECT_ID(N'[dbo].[FK_JournalTag]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Tags] DROP CONSTRAINT [FK_JournalTag];
 GO
 IF OBJECT_ID(N'[dbo].[FK_JournalUser]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Journals] DROP CONSTRAINT [FK_JournalUser];
+    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_JournalUser];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserCV]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_UserCV];
@@ -127,6 +130,9 @@ GO
 IF OBJECT_ID(N'[dbo].[ArticlesTags]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ArticlesTags];
 GO
+IF OBJECT_ID(N'[dbo].[CategoriesArticles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CategoriesArticles];
+GO
 IF OBJECT_ID(N'[dbo].[WorkExperiencesSkills]', 'U') IS NOT NULL
     DROP TABLE [dbo].[WorkExperiencesSkills];
 GO
@@ -147,15 +153,14 @@ CREATE TABLE [dbo].[Articles] (
     [Summary] nvarchar(max)  NULL,
     [LinkText] nvarchar(max)  NOT NULL,
     [NumberOfPages] smallint  NOT NULL,
-    [Journal_Id] int  NOT NULL,
-    [Category_Id] int  NOT NULL
+    [Journal_Id] int  NOT NULL
 );
 GO
 
 -- Creating table 'Journals'
 CREATE TABLE [dbo].[Journals] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [User_Id] int  NOT NULL
+    [Title] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -169,7 +174,7 @@ CREATE TABLE [dbo].[Users] (
     [AuthorizationLevel] smallint  NOT NULL,
     [LoginName] nvarchar(max)  NOT NULL,
     [Password] nvarchar(max)  NOT NULL,
-    [CV_Id] int  NOT NULL
+    [Journal_Id] int  NOT NULL
 );
 GO
 
@@ -195,7 +200,8 @@ CREATE TABLE [dbo].[CVs] (
     [City] nvarchar(max)  NOT NULL,
     [Area] nvarchar(max)  NOT NULL,
     [Country] nvarchar(max)  NOT NULL,
-    [Summary] nvarchar(max)  NOT NULL
+    [Summary] nvarchar(max)  NOT NULL,
+    [User_Id] int  NOT NULL
 );
 GO
 
@@ -266,8 +272,15 @@ GO
 
 -- Creating table 'ArticlesTags'
 CREATE TABLE [dbo].[ArticlesTags] (
-    [Article_Id] int  NOT NULL,
-    [Tag_Id] int  NOT NULL
+    [Articles_Id] int  NOT NULL,
+    [Tags_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'CategoriesArticles'
+CREATE TABLE [dbo].[CategoriesArticles] (
+    [Categories_Id] int  NOT NULL,
+    [Articles_Id] int  NOT NULL
 );
 GO
 
@@ -280,7 +293,7 @@ GO
 
 -- Creating table 'SkillsProjects'
 CREATE TABLE [dbo].[SkillsProjects] (
-    [Skill_Id] int  NOT NULL,
+    [Skills_Id] int  NOT NULL,
     [Project_Id] int  NOT NULL
 );
 GO
@@ -361,10 +374,16 @@ ADD CONSTRAINT [PK_Comments]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Article_Id], [Tag_Id] in table 'ArticlesTags'
+-- Creating primary key on [Articles_Id], [Tags_Id] in table 'ArticlesTags'
 ALTER TABLE [dbo].[ArticlesTags]
 ADD CONSTRAINT [PK_ArticlesTags]
-    PRIMARY KEY NONCLUSTERED ([Article_Id], [Tag_Id] ASC);
+    PRIMARY KEY NONCLUSTERED ([Articles_Id], [Tags_Id] ASC);
+GO
+
+-- Creating primary key on [Categories_Id], [Articles_Id] in table 'CategoriesArticles'
+ALTER TABLE [dbo].[CategoriesArticles]
+ADD CONSTRAINT [PK_CategoriesArticles]
+    PRIMARY KEY NONCLUSTERED ([Categories_Id], [Articles_Id] ASC);
 GO
 
 -- Creating primary key on [WorkExperience_Id], [Skill_Id] in table 'WorkExperiencesSkills'
@@ -373,10 +392,10 @@ ADD CONSTRAINT [PK_WorkExperiencesSkills]
     PRIMARY KEY NONCLUSTERED ([WorkExperience_Id], [Skill_Id] ASC);
 GO
 
--- Creating primary key on [Skill_Id], [Project_Id] in table 'SkillsProjects'
+-- Creating primary key on [Skills_Id], [Project_Id] in table 'SkillsProjects'
 ALTER TABLE [dbo].[SkillsProjects]
 ADD CONSTRAINT [PK_SkillsProjects]
-    PRIMARY KEY NONCLUSTERED ([Skill_Id], [Project_Id] ASC);
+    PRIMARY KEY NONCLUSTERED ([Skills_Id], [Project_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -397,19 +416,19 @@ ON [dbo].[Articles]
     ([Journal_Id]);
 GO
 
--- Creating foreign key on [Article_Id] in table 'ArticlesTags'
+-- Creating foreign key on [Articles_Id] in table 'ArticlesTags'
 ALTER TABLE [dbo].[ArticlesTags]
 ADD CONSTRAINT [FK_ArticlesTags_Article]
-    FOREIGN KEY ([Article_Id])
+    FOREIGN KEY ([Articles_Id])
     REFERENCES [dbo].[Articles]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Tag_Id] in table 'ArticlesTags'
+-- Creating foreign key on [Tags_Id] in table 'ArticlesTags'
 ALTER TABLE [dbo].[ArticlesTags]
 ADD CONSTRAINT [FK_ArticlesTags_Tag]
-    FOREIGN KEY ([Tag_Id])
+    FOREIGN KEY ([Tags_Id])
     REFERENCES [dbo].[Tags]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -417,21 +436,30 @@ ADD CONSTRAINT [FK_ArticlesTags_Tag]
 -- Creating non-clustered index for FOREIGN KEY 'FK_ArticlesTags_Tag'
 CREATE INDEX [IX_FK_ArticlesTags_Tag]
 ON [dbo].[ArticlesTags]
-    ([Tag_Id]);
+    ([Tags_Id]);
 GO
 
--- Creating foreign key on [Category_Id] in table 'Articles'
-ALTER TABLE [dbo].[Articles]
-ADD CONSTRAINT [FK_CategoryArticles]
-    FOREIGN KEY ([Category_Id])
+-- Creating foreign key on [Categories_Id] in table 'CategoriesArticles'
+ALTER TABLE [dbo].[CategoriesArticles]
+ADD CONSTRAINT [FK_CategoriesArticles_Category]
+    FOREIGN KEY ([Categories_Id])
     REFERENCES [dbo].[Categories]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_CategoryArticles'
-CREATE INDEX [IX_FK_CategoryArticles]
-ON [dbo].[Articles]
-    ([Category_Id]);
+-- Creating foreign key on [Articles_Id] in table 'CategoriesArticles'
+ALTER TABLE [dbo].[CategoriesArticles]
+ADD CONSTRAINT [FK_CategoriesArticles_Article]
+    FOREIGN KEY ([Articles_Id])
+    REFERENCES [dbo].[Articles]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CategoriesArticles_Article'
+CREATE INDEX [IX_FK_CategoriesArticles_Article]
+ON [dbo].[CategoriesArticles]
+    ([Articles_Id]);
 GO
 
 -- Creating foreign key on [Journal_Id] in table 'Categories'
@@ -462,32 +490,32 @@ ON [dbo].[Tags]
     ([Journal_Id]);
 GO
 
--- Creating foreign key on [User_Id] in table 'Journals'
-ALTER TABLE [dbo].[Journals]
+-- Creating foreign key on [Journal_Id] in table 'Users'
+ALTER TABLE [dbo].[Users]
 ADD CONSTRAINT [FK_JournalUser]
-    FOREIGN KEY ([User_Id])
-    REFERENCES [dbo].[Users]
+    FOREIGN KEY ([Journal_Id])
+    REFERENCES [dbo].[Journals]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_JournalUser'
 CREATE INDEX [IX_FK_JournalUser]
-ON [dbo].[Journals]
-    ([User_Id]);
+ON [dbo].[Users]
+    ([Journal_Id]);
 GO
 
--- Creating foreign key on [CV_Id] in table 'Users'
-ALTER TABLE [dbo].[Users]
+-- Creating foreign key on [User_Id] in table 'CVs'
+ALTER TABLE [dbo].[CVs]
 ADD CONSTRAINT [FK_UserCV]
-    FOREIGN KEY ([CV_Id])
-    REFERENCES [dbo].[CVs]
+    FOREIGN KEY ([User_Id])
+    REFERENCES [dbo].[Users]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_UserCV'
 CREATE INDEX [IX_FK_UserCV]
-ON [dbo].[Users]
-    ([CV_Id]);
+ON [dbo].[CVs]
+    ([User_Id]);
 GO
 
 -- Creating foreign key on [CV_Id] in table 'WorkExperiences'
@@ -583,10 +611,10 @@ ON [dbo].[Projects]
     ([WorkExperience_Id]);
 GO
 
--- Creating foreign key on [Skill_Id] in table 'SkillsProjects'
+-- Creating foreign key on [Skills_Id] in table 'SkillsProjects'
 ALTER TABLE [dbo].[SkillsProjects]
 ADD CONSTRAINT [FK_SkillsProjects_Skill]
-    FOREIGN KEY ([Skill_Id])
+    FOREIGN KEY ([Skills_Id])
     REFERENCES [dbo].[Skills]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;

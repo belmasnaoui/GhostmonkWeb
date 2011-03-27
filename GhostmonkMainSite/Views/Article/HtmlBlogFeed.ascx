@@ -2,7 +2,7 @@
 
 <% foreach (var entry in Model) { %>
     
-    <h1><%: Html.ActionLink( entry.Title, "FullPost", "Posts", new { linkText = entry.LinkText }, null )%></h1>
+    <h1><%: Html.ActionLink( entry.Title, "FullArticle", "Article", new { linkText = entry.LinkText }, null )%></h1>
     
     <p><%: entry.PublishDate.ToString( "MMMM dd, yyyy" ) %></p>
     
@@ -10,7 +10,7 @@
 
     <%= entry.Summary ?? entry.Body.Substring( 0, 200 ) %>
 
-    <p><%: Html.ActionLink( "Read More...", "FullPost", "Posts", new { linkText = entry.LinkText }, null ) %></p>
+    <p><%: Html.ActionLink( "Read More...", "FullArticle", "Article", new { linkText = entry.LinkText }, null )%></p>
 
     <hr />
 

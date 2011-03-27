@@ -1,5 +1,5 @@
-INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Category_Id],[Summary],[Body])
-VALUES ('HUMBLE PROGRAMMING, AND OTHER ZENFUL CONNECTIONS','humble-programming-zenful-connections','02/12/2011', 1, 1, 4,
+INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Summary],[Body])
+VALUES ('HUMBLE PROGRAMMING, AND OTHER ZENFUL CONNECTIONS','humble-programming-zenful-connections','02/12/2011', 1, 1,
 'Project statgnation can be as common as rust to a creative worker embarking on a personal project. Professional projects can often take on a fervorous pitch that is hard to duplicate when you are your own client. Unfortunately I was experiencing this malaise.',
 '<p>Project statgnation can be as common as rust to a creative worker embarking on a personal project. Professional projects can often take on a fervorous pitch that is hard to duplicate when you are your own client. Unfortunately I was experiencing this malaise.</p>
 <p>Lack of ASP.NET knowledge, ambitious goals and the reality of a part-time commitment is making progress on Ghostmonk simlar to that of oceans forming carverns into the side of the cliff.</p>
@@ -14,8 +14,8 @@ VALUES ('HUMBLE PROGRAMMING, AND OTHER ZENFUL CONNECTIONS','humble-programming-z
 <p>Typically, it''s not technologies that are the problem, but the attitudes of the programmers who use them.</p>
 <p>And so, by centering myself, I was able to forge ahead and achieve a large conceptual breakthrough in building Ghostmonk. Now I have Master Pages, have implemented Themes and Skins and have started building custom user controls. Much of these concepts where unknown to me even yesterday.</p>')
 
-INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Category_Id],[Summary],[Body])
-VALUES ('FOR THE LOVE OF.... JUST RELEASE ME ALREADY','just-release-me-already','12/30/2010', 1, 1, 4, 
+INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Summary],[Body])
+VALUES ('FOR THE LOVE OF.... JUST RELEASE ME ALREADY','just-release-me-already','12/30/2010', 1, 1, 
 'Ok, this site is nowhere near completition, but I''ve made a fair bit of progress on the design. Unfortunately, that was the easy part....',
 '<p>Ok, this site is nowhere near completition, but I''ve made a fair bit of progress on the design. Unfortunately, that was the easy part....</p>
 <p>What you are experiencing here is the embryonic stage of a much larger genesis.</p>
@@ -28,8 +28,8 @@ VALUES ('FOR THE LOVE OF.... JUST RELEASE ME ALREADY','just-release-me-already',
 <p>If you are rocking Adobe Flash on your Box, then you can take a look at some of my older work here -><a href="http://selectedWork.ghostmonk.com">selectedWork.ghostmonk.com</a></p>
 <p>Thanks for the interest!</p>' )
 
-INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Category_Id],[Summary],[Body])
-VALUES ( 'INSPIRATION', 'inspiration','12/30/2010', 1, 1, 1,
+INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Summary],[Body])
+VALUES ( 'INSPIRATION', 'inspiration','12/30/2010', 1, 1,
 'Inspriation links with styles or ideas that help form the conceptual experince, design, interaction and style of Ghostmonk.com',
 '<p>The following links have have given me some level of inspiration in designing this site.</p>
 <ul>
@@ -82,8 +82,8 @@ VALUES ( 'INSPIRATION', 'inspiration','12/30/2010', 1, 1, 1,
 </ul>
 ' )
 
-INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Category_Id],[Summary],[Body])
-VALUES ( 'MOOD BOARD', 'mood-board','12/30/2010', 1, 1, 1,
+INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Summary],[Body])
+VALUES ( 'MOOD BOARD', 'mood-board','12/30/2010', 1, 1,
 'A mood board to help bring together some of the visual ideas of ghostmonk.',
 '<p>This mood board helped me visually bring together some of my ideas... A collection of images and designs I have found on the web. Click to see a bigger version</p>
 <br />
@@ -96,8 +96,8 @@ VALUES ( 'MOOD BOARD', 'mood-board','12/30/2010', 1, 1, 1,
 <br />
 <br />')
 
-INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Category_Id],[Summary],[Body])
-VALUES ( 'FEATURES', 'features','12/30/2010', 1, 1, 1,
+INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Summary],[Body])
+VALUES ( 'FEATURES', 'features','12/30/2010', 1, 1,
 'A planned feature list to help keep track of the evolving progress on ghostmonk.com.',
 '<p>The following list are planned features - an evolving task list.</p> 
  <ol>
@@ -120,8 +120,8 @@ VALUES ( 'FEATURES', 'features','12/30/2010', 1, 1, 1,
 <br />
 <br />')
 
-INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Category_Id],[Summary],[Body])
-VALUES ('ABOUT','about','12/30/2010', 1, 1, 1,
+INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Summary],[Body])
+VALUES ('ABOUT','about','12/30/2010', 1, 1,
 'A short story about who Ghostmonk is, and what Ghostmonk.com is all about.',
 '<p>For the last seven years plus I have been developing a mix of important abilities in communications, from web programming &amp; design to photography and writing.
 As an expressive and driven person I find this realm of work best fits my personality, and I am constantly on the move, aiming for that sweet spot of having something to say, and being able to make it memorable (maybe even look good).&lt;/p&gt;
@@ -129,8 +129,8 @@ As an expressive and driven person I find this realm of work best fits my person
 <p>Family tree wise, I am a descendant of a long line of Acadians on my father&#39;s side, who have for generations been living on or near the island called Ile Madame, which is located just off the South-East coast of Cape Breton. To this day I am distantly related to about 400 people in that area. It&#39;s not that creepy really, you probably have a 20th-removed cousin somewhere in the world too… I just know where many of mine live. My mother&#39;s side is another strange mix of first generation Irish settlers who made their way into the heart of this country, Ontario, generations ago. Additionally, I have some traces of German and English blood coursing through my veins.&lt;/p&gt;
 <p>Spending a good portion of my life soaking up the enormity of Canada, I have made prolonged pit stops in Barrie Ontario, Fort McMurray Alberta, Calgary Alberta, Banff Alberta, Halifax Nova Scotia, Port Hawkesbury Nova Scotia, Montreal Quebec, Toronto and now Montreal Again. I live here with my beautiful girlfriend Tracey and my amazing 4-year-old son Lucas-Ray, 1-year-old Logan-John and … Oh, I should also mention that we have three cats: Toro, Urban and Frankie, and a hundred pound Rottweiler/Shepherd cross named Teddy. He&#39;s a German monstrosity… but I love him just the same.&lt;/p&gt;')
 
-INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Category_Id],[Summary],[Body])
-VALUES ('CONTACT','contact','12/30/2010', 1, 1, 1,
+INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Summary],[Body])
+VALUES ('CONTACT','contact','12/30/2010', 1, 1,
 'How to contact Nicholas at ghostmonk.com.',
 '<p>If you would like to reach me, send me an email to <a href="mailto:nicholas@ghostmonk.com">nicholas@ghostmonk.com</a> or use any of the social sites I frequent in the lower right hand corner.</p>
 <br />

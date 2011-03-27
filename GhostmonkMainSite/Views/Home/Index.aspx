@@ -6,6 +6,6 @@
 
 <asp:Content ID="Body" ContentPlaceHolderID="MainContent" runat="server">
 
-    <% Html.RenderAction( "HtmlPostsFeed", "Posts" ); %>
+    <% Html.RenderAction( "HtmlBlogFeed", "Article" ); %>
 
 </asp:Content>

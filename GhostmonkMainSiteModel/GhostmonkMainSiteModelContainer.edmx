@@ -19,6 +19,7 @@
     <EntitySet Name="Assets" EntityType="GhostmonkMainSiteModel.Store.Assets" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Comments" EntityType="GhostmonkMainSiteModel.Store.Comments" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ArticlesTags" EntityType="GhostmonkMainSiteModel.Store.ArticlesTags" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CategoriesArticles" EntityType="GhostmonkMainSiteModel.Store.CategoriesArticles" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WorkExperiencesSkills" EntityType="GhostmonkMainSiteModel.Store.WorkExperiencesSkills" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SkillsProjects" EntityType="GhostmonkMainSiteModel.Store.SkillsProjects" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="JournalArticles" Association="GhostmonkMainSiteModel.Store.JournalArticles">
@@ -33,9 +34,13 @@
       <End Role="Tag" EntitySet="Tags" />
       <End Role="ArticlesTags" EntitySet="ArticlesTags" />
     </AssociationSet>
-    <AssociationSet Name="CategoryArticles" Association="GhostmonkMainSiteModel.Store.CategoryArticles">
+    <AssociationSet Name="FK_CategoriesArticles_Category" Association="GhostmonkMainSiteModel.Store.FK_CategoriesArticles_Category">
       <End Role="Category" EntitySet="Categories" />
+      <End Role="CategoriesArticles" EntitySet="CategoriesArticles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CategoriesArticles_Article" Association="GhostmonkMainSiteModel.Store.FK_CategoriesArticles_Article">
       <End Role="Article" EntitySet="Articles" />
+      <End Role="CategoriesArticles" EntitySet="CategoriesArticles" />
     </AssociationSet>
     <AssociationSet Name="JournalCategories" Association="GhostmonkMainSiteModel.Store.JournalCategories">
       <End Role="Journal" EntitySet="Journals" />
@@ -122,14 +127,13 @@
     <Property Name="LinkText" Type="nvarchar(max)" Nullable="false" />
     <Property Name="NumberOfPages" Type="smallint" Nullable="false" DefaultValue="1" />
     <Property Name="Journal_Id" Type="int" Nullable="false" />
-    <Property Name="Category_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Journals">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -143,7 +147,7 @@
     <Property Name="AuthorizationLevel" Type="smallint" Nullable="false" />
     <Property Name="LoginName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CV_Id" Type="int" Nullable="false" />
+    <Property Name="Journal_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Tags">
     <Key>
@@ -170,6 +174,7 @@
     <Property Name="Area" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Summary" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="WorkExperiences">
     <Key>
@@ -238,11 +243,19 @@
   </EntityType>
   <EntityType Name="ArticlesTags">
     <Key>
-      <PropertyRef Name="Article_Id" />
-      <PropertyRef Name="Tag_Id" />
+      <PropertyRef Name="Articles_Id" />
+      <PropertyRef Name="Tags_Id" />
     </Key>
-    <Property Name="Article_Id" Type="int" Nullable="false" />
-    <Property Name="Tag_Id" Type="int" Nullable="false" />
+    <Property Name="Articles_Id" Type="int" Nullable="false" />
+    <Property Name="Tags_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CategoriesArticles">
+    <Key>
+      <PropertyRef Name="Categories_Id" />
+      <PropertyRef Name="Articles_Id" />
+    </Key>
+    <Property Name="Categories_Id" Type="int" Nullable="false" />
+    <Property Name="Articles_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="WorkExperiencesSkills">
     <Key>
@@ -254,10 +267,10 @@
   </EntityType>
   <EntityType Name="SkillsProjects">
     <Key>
-      <PropertyRef Name="Skill_Id" />
+      <PropertyRef Name="Skills_Id" />
       <PropertyRef Name="Project_Id" />
     </Key>
-    <Property Name="Skill_Id" Type="int" Nullable="false" />
+    <Property Name="Skills_Id" Type="int" Nullable="false" />
     <Property Name="Project_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="JournalArticles">
@@ -269,18 +282,6 @@
       </Principal>
       <Dependent Role="Article">
         <PropertyRef Name="Journal_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CategoryArticles">
-    <End Role="Category" Type="GhostmonkMainSiteModel.Store.Categories" Multiplicity="1" />
-    <End Role="Article" Type="GhostmonkMainSiteModel.Store.Articles" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Category">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Article">
-        <PropertyRef Name="Category_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -309,26 +310,26 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="JournalUser">
-    <End Role="Journal" Type="GhostmonkMainSiteModel.Store.Journals" Multiplicity="*" />
-    <End Role="User" Type="GhostmonkMainSiteModel.Store.Users" Multiplicity="1" />
+    <End Role="Journal" Type="GhostmonkMainSiteModel.Store.Journals" Multiplicity="1" />
+    <End Role="User" Type="GhostmonkMainSiteModel.Store.Users" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="User">
+      <Principal Role="Journal">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Journal">
-        <PropertyRef Name="User_Id" />
+      <Dependent Role="User">
+        <PropertyRef Name="Journal_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="UserCV">
-    <End Role="User" Type="GhostmonkMainSiteModel.Store.Users" Multiplicity="*" />
-    <End Role="CV" Type="GhostmonkMainSiteModel.Store.CVs" Multiplicity="1" />
+    <End Role="User" Type="GhostmonkMainSiteModel.Store.Users" Multiplicity="1" />
+    <End Role="CV" Type="GhostmonkMainSiteModel.Store.CVs" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CV">
+      <Principal Role="User">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="User">
-        <PropertyRef Name="CV_Id" />
+      <Dependent Role="CV">
+        <PropertyRef Name="User_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -460,7 +461,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ArticlesTags">
-        <PropertyRef Name="Article_Id" />
+        <PropertyRef Name="Articles_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -472,7 +473,31 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ArticlesTags">
-        <PropertyRef Name="Tag_Id" />
+        <PropertyRef Name="Tags_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CategoriesArticles_Category">
+    <End Role="Category" Type="GhostmonkMainSiteModel.Store.Categories" Multiplicity="1" />
+    <End Role="CategoriesArticles" Type="GhostmonkMainSiteModel.Store.CategoriesArticles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CategoriesArticles">
+        <PropertyRef Name="Categories_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CategoriesArticles_Article">
+    <End Role="CategoriesArticles" Type="GhostmonkMainSiteModel.Store.CategoriesArticles" Multiplicity="*" />
+    <End Role="Article" Type="GhostmonkMainSiteModel.Store.Articles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CategoriesArticles">
+        <PropertyRef Name="Articles_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -508,7 +533,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SkillsProjects">
-        <PropertyRef Name="Skill_Id" />
+        <PropertyRef Name="Skills_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -542,7 +567,7 @@
             <End Role="Article" EntitySet="Articles" />
             <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
-          <AssociationSet Name="CategoryArticles" Association="GhostmonkMainSiteModel.CategoryArticles">
+          <AssociationSet Name="CategoriesArticles" Association="GhostmonkMainSiteModel.CategoriesArticles">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Article" EntitySet="Articles" />
           </AssociationSet>
@@ -646,8 +671,8 @@
               <LongDescription>A Journal can have multiple articles</LongDescription>
             </Documentation>
           </NavigationProperty>
-          <NavigationProperty Name="Tag" Relationship="GhostmonkMainSiteModel.ArticlesTags" FromRole="Article" ToRole="Tag" />
-          <NavigationProperty Name="Category" Relationship="GhostmonkMainSiteModel.CategoryArticles" FromRole="Article" ToRole="Category" />
+          <NavigationProperty Name="Tags" Relationship="GhostmonkMainSiteModel.ArticlesTags" FromRole="Article" ToRole="Tag" />
+          <NavigationProperty Name="Categories" Relationship="GhostmonkMainSiteModel.CategoriesArticles" FromRole="Article" ToRole="Category" />
           <Property Type="String" Name="Summary" Nullable="true" >
             <Documentation>
               <LongDescription>Short description of the article. Typically the first paragraph or couple sentences. Can be a description if desired.</LongDescription>
@@ -678,7 +703,8 @@
           <NavigationProperty Name="Articles" Relationship="GhostmonkMainSiteModel.JournalArticles" FromRole="Journal" ToRole="Article" />
           <NavigationProperty Name="Categories" Relationship="GhostmonkMainSiteModel.JournalCategories" FromRole="Journal" ToRole="Category" />
           <NavigationProperty Name="Tags" Relationship="GhostmonkMainSiteModel.JournalTag" FromRole="Journal" ToRole="Tag" />
-          <NavigationProperty Name="User" Relationship="GhostmonkMainSiteModel.JournalUser" FromRole="Journal" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="GhostmonkMainSiteModel.JournalUser" FromRole="Journal" ToRole="User" />
+          <Property Type="String" Name="Title" Nullable="false" />
         </EntityType>
         <Association Name="JournalArticles">
           <End Type="GhostmonkMainSiteModel.Journal" Role="Journal" Multiplicity="1" />
@@ -719,7 +745,7 @@
         </EntityType>
         <EntityType Name="Tag">
           <Documentation>
-            <LongDescription>Tags are sorting mechanisms, useful for defining journal entries. Journal entries can have zero to many tags.</LongDescription>
+            <LongDescription>Tags are sorting mechanisms, useful for defining Articles. Articles can have zero to many tags, and should define as many as makes sense.</LongDescription>
           </Documentation>
           <Key>
             <PropertyRef Name="Id" />
@@ -730,12 +756,12 @@
               <LongDescription>Simple, preferably single word, descriptor of an article.</LongDescription>
             </Documentation>
           </Property>
-          <NavigationProperty Name="Article" Relationship="GhostmonkMainSiteModel.ArticlesTags" FromRole="Tag" ToRole="Article" />
+          <NavigationProperty Name="Articles" Relationship="GhostmonkMainSiteModel.ArticlesTags" FromRole="Tag" ToRole="Article" />
           <NavigationProperty Name="Journal" Relationship="GhostmonkMainSiteModel.JournalTag" FromRole="Tag" ToRole="Journal" />
         </EntityType>
         <EntityType Name="Category">
           <Documentation>
-            <LongDescription>Top level sorting and categorization mechanism. Journal Entries can only have on category.</LongDescription>
+            <LongDescription>Top level sorting and categorization mechanism. Articles should not have too many categories.</LongDescription>
           </Documentation>
           <Key>
             <PropertyRef Name="Id" />
@@ -746,15 +772,15 @@
               <LongDescription>Simple very short, categorization of a collection of articles.</LongDescription>
             </Documentation>
           </Property>
-          <NavigationProperty Name="Articles" Relationship="GhostmonkMainSiteModel.CategoryArticles" FromRole="Category" ToRole="Article" />
+          <NavigationProperty Name="Articles" Relationship="GhostmonkMainSiteModel.CategoriesArticles" FromRole="Category" ToRole="Article" />
           <NavigationProperty Name="Journal" Relationship="GhostmonkMainSiteModel.JournalCategories" FromRole="Category" ToRole="Journal" />
         </EntityType>
         <Association Name="ArticlesTags">
           <End Type="GhostmonkMainSiteModel.Article" Role="Article" Multiplicity="*" />
           <End Type="GhostmonkMainSiteModel.Tag" Role="Tag" Multiplicity="*" />
         </Association>
-        <Association Name="CategoryArticles">
-          <End Type="GhostmonkMainSiteModel.Category" Role="Category" Multiplicity="1" />
+        <Association Name="CategoriesArticles">
+          <End Type="GhostmonkMainSiteModel.Category" Role="Category" Multiplicity="*" />
           <End Type="GhostmonkMainSiteModel.Article" Role="Article" Multiplicity="*" />
         </Association>
         <Association Name="JournalCategories">
@@ -788,11 +814,11 @@
         </EntityType>
         <Association Name="JournalUser">
           <End Type="GhostmonkMainSiteModel.Journal" Role="Journal" Multiplicity="1" />
-          <End Type="GhostmonkMainSiteModel.User" Role="User" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.User" Role="User" Multiplicity="*" />
         </Association>
         <Association Name="UserCV">
           <End Type="GhostmonkMainSiteModel.User" Role="User" Multiplicity="1" />
-          <End Type="GhostmonkMainSiteModel.CV" Role="CV" Multiplicity="1" />
+          <End Type="GhostmonkMainSiteModel.CV" Role="CV" Multiplicity="0..1" />
         </Association>
         <EntityType Name="WorkExperience">
           <Key>
@@ -862,7 +888,7 @@
           <Property Type="String" Name="Title" Nullable="false" />
           <Property Type="DateTime" Name="Date" Nullable="false" />
           <Property Type="String" Name="Company" Nullable="false" />
-          <NavigationProperty Name="Skill" Relationship="GhostmonkMainSiteModel.SkillsProjects" FromRole="Project" ToRole="Skill" />
+          <NavigationProperty Name="Skills" Relationship="GhostmonkMainSiteModel.SkillsProjects" FromRole="Project" ToRole="Skill" />
           <Property Type="String" Name="FullText" Nullable="false" />
           <NavigationProperty Name="Comments" Relationship="GhostmonkMainSiteModel.ProjectComments" FromRole="Project" ToRole="Comment" />
         </EntityType>
@@ -952,6 +978,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(GhostmonkMainSiteModel.Journal)">
         <MappingFragment StoreEntitySet="Journals">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1067,18 +1094,18 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="ArticlesTags" TypeName="GhostmonkMainSiteModel.ArticlesTags" StoreEntitySet="ArticlesTags">
       <EndProperty Name="Article">
-        <ScalarProperty Name="Id" ColumnName="Article_Id" />
+        <ScalarProperty Name="Id" ColumnName="Articles_Id" />
       </EndProperty>
       <EndProperty Name="Tag">
-        <ScalarProperty Name="Id" ColumnName="Tag_Id" />
+        <ScalarProperty Name="Id" ColumnName="Tags_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="CategoryArticles" TypeName="GhostmonkMainSiteModel.CategoryArticles" StoreEntitySet="Articles">
+    <AssociationSetMapping Name="CategoriesArticles" TypeName="GhostmonkMainSiteModel.CategoriesArticles" StoreEntitySet="CategoriesArticles">
       <EndProperty Name="Category">
-        <ScalarProperty Name="Id" ColumnName="Category_Id" />
+        <ScalarProperty Name="Id" ColumnName="Categories_Id" />
       </EndProperty>
       <EndProperty Name="Article">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="Id" ColumnName="Articles_Id" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="JournalCategories" TypeName="GhostmonkMainSiteModel.JournalCategories" StoreEntitySet="Categories">
@@ -1097,19 +1124,19 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="JournalUser" TypeName="GhostmonkMainSiteModel.JournalUser" StoreEntitySet="Journals">
-      <EndProperty Name="User">
-        <ScalarProperty Name="Id" ColumnName="User_Id" />
-      </EndProperty>
+    <AssociationSetMapping Name="JournalUser" TypeName="GhostmonkMainSiteModel.JournalUser" StoreEntitySet="Users">
       <EndProperty Name="Journal">
+        <ScalarProperty Name="Id" ColumnName="Journal_Id" />
+      </EndProperty>
+      <EndProperty Name="User">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="UserCV" TypeName="GhostmonkMainSiteModel.UserCV" StoreEntitySet="Users">
-      <EndProperty Name="CV">
-        <ScalarProperty Name="Id" ColumnName="CV_Id" />
-      </EndProperty>
+    <AssociationSetMapping Name="UserCV" TypeName="GhostmonkMainSiteModel.UserCV" StoreEntitySet="CVs">
       <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="CV">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
@@ -1164,7 +1191,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="SkillsProjects" TypeName="GhostmonkMainSiteModel.SkillsProjects" StoreEntitySet="SkillsProjects">
       <EndProperty Name="Skill">
-        <ScalarProperty Name="Id" ColumnName="Skill_Id" />
+        <ScalarProperty Name="Id" ColumnName="Skills_Id" />
       </EndProperty>
       <EndProperty Name="Project">
         <ScalarProperty Name="Id" ColumnName="Project_Id" />
@@ -1234,39 +1261,39 @@
     <edmx:Diagrams>
       <Diagram Name="GhostmonkMainSiteModelContainer" >
         <EntityTypeShape EntityType="GhostmonkMainSiteModel.Article" Width="1.5" PointX="4.625" PointY="4.75" Height="3.5186979166666656" />
-        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Journal" Width="1.5" PointX="2.5" PointY="0.875" Height="1.9802864583333331" IsExpanded="true" />
+        <EntityTypeShape EntityType="GhostmonkMainSiteModel.Journal" Width="1.5" PointX="2.5" PointY="0.875" Height="2.172587890625" IsExpanded="true" />
         <AssociationConnector Association="GhostmonkMainSiteModel.JournalArticles" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.7236894645162724" PointY="2.8552864583333335" />
-          <ConnectorPoint PointX="3.7236894645162724" PointY="4.375" />
-          <ConnectorPoint PointX="5.1355622631838012" PointY="4.375" />
-          <ConnectorPoint PointX="5.1355622631838012" PointY="4.75" />
+          <ConnectorPoint PointX="3.6857560786046593" PointY="3.047587890625" />
+          <ConnectorPoint PointX="3.6857560786046593" PointY="4.375" />
+          <ConnectorPoint PointX="5.3458229971392637" PointY="4.375" />
+          <ConnectorPoint PointX="5.3458229971392637" PointY="4.75" />
         </AssociationConnector>
         <EntityTypeShape EntityType="GhostmonkMainSiteModel.User" Width="1.75" PointX="5.75" PointY="0.75" Height="3.3263964843749996" />
         <EntityTypeShape EntityType="GhostmonkMainSiteModel.Tag" Width="1.5" PointX="0.5" PointY="4.75" Height="1.7879850260416657" />
         <EntityTypeShape EntityType="GhostmonkMainSiteModel.Category" Width="1.5" PointX="2.5" PointY="4.75" Height="1.7879850260416661" />
         <AssociationConnector Association="GhostmonkMainSiteModel.ArticlesTags">
-          <ConnectorPoint PointX="4.625" PointY="7.1414437859195408" />
-          <ConnectorPoint PointX="1.25" PointY="7.1414437859195408" />
+          <ConnectorPoint PointX="4.625" PointY="7.4718729967948718" />
+          <ConnectorPoint PointX="1.25" PointY="7.4718729967948718" />
           <ConnectorPoint PointX="1.25" PointY="6.5379850260416656" />
         </AssociationConnector>
-        <AssociationConnector Association="GhostmonkMainSiteModel.CategoryArticles" ManuallyRouted="false">
+        <AssociationConnector Association="GhostmonkMainSiteModel.CategoriesArticles" ManuallyRouted="false">
           <ConnectorPoint PointX="4" PointY="5.6439925130208328" />
           <ConnectorPoint PointX="4.625" PointY="5.6439925130208328" />
         </AssociationConnector>
         <AssociationConnector Association="GhostmonkMainSiteModel.JournalCategories" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.25" PointY="2.8552864583333331" />
-          <ConnectorPoint PointX="3.25" PointY="4.75" />
+          <ConnectorPoint PointX="3.2820390975312641" PointY="3.047587890625" />
+          <ConnectorPoint PointX="3.2820390975312641" PointY="4.75" />
         </AssociationConnector>
         <AssociationConnector Association="GhostmonkMainSiteModel.JournalTag">
-          <ConnectorPoint PointX="2.8734146280544732" PointY="2.8552864583333331" />
-          <ConnectorPoint PointX="2.8734146280544732" PointY="4.375" />
-          <ConnectorPoint PointX="1.2162080970289009" PointY="4.375" />
-          <ConnectorPoint PointX="1.2162080970289009" PointY="4.75" />
+          <ConnectorPoint PointX="2.8428272528811194" PointY="3.047587890625" />
+          <ConnectorPoint PointX="2.8428272528811194" PointY="4.375" />
+          <ConnectorPoint PointX="1.2696864174189" PointY="4.375" />
+          <ConnectorPoint PointX="1.2696864174189" PointY="4.75" />
         </AssociationConnector>
         <EntityTypeShape EntityType="GhostmonkMainSiteModel.CV" Width="1.5" PointX="8.5" PointY="0.5" Height="2.5571907552083331" />
         <AssociationConnector Association="GhostmonkMainSiteModel.JournalUser">
-          <ConnectorPoint PointX="4" PointY="1.8651432291666663" />
-          <ConnectorPoint PointX="5.75" PointY="1.8651432291666663" />
+          <ConnectorPoint PointX="4" PointY="1.9300414453125" />
+          <ConnectorPoint PointX="5.75" PointY="1.9300414453125" />
         </AssociationConnector>
         <AssociationConnector Association="GhostmonkMainSiteModel.UserCV">
           <ConnectorPoint PointX="7.5" PointY="2.062632040964739" />

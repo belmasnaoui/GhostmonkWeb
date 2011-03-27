@@ -60,22 +60,24 @@
     <None Include="App.Config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClearDB.sql" />
     <Content Include="GhostmonkMainSiteModelContainer.edmx.sql" />
-    <Content Include="inserts\4-categories.sql" />
-    <Content Include="inserts\1-cvs.sql" />
-    <Content Include="inserts\5-articles.sql" />
-    <Content Include="inserts\3-journals.sql" />
-    <Content Include="inserts\2-skills.sql" />
-    <Content Include="inserts\6-tags.sql" />
+    <Content Include="inserts\2-categories.sql" />
+    <Content Include="inserts\3-cvs.sql" />
+    <Content Include="inserts\2-articles.sql" />
+    <Content Include="inserts\1-journals.sql" />
+    <Content Include="inserts\4-skills.sql" />
+    <Content Include="inserts\2-tags.sql" />
     <Content Include="inserts\2-users.sql" />
-    <Content Include="inserts\2-work-experience.sql" />
-    <Content Include="inserts\3-work-experience-skill.sql" />
+    <Content Include="inserts\4-work-experiences.sql" />
+    <Content Include="inserts\5-work-experiences-skills.sql" />
     <Content Include="inserts\6-assets.sql" />
     <Content Include="inserts\6-comments.sql" />
-    <Content Include="inserts\3-projects.sql" />
-    <Content Include="inserts\6-pull-quotes.sql" />
-    <Content Include="inserts\4-skill-project.sql" />
-    <Content Include="inserts\4-work-experience-project.sql" />
+    <Content Include="inserts\5-projects.sql" />
+    <Content Include="inserts\3-pull-quotes.sql" />
+    <Content Include="inserts\6-skills-projects.sql" />
+    <Content Include="inserts\3-articles-tags.sql" />
+    <Content Include="inserts\3-categories-articles.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
