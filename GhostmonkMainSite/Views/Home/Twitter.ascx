@@ -1,3 +1,3 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LinqToTwitter.Status>" %>
 
-<p>><%: Model.Text %></p>
+<p><%= TweetParser.ParseTweet( Model.Text ) %></p>

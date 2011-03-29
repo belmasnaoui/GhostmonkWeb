@@ -130,10 +130,6 @@ h1, h2, h3, h4, h5, h6
     margin-top: 0;
 }
 
-#Twitter
-{
-}
-
 #CurrentWork
 {
 }
@@ -332,3 +328,18 @@ h1 a { color:#260c05; }
 a img.active { }
 
 hr { color:#561b0b; border-color:#561b0b; background-color:#561b0b; }
+
+#Twitter p a:link
+{
+    color: #3399FF;
+}
+
+#Twitter p a:visited
+{
+    color: #3399FF;
+}
+
+#Twitter p a:hover
+{
+    color: #C7C7C7;
+}
