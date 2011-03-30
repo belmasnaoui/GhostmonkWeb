@@ -1,11 +1,11 @@
-INSERT INTO [GhostmonkMainSite].[dbo].[Assets] ([Type],[Uri],[Article_Id])
-VALUES ('image/jpeg','~/Content/Images/bank/posts/blaze.jpg','1')
+INSERT INTO [GhostmonkMainSite].[dbo].[Assets] ([Type],[EmbedUri],[AltTag],[Article_Id])
+VALUES ('image/jpeg','~/Content/Images/bank/posts/blaze.jpg','Winter''s Fury','1')
 
-INSERT INTO [GhostmonkMainSite].[dbo].[Assets] ([Type],[Uri],[Article_Id])
-VALUES ('image/jpeg','~/Content/Images/bank/posts/rhino.jpg','2')
+INSERT INTO [GhostmonkMainSite].[dbo].[Assets] ([Type],[EmbedUri],[AltTag],[Article_Id])
+VALUES ('image/jpeg','~/Content/Images/bank/posts/rhino.jpg','Rhino Splash','2')
 
-INSERT INTO [GhostmonkMainSite].[dbo].[Assets] ([Type],[Uri],[Article_Id])
-VALUES ('image/gif','~/Content/Images/bank/nicholas.gif','6')
+INSERT INTO [GhostmonkMainSite].[dbo].[Assets] ([Type],[EmbedUri],[AltTag],[Article_Id])
+VALUES ('image/gif','~/Content/Images/bank/nicholas.gif','Ghostmonk','6')
 
-INSERT INTO [GhostmonkMainSite].[dbo].[Assets] ([Type],[Uri],[Article_Id])
-VALUES ('image/jpeg','~/Content/Images/bank/moodBoardThumb.jpg','4')
+INSERT INTO [GhostmonkMainSite].[dbo].[Assets] ([Type],[EmbedUri],[FullUri],[AltTag],[Article_Id])
+VALUES ('image/jpeg','~/Content/Images/bank/moodBoardThumb.jpg','~/Content/Images/bank/moodBoard.jpg','Mood Board','4')

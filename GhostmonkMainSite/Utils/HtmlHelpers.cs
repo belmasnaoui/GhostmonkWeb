@@ -46,5 +46,19 @@ namespace GhostmonkMainSite.Utils
                 socialIconsPath + imgName + "-out.png",
                 alt );
         }
+
+        public static IHtmlString ThumbToFullImageLink( this HtmlHelper helper, string thumbHref, string fullHref, string alt )
+        {
+            if( alt == null )
+            {
+                int start = thumbHref.LastIndexOf( "/" ) + 1;
+                int length = thumbHref.LastIndexOf( "." ) - start;
+                alt = thumbHref.Substring( start, length );
+            }
+            return new HtmlString( 
+                string.Format( "<a href='{0}' target='_blank'><img src='{1}' alt='{2}' /></a>", 
+                    VirtualPathUtility.ToAbsolute( fullHref ), 
+                    VirtualPathUtility.ToAbsolute( thumbHref ), alt ) );
+        }
     }
 }

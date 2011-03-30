@@ -10,9 +10,18 @@
     
     <p><%: Model.PublishDate.ToString( "MMMM dd, yyyy" ) %></p>
     
-    <%  if( Model.Assets.Count > 0 ) { %>
-            <%= Html.Image( Model.Assets.First().Uri, Model.Title ) + "<br />" %>
-    <% } %>
+    <%
+        IHtmlString link = null;
+        if( Model.Assets.Count > 0 )
+        {
+            var image = Model.Assets.First();
+            link = image.FullUri != null 
+                ? Html.ThumbToFullImageLink( image.EmbedUri, image.FullUri, image.AltTag ) 
+                : Html.Image( image.EmbedUri, image.AltTag ?? Model.Title );
+        }
+    %>
+
+    <%= link + "<br />" %>
 
     <%= Model.Body %>
 

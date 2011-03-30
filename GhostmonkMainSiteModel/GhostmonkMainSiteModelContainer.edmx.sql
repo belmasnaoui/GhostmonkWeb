@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 03/26/2011 17:36:49
+-- Date Created: 03/29/2011 21:14:09
 -- Generated from EDMX file: D:\Projects\ghostmonk\GhostmonkWeb\GhostmonkMainSiteModel\GhostmonkMainSiteModelContainer.edmx
 -- --------------------------------------------------
 
@@ -42,7 +42,7 @@ IF OBJECT_ID(N'[dbo].[FK_JournalUser]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_JournalUser];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserCV]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_UserCV];
+    ALTER TABLE [dbo].[CVs] DROP CONSTRAINT [FK_UserCV];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CVWorkExperiences]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[WorkExperiences] DROP CONSTRAINT [FK_CVWorkExperiences];
@@ -251,7 +251,9 @@ GO
 CREATE TABLE [dbo].[Assets] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Type] nvarchar(max)  NOT NULL,
-    [Uri] nvarchar(max)  NOT NULL,
+    [EmbedUri] nvarchar(max)  NOT NULL,
+    [AltTag] nvarchar(max)  NULL,
+    [FullUri] nvarchar(max)  NULL,
     [Project_Id] int  NULL,
     [Article_Id] int  NULL
 );

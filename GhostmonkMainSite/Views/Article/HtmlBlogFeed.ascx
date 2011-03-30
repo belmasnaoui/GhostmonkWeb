@@ -6,7 +6,7 @@
     
     <p><%: entry.PublishDate.ToString( "MMMM dd, yyyy" ) %></p>
     
-    <%: Html.Image( entry.Assets.First().Uri, entry.Title ) %>
+    <%: Html.Image( entry.Assets.First().EmbedUri, entry.Title ) %>
 
     <%= entry.Summary ?? entry.Body.Substring( 0, 200 ) %>
 

@@ -787,13 +787,13 @@ namespace GhostmonkMainSiteModel
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="type">Initial value of the Type property.</param>
-        /// <param name="uri">Initial value of the Uri property.</param>
-        public static Asset CreateAsset(global::System.Int32 id, global::System.String type, global::System.String uri)
+        /// <param name="embedUri">Initial value of the EmbedUri property.</param>
+        public static Asset CreateAsset(global::System.Int32 id, global::System.String type, global::System.String embedUri)
         {
             Asset asset = new Asset();
             asset.Id = id;
             asset.Type = type;
-            asset.Uri = uri;
+            asset.EmbedUri = embedUri;
             return asset;
         }
 
@@ -859,24 +859,72 @@ namespace GhostmonkMainSiteModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Uri
+        public global::System.String EmbedUri
         {
             get
             {
-                return _Uri;
+                return _EmbedUri;
             }
             set
             {
-                OnUriChanging(value);
-                ReportPropertyChanging("Uri");
-                _Uri = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Uri");
-                OnUriChanged();
+                OnEmbedUriChanging(value);
+                ReportPropertyChanging("EmbedUri");
+                _EmbedUri = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("EmbedUri");
+                OnEmbedUriChanged();
             }
         }
-        private global::System.String _Uri;
-        partial void OnUriChanging(global::System.String value);
-        partial void OnUriChanged();
+        private global::System.String _EmbedUri;
+        partial void OnEmbedUriChanging(global::System.String value);
+        partial void OnEmbedUriChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AltTag
+        {
+            get
+            {
+                return _AltTag;
+            }
+            set
+            {
+                OnAltTagChanging(value);
+                ReportPropertyChanging("AltTag");
+                _AltTag = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AltTag");
+                OnAltTagChanged();
+            }
+        }
+        private global::System.String _AltTag;
+        partial void OnAltTagChanging(global::System.String value);
+        partial void OnAltTagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FullUri
+        {
+            get
+            {
+                return _FullUri;
+            }
+            set
+            {
+                OnFullUriChanging(value);
+                ReportPropertyChanging("FullUri");
+                _FullUri = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FullUri");
+                OnFullUriChanged();
+            }
+        }
+        private global::System.String _FullUri;
+        partial void OnFullUriChanging(global::System.String value);
+        partial void OnFullUriChanged();
 
         #endregion
     
