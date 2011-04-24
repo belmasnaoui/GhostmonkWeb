@@ -24,3 +24,9 @@ VALUES (6,2)
 
 INSERT INTO [GhostmonkMainSite].[dbo].[CategoriesArticles]([Articles_Id],[Categories_Id])
 VALUES (7,2)
+
+INSERT INTO [GhostmonkMainSite].[dbo].[CategoriesArticles]([Articles_Id],[Categories_Id])
+VALUES (8,1)
+
+INSERT INTO [GhostmonkMainSite].[dbo].[CategoriesArticles]([Articles_Id],[Categories_Id])
+VALUES (8,3)

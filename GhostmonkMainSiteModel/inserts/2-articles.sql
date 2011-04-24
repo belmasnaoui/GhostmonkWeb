@@ -1,4 +1,18 @@
 INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Summary],[Body])
+VALUES ('FOR THE LOVE OF.... JUST RELEASE ME ALREADY','just-release-me-already','12/30/2010', 1, 1, 
+'Ok, this site is nowhere near completition, but I''ve made a fair bit of progress on the design. Unfortunately, that was the easy part....',
+'<p>Ok, this site is nowhere near completition, but I''ve made a fair bit of progress on the design. Unfortunately, that was the easy part....</p>
+<p>What you are experiencing here is the embryonic stage of a much larger genesis.</p>
+<p>No matter how much I study, practice and train, buidling a website from scratch is a serious endeavour. To stem this fact, I am iteratively releasing every aspect of this creation.</p>
+<p>It starts with the graphic design.</p>
+<p>I don''t actually expect to ever finish, but if I don''t start releasing this thing now, and start releasing often, I will never have anything to show.</p>
+<p>The site you see here is about 20 percent of what I have already built, and roughly about 1 percent of what I have floating around in my mind.</p>
+<p>There is no monetary model associated to this, only the pure love of programming and technology.</p>
+<p>It may take a long long time to achieve something closer to what I have envisioned, but it''s not really about the destination.</p>
+<p>If you are rocking Adobe Flash on your Box, then you can take a look at some of my older work here -><a href="http://selectedWork.ghostmonk.com">selectedWork.ghostmonk.com</a></p>
+<p>Thanks for the interest!</p>' )
+
+INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Summary],[Body])
 VALUES ('HUMBLE PROGRAMMING, AND OTHER ZENFUL CONNECTIONS','humble-programming-zenful-connections','02/12/2011', 1, 1,
 'Project statgnation can be as common as rust to a creative worker embarking on a personal project. Professional projects can often take on a fervorous pitch that is hard to duplicate when you are your own client. Unfortunately I was experiencing this malaise.',
 '<p>Project statgnation can be as common as rust to a creative worker embarking on a personal project. Professional projects can often take on a fervorous pitch that is hard to duplicate when you are your own client. Unfortunately I was experiencing this malaise.</p>
@@ -13,20 +27,6 @@ VALUES ('HUMBLE PROGRAMMING, AND OTHER ZENFUL CONNECTIONS','humble-programming-z
 <p>While reading that impoverished comment thread, Edward Dijksta''s paper "The Humble Programmer", came to mind. Programs and programming are hard. There is no one way around it, and no perfect solutions in building programs. Armed with this fact, a humbled approach to learning and building with a technology can mark the difference between understanding the point, or completely blowing your brains out.</p>
 <p>Typically, it''s not technologies that are the problem, but the attitudes of the programmers who use them.</p>
 <p>And so, by centering myself, I was able to forge ahead and achieve a large conceptual breakthrough in building Ghostmonk. Now I have Master Pages, have implemented Themes and Skins and have started building custom user controls. Much of these concepts where unknown to me even yesterday.</p>')
-
-INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Summary],[Body])
-VALUES ('FOR THE LOVE OF.... JUST RELEASE ME ALREADY','just-release-me-already','12/30/2010', 1, 1, 
-'Ok, this site is nowhere near completition, but I''ve made a fair bit of progress on the design. Unfortunately, that was the easy part....',
-'<p>Ok, this site is nowhere near completition, but I''ve made a fair bit of progress on the design. Unfortunately, that was the easy part....</p>
-<p>What you are experiencing here is the embryonic stage of a much larger genesis.</p>
-<p>No matter how much I study, practice and train, buidling a website from scratch is a serious endeavour. To stem this fact, I am iteratively releasing every aspect of this creation.</p>
-<p>It starts with the graphic design.</p>
-<p>I don''t actually expect to ever finish, but if I don''t start releasing this thing now, and start releasing often, I will never have anything to show.</p>
-<p>The site you see here is about 20 percent of what I have already built, and roughly about 1 percent of what I have floating around in my mind.</p>
-<p>There is no monetary model associated to this, only the pure love of programming and technology.</p>
-<p>It may take a long long time to achieve something closer to what I have envisioned, but it''s not really about the destination.</p>
-<p>If you are rocking Adobe Flash on your Box, then you can take a look at some of my older work here -><a href="http://selectedWork.ghostmonk.com">selectedWork.ghostmonk.com</a></p>
-<p>Thanks for the interest!</p>' )
 
 INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Summary],[Body])
 VALUES ( 'INSPIRATION', 'inspiration','12/30/2010', 1, 1,
@@ -152,3 +152,25 @@ VALUES ('CONTACT','contact','12/30/2010', 1, 1,
 <br />
 <br />
 <br />')
+
+INSERT INTO [GhostmonkMainSite].[dbo].[Articles]([Title],[LinkText],[PublishDate],[NumberOfPages],[Journal_Id],[Summary],[Body])
+VALUES ('PRINCIPLED PROGRAMMING IS FOR SUCKERS','principled-programming-for-suckers','04/24/2011', 1, 1,
+'Principled programming, like any theory, is fun to argue about and get your colleagues all worked up over, but it tends to break down when exposed to the rigorous challenges of really real reality.
+Really real is the place many (if not most) programmers find themselves - smaller projects with questionable futures and shoe string budgets. They tend to either be theoretical ideas or rehashed, repackaged, re, re, re concepts with limited backing and a short window under which to prove their worth.',
+'<p>Principled programming, like any theory, is fun to argue about and get your colleagues all worked up over, but it tends to break down when exposed to the rigorous challenges of really real reality.</p>
+<p>Really real is the place many (if not most) programmers find themselves - smaller projects with questionable futures and shoe string budgets. They tend to either be theoretical ideas or rehashed, repackaged, re, re, re concepts with limited backing and a short window under which to prove their worth.</p>
+<p>Good programmers tend to be moral coders with lofty ideals. They want to cover all possible outputs of their programs with unit tests. They never use public members, carefully structure their architecture, refactor constantly and avoid confounding spaghetti prone patterns like the Singleton. </p>
+<p>But these principles have hard trade-offs… they are time consuming, difficult to get right and only make sense on large projects with long life cycles.</p>
+<p>When working on a project that is scoped to live forever and will continue to grow in complexity and functionality for just as long, there is time for sketching architecture, arguing over details, careful planning and considered implementation. This is not to say you should spend time carving ticks into the wall burning away the days strategizing instead of acting... on the contrary, design on any size project should probably always be big box components, leaving the smaller details where they belong… in the code. The tricky proviso of course, is that the definition of big box changes based on the size of the project.</p>
+<p>This is a happy path, and is probably the minority of cases seen in the really real. Most projects vary so widely in definition, complexity and scope, it can be nearly impossible to understand the full potential of their lifetime. One might grow for months only to die miserably. Another might blossom and grow over the years with a thriving client constantly requesting updates. Even worse, the actual product a client needs might be a purple button that plays a burp sound when it’s pressed, and not the b2b mobile compliant multi-threaded optimized power engine with 40 inch chrome rims they’ve asked for.</p>
+<p>This is where principles start to get in the way of releasing real products. When working on your own time, the value of a single hour can become frighteningly clear. </p>
+<p>Consider the choice a programmer has to make when building an incubating project. He or she must devise a clean and clear way to route together two classes to set a single property. In a project with a small budget and a theoretical future, this can be a righteous waste of time. Whereas setting the thing to a public static, and being done with it, might take a couple of seconds.</p>
+<p>Principled programmers will cringe at that last statement. There are few sins more heinous than flipping a class member to a public static for this purpose. Terrible they would say, foolhardy, dangerous and they would be right. However, losing sight of scope to cater to glorious ideals is the programmer’s hubris.</p>
+<p>The painful truth for the principled programmer is that moral coding is rarely a necessity. </p>
+<p>Go ahead and start off one of these projects on highly principled grounds, ready to create reusable classes with strong commented interfaces, fully tested and clearly structured. After a few days of poor support from an overworked client, you will wish you hadn’t taken the project in the first place. Instead of crying into your beer however, drop your principles off at the front door.</p>
+<p>It can be a revelation! It will feel dirty to take such wicked actions… but the deadline is tight and you can’t devote your entire life to someone else’s ideas. Flip it. Turn that unworkable SOB into a public static variable, set aside unit tests, forget UML and just make the thing work. You will feel free. A voice in your head will remind you that this is one small step toward a tangled web of impossible twists and turns, but who cares. You can release for immediate feedback, and not toil deep into the night refactoring and amending the framework for a more considered architecture.</p>
+<p>Once you break the seal, continue flirting with danger. Flip a few more variables, and with complete disregard for your own safety (and the client’s), turn some of your more popular “classes” into Singletons. If you need to access an object from halfway across the world just do it, not a problem... well at least not yet. </p>
+<p>Things will work out but beware, the trade-offs will also start to take effect. Your new pseudo OO program will become brittle. Changing minor behaviour will become a bit of a chore. You will often wonder when and where you accessed a variable. In minor cases it will be an irritation, in major cases your program will act erratically and you might feel desperate hacking and slashing at different paths through the code and recompiling just to see results.</p>
+<p>Take heed, the deadline should be short, between two and 6 weeks. The race to keep your code understandable and under control long enough to finish is a sprint, and you will be dancing on the border of madness, where your own crafted code starts to resemble an abyss. If you ever go beyond that point, where flirting has become a commitment, everything said in this post will start to become woefully wrong.</p>
+<p>Still, if you can get away with it, not having to rework architecture, revisit UML diagrams or bang your head against a white board to find the best solution for an unexpected change is a more efficient way to work. Instead just rip out the target code and replace it with an equally expendable fix.</p>
+<p>In the end, the code in your project will probably be a terrible mess, but only you have to know this. As far as the client is concerned, the program executes correctly, and it’s beautiful.</p>')

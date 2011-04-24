@@ -94,6 +94,7 @@
     <Content Include="Content\Images\bank\moodBoardThumb.jpg" />
     <Content Include="Content\Images\bank\nicholas.gif" />
     <Content Include="Content\Images\bank\posts\blaze.jpg" />
+    <Content Include="Content\Images\bank\posts\blush.jpg" />
     <Content Include="Content\Images\bank\posts\rhino.jpg" />
     <Content Include="Content\Images\features\test\alien.jpg" />
     <Content Include="Content\Images\features\test\leaf.jpg" />

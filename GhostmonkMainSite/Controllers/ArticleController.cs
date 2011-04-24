@@ -17,7 +17,8 @@ namespace GhostmonkMainSite.Controllers
                 var entries = ( from entry in container.Articles
                                 from cat in entry.Categories
                                 where cat.Value == "Blog"
-                                select entry ).ToList();
+                                orderby entry.PublishDate descending 
+                                select entry).ToList();
                 entries.ForEach( article => article.Assets.ToList() );
                 return PartialView( "HtmlBlogFeed", entries );
             }
