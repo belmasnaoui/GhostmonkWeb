@@ -17,7 +17,7 @@ namespace GhostmonkLib.Web.Utils
             XPathNavigator navigator = section.CreateNavigator();
             string typeName = ( string )navigator.Evaluate( "string(@type)" );
 
-            if( typeName == "" )
+            if( string.IsNullOrEmpty( typeName ) )
                 throw new ConfigurationErrorsException( string.Format( MISSING_TYPE_MSG, section.Name ), section );
 
             Type type = Type.GetType( typeName );

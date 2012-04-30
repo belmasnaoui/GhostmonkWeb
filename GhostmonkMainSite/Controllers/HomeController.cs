@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using GhostmonkLib.Utils;
 using LinqToTwitter;
 
 namespace GhostmonkMainSite.Controllers
@@ -16,6 +17,7 @@ namespace GhostmonkMainSite.Controllers
         [ChildActionOnly]
         public PartialViewResult TwitterFeed()
         {
+            Diagnostic.Start( "Twitter" );
             TwitterContext twitter = new TwitterContext();
             Status target;
             try
@@ -31,7 +33,7 @@ namespace GhostmonkMainSite.Controllers
             {
                 target = new Status { Text = FAIL_WHALE };
             }
-
+            Diagnostic.Stop( "Twitter" );
 
             return PartialView( "Twitter", target );
         }

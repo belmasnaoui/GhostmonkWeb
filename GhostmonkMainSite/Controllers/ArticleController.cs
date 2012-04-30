@@ -15,15 +15,15 @@ namespace GhostmonkMainSite.Controllers
         {
             using( var container = new GhostmonkMainSiteModelContainer() )
             {
-                var query = container.Articles
+                var blogArticleQuery = container.Articles
                     .SelectMany( entry => entry.Categories, ( entry, cat ) => new { entry, cat } )
                     .Where( @t => @t.cat.Value == "Blog" );
-                    
-                int pageCount = (query.Count()  - 1) / POSTS_PER_PAGE;
-                int start = ( page ?? 0 ) * POSTS_PER_PAGE;
-                start = Math.Min( start, pageCount );
 
-                var records = query.OrderByDescending( @t => @t.entry.PublishDate )
+                int lastPage = ( blogArticleQuery.Count() - 1 ) / POSTS_PER_PAGE;
+                int start = ( page ?? 0 ) * POSTS_PER_PAGE;
+                start = Math.Min( start, lastPage * POSTS_PER_PAGE );
+
+                var records = blogArticleQuery.OrderByDescending( @t => @t.entry.PublishDate )
                     .Select( @t => @t.entry ).Skip( start ).Take( POSTS_PER_PAGE ).ToList();
                 
                 records.ForEach( article => article.Assets.ToList() );

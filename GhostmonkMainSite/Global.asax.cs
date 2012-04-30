@@ -3,6 +3,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using GhostmonkLib.Utils;
+using log4net;
 
 namespace GhostmonkMainSite
 {
@@ -15,6 +17,8 @@ namespace GhostmonkMainSite
             routes.IgnoreRoute( "{resource}.axd/{*pathInfo}" );
 
             routes.MapRoute( "Home", string.Empty, new { controller = "Home", action = "Index" } );
+
+            //routes.MapRoute( "msnAutos/mainSite.html", "projects/as3/msn-autos" );
 
             routes.MapRoute(
                 "CategoryLink",
@@ -33,7 +37,7 @@ namespace GhostmonkMainSite
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-                
+            Diagnostic.Logger = LogManager.GetLogger( "GhostmonkMainSite" );
             RegisterRoutes( RouteTable.Routes );
             partialViewLocations.Add( "~/Views/Widgets/{0}.ascx" );
             RegisterViewEngine();
