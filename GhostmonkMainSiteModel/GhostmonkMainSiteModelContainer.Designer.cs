@@ -18,25 +18,23 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalArticles", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Article))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticlesTags", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Article), "Tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Tag))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "CategoriesArticles", "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Category), "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Article))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalCategories", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Category))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalTag", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "Tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Tag))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalUser", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.User))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "UserCV", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User), "CV", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GhostmonkMainSiteModel.CV))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "CVWorkExperiences", "CV", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.CV), "WorkExperience", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.WorkExperience))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "WorkExperiencesSkills", "WorkExperience", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.WorkExperience), "Skill", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Skill))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticlePullQuotes", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Article), "PullQuote", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.PullQuote))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ProjectAssets", "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GhostmonkMainSiteModel.Project), "Asset", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Asset))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "UserProjects", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User), "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Project))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "WorkExperienceProject", "WorkExperience", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.WorkExperience), "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Project))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "SkillsProjects", "Skill", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Skill), "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Project))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticleAssets", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GhostmonkMainSiteModel.Article), "Asset", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Asset))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "CVSkills", "CV", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.CV), "Skill", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Skill))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticleComments", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GhostmonkMainSiteModel.Article), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Comment))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "UserComments", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GhostmonkMainSiteModel.User), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Comment))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ProjectComments", "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GhostmonkMainSiteModel.Project), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Comment))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "UserArticle", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User), "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Article))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticleComment", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Article), "Comment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Comment))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticlePullQuote", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Article), "PullQuote", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.PullQuote))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticleImage", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Article), "Image", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Image))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticleSlideshow", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Article), "Slideshow", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Slideshow))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticleVideo", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Article), "Video", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Video))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticleCategory", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Article), "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Category))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "ArticleTag", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Article), "Tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Tag))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "SlideshowImage", "Slideshow", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Slideshow), "Image", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Image))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalCategory", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Category))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalTag", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "Tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Tag))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalArticle", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Article))]
 
 #endregion
 
@@ -235,38 +233,6 @@ namespace GhostmonkMainSiteModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Project> Projects
-        {
-            get
-            {
-                if ((_Projects == null))
-                {
-                    _Projects = base.CreateObjectSet<Project>("Projects");
-                }
-                return _Projects;
-            }
-        }
-        private ObjectSet<Project> _Projects;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Asset> Assets
-        {
-            get
-            {
-                if ((_Assets == null))
-                {
-                    _Assets = base.CreateObjectSet<Asset>("Assets");
-                }
-                return _Assets;
-            }
-        }
-        private ObjectSet<Asset> _Assets;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Comment> Comments
         {
             get
@@ -279,6 +245,54 @@ namespace GhostmonkMainSiteModel
             }
         }
         private ObjectSet<Comment> _Comments;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Slideshow> Slideshows
+        {
+            get
+            {
+                if ((_Slideshows == null))
+                {
+                    _Slideshows = base.CreateObjectSet<Slideshow>("Slideshows");
+                }
+                return _Slideshows;
+            }
+        }
+        private ObjectSet<Slideshow> _Slideshows;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Image> Images
+        {
+            get
+            {
+                if ((_Images == null))
+                {
+                    _Images = base.CreateObjectSet<Image>("Images");
+                }
+                return _Images;
+            }
+        }
+        private ObjectSet<Image> _Images;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Video> Videos
+        {
+            get
+            {
+                if ((_Videos == null))
+                {
+                    _Videos = base.CreateObjectSet<Video>("Videos");
+                }
+                return _Videos;
+            }
+        }
+        private ObjectSet<Video> _Videos;
 
         #endregion
         #region AddTo Methods
@@ -356,27 +370,35 @@ namespace GhostmonkMainSiteModel
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Projects EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToProjects(Project project)
-        {
-            base.AddObject("Projects", project);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Assets EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToAssets(Asset asset)
-        {
-            base.AddObject("Assets", asset);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Comments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToComments(Comment comment)
         {
             base.AddObject("Comments", comment);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Slideshows EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSlideshows(Slideshow slideshow)
+        {
+            base.AddObject("Slideshows", slideshow);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Images EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToImages(Image image)
+        {
+            base.AddObject("Images", image);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Videos EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToVideos(Video video)
+        {
+            base.AddObject("Videos", video);
         }
 
         #endregion
@@ -583,425 +605,237 @@ namespace GhostmonkMainSiteModel
         private global::System.String _LinkText;
         partial void OnLinkTextChanging(global::System.String value);
         partial void OnLinkTextChanged();
-    
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <LongDescription>
-        /// The number of pages to split the entry into.
-        /// </LongDescription>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int16 NumberOfPages
-        {
-            get
-            {
-                return _NumberOfPages;
-            }
-            set
-            {
-                OnNumberOfPagesChanging(value);
-                ReportPropertyChanging("NumberOfPages");
-                _NumberOfPages = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("NumberOfPages");
-                OnNumberOfPagesChanged();
-            }
-        }
-        private global::System.Int16 _NumberOfPages = 1;
-        partial void OnNumberOfPagesChanging(global::System.Int16 value);
-        partial void OnNumberOfPagesChanged();
 
         #endregion
     
         #region Navigation Properties
     
         /// <summary>
-        /// 
+        /// No Metadata Documentation available.
         /// </summary>
-        /// <LongDescription>
-        /// A Journal can have multiple articles
-        /// </LongDescription>
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "JournalArticles", "Journal")]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "UserArticle", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserArticle", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserArticle", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserArticle", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GhostmonkMainSiteModel.UserArticle", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleComment", "Comment")]
+        public EntityCollection<Comment> Comments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Comment>("GhostmonkMainSiteModel.ArticleComment", "Comment");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Comment>("GhostmonkMainSiteModel.ArticleComment", "Comment", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticlePullQuote", "PullQuote")]
+        public EntityCollection<PullQuote> PullQuotes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PullQuote>("GhostmonkMainSiteModel.ArticlePullQuote", "PullQuote");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PullQuote>("GhostmonkMainSiteModel.ArticlePullQuote", "PullQuote", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleImage", "Image")]
+        public EntityCollection<Image> Images
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Image>("GhostmonkMainSiteModel.ArticleImage", "Image");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Image>("GhostmonkMainSiteModel.ArticleImage", "Image", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleSlideshow", "Slideshow")]
+        public EntityCollection<Slideshow> Slideshows
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Slideshow>("GhostmonkMainSiteModel.ArticleSlideshow", "Slideshow");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Slideshow>("GhostmonkMainSiteModel.ArticleSlideshow", "Slideshow", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleVideo", "Video")]
+        public EntityCollection<Video> Videos
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Video>("GhostmonkMainSiteModel.ArticleVideo", "Video");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Video>("GhostmonkMainSiteModel.ArticleVideo", "Video", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleCategory", "Category")]
+        public EntityCollection<Category> Categories
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Category>("GhostmonkMainSiteModel.ArticleCategory", "Category");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Category>("GhostmonkMainSiteModel.ArticleCategory", "Category", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleTag", "Tag")]
+        public EntityCollection<Tag> Tags
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Tag>("GhostmonkMainSiteModel.ArticleTag", "Tag");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Tag>("GhostmonkMainSiteModel.ArticleTag", "Tag", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "JournalArticle", "Journal")]
         public Journal Journal
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.JournalArticles", "Journal").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.JournalArticle", "Journal").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.JournalArticles", "Journal").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.JournalArticle", "Journal").Value = value;
             }
         }
         /// <summary>
-        /// 
+        /// No Metadata Documentation available.
         /// </summary>
-        /// <LongDescription>
-        /// A Journal can have multiple articles
-        /// </LongDescription>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
         public EntityReference<Journal> JournalReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.JournalArticles", "Journal");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.JournalArticle", "Journal");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Journal>("GhostmonkMainSiteModel.JournalArticles", "Journal", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticlesTags", "Tag")]
-        public EntityCollection<Tag> Tags
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Tag>("GhostmonkMainSiteModel.ArticlesTags", "Tag");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Tag>("GhostmonkMainSiteModel.ArticlesTags", "Tag", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "CategoriesArticles", "Category")]
-        public EntityCollection<Category> Categories
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Category>("GhostmonkMainSiteModel.CategoriesArticles", "Category");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Category>("GhostmonkMainSiteModel.CategoriesArticles", "Category", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticlePullQuotes", "PullQuote")]
-        public EntityCollection<PullQuote> PullQuotes
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PullQuote>("GhostmonkMainSiteModel.ArticlePullQuotes", "PullQuote");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PullQuote>("GhostmonkMainSiteModel.ArticlePullQuotes", "PullQuote", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleAssets", "Asset")]
-        public EntityCollection<Asset> Assets
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Asset>("GhostmonkMainSiteModel.ArticleAssets", "Asset");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Asset>("GhostmonkMainSiteModel.ArticleAssets", "Asset", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleComments", "Comment")]
-        public EntityCollection<Comment> Comments
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Comment>("GhostmonkMainSiteModel.ArticleComments", "Comment");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Comment>("GhostmonkMainSiteModel.ArticleComments", "Comment", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="GhostmonkMainSiteModel", Name="Asset")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Asset : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Asset object.
-        /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="type">Initial value of the Type property.</param>
-        /// <param name="embedUri">Initial value of the EmbedUri property.</param>
-        public static Asset CreateAsset(global::System.Int32 id, global::System.String type, global::System.String embedUri)
-        {
-            Asset asset = new Asset();
-            asset.Id = id;
-            asset.Type = type;
-            asset.EmbedUri = embedUri;
-            return asset;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Id
-        {
-            get
-            {
-                return _Id;
-            }
-            set
-            {
-                if (_Id != value)
-                {
-                    OnIdChanging(value);
-                    ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Id");
-                    OnIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _Id;
-        partial void OnIdChanging(global::System.Int32 value);
-        partial void OnIdChanged();
-    
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <LongDescription>
-        /// The content type of the asset
-        /// </LongDescription>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Type
-        {
-            get
-            {
-                return _Type;
-            }
-            set
-            {
-                OnTypeChanging(value);
-                ReportPropertyChanging("Type");
-                _Type = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Type");
-                OnTypeChanged();
-            }
-        }
-        private global::System.String _Type;
-        partial void OnTypeChanging(global::System.String value);
-        partial void OnTypeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String EmbedUri
-        {
-            get
-            {
-                return _EmbedUri;
-            }
-            set
-            {
-                OnEmbedUriChanging(value);
-                ReportPropertyChanging("EmbedUri");
-                _EmbedUri = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("EmbedUri");
-                OnEmbedUriChanged();
-            }
-        }
-        private global::System.String _EmbedUri;
-        partial void OnEmbedUriChanging(global::System.String value);
-        partial void OnEmbedUriChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String AltTag
-        {
-            get
-            {
-                return _AltTag;
-            }
-            set
-            {
-                OnAltTagChanging(value);
-                ReportPropertyChanging("AltTag");
-                _AltTag = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("AltTag");
-                OnAltTagChanged();
-            }
-        }
-        private global::System.String _AltTag;
-        partial void OnAltTagChanging(global::System.String value);
-        partial void OnAltTagChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String FullUri
-        {
-            get
-            {
-                return _FullUri;
-            }
-            set
-            {
-                OnFullUriChanging(value);
-                ReportPropertyChanging("FullUri");
-                _FullUri = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("FullUri");
-                OnFullUriChanged();
-            }
-        }
-        private global::System.String _FullUri;
-        partial void OnFullUriChanging(global::System.String value);
-        partial void OnFullUriChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ProjectAssets", "Project")]
-        public Project Project
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("GhostmonkMainSiteModel.ProjectAssets", "Project").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("GhostmonkMainSiteModel.ProjectAssets", "Project").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Project> ProjectReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("GhostmonkMainSiteModel.ProjectAssets", "Project");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Project>("GhostmonkMainSiteModel.ProjectAssets", "Project", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleAssets", "Article")]
-        public Article Article
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleAssets", "Article").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleAssets", "Article").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Article> ArticleReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleAssets", "Article");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Article>("GhostmonkMainSiteModel.ArticleAssets", "Article", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Journal>("GhostmonkMainSiteModel.JournalArticle", "Journal", value);
                 }
             }
         }
@@ -1102,18 +936,18 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "CategoriesArticles", "Article")]
-        public EntityCollection<Article> Articles
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleCategory", "Article")]
+        public EntityCollection<Article> Article
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Article>("GhostmonkMainSiteModel.CategoriesArticles", "Article");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Article>("GhostmonkMainSiteModel.ArticleCategory", "Article");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Article>("GhostmonkMainSiteModel.CategoriesArticles", "Article", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Article>("GhostmonkMainSiteModel.ArticleCategory", "Article", value);
                 }
             }
         }
@@ -1124,16 +958,16 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "JournalCategories", "Journal")]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "JournalCategory", "Journal")]
         public Journal Journal
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.JournalCategories", "Journal").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.JournalCategory", "Journal").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.JournalCategories", "Journal").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.JournalCategory", "Journal").Value = value;
             }
         }
         /// <summary>
@@ -1145,13 +979,13 @@ namespace GhostmonkMainSiteModel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.JournalCategories", "Journal");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.JournalCategory", "Journal");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Journal>("GhostmonkMainSiteModel.JournalCategories", "Journal", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Journal>("GhostmonkMainSiteModel.JournalCategory", "Journal", value);
                 }
             }
         }
@@ -1324,16 +1158,16 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleComments", "Article")]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleComment", "Article")]
         public Article Article
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleComments", "Article").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleComment", "Article").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleComments", "Article").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleComment", "Article").Value = value;
             }
         }
         /// <summary>
@@ -1345,89 +1179,13 @@ namespace GhostmonkMainSiteModel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleComments", "Article");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleComment", "Article");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Article>("GhostmonkMainSiteModel.ArticleComments", "Article", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "UserComments", "User")]
-        public User User
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserComments", "User").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserComments", "User").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<User> UserReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserComments", "User");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GhostmonkMainSiteModel.UserComments", "User", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ProjectComments", "Project")]
-        public Project Project
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("GhostmonkMainSiteModel.ProjectComments", "Project").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("GhostmonkMainSiteModel.ProjectComments", "Project").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Project> ProjectReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("GhostmonkMainSiteModel.ProjectComments", "Project");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Project>("GhostmonkMainSiteModel.ProjectComments", "Project", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Article>("GhostmonkMainSiteModel.ArticleComment", "Article", value);
                 }
             }
         }
@@ -1686,6 +1444,124 @@ namespace GhostmonkMainSiteModel
     }
     
     /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GhostmonkMainSiteModel", Name="Image")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Image : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Image object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        public static Image CreateImage(global::System.Int32 id)
+        {
+            Image image = new Image();
+            image.Id = id;
+            return image;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleImage", "Article")]
+        public Article Article
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleImage", "Article").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleImage", "Article").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Article> ArticleReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleImage", "Article");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Article>("GhostmonkMainSiteModel.ArticleImage", "Article", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "SlideshowImage", "Slideshow")]
+        public EntityCollection<Slideshow> Slideshow
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Slideshow>("GhostmonkMainSiteModel.SlideshowImage", "Slideshow");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Slideshow>("GhostmonkMainSiteModel.SlideshowImage", "Slideshow", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
     /// 
     /// </summary>
     /// <LongDescription>
@@ -1775,18 +1651,18 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "JournalArticles", "Article")]
-        public EntityCollection<Article> Articles
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "JournalUser", "User")]
+        public EntityCollection<User> Users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Article>("GhostmonkMainSiteModel.JournalArticles", "Article");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("GhostmonkMainSiteModel.JournalUser", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Article>("GhostmonkMainSiteModel.JournalArticles", "Article", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("GhostmonkMainSiteModel.JournalUser", "User", value);
                 }
             }
         }
@@ -1797,18 +1673,18 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "JournalCategories", "Category")]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "JournalCategory", "Category")]
         public EntityCollection<Category> Categories
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Category>("GhostmonkMainSiteModel.JournalCategories", "Category");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Category>("GhostmonkMainSiteModel.JournalCategory", "Category");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Category>("GhostmonkMainSiteModel.JournalCategories", "Category", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Category>("GhostmonkMainSiteModel.JournalCategory", "Category", value);
                 }
             }
         }
@@ -1841,348 +1717,18 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "JournalUser", "User")]
-        public EntityCollection<User> Users
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "JournalArticle", "Article")]
+        public EntityCollection<Article> Articles
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("GhostmonkMainSiteModel.JournalUser", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Article>("GhostmonkMainSiteModel.JournalArticle", "Article");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("GhostmonkMainSiteModel.JournalUser", "User", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="GhostmonkMainSiteModel", Name="Project")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Project : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Project object.
-        /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="summary">Initial value of the Summary property.</param>
-        /// <param name="title">Initial value of the Title property.</param>
-        /// <param name="date">Initial value of the Date property.</param>
-        /// <param name="company">Initial value of the Company property.</param>
-        /// <param name="fullText">Initial value of the FullText property.</param>
-        public static Project CreateProject(global::System.Int32 id, global::System.String summary, global::System.String title, global::System.DateTime date, global::System.String company, global::System.String fullText)
-        {
-            Project project = new Project();
-            project.Id = id;
-            project.Summary = summary;
-            project.Title = title;
-            project.Date = date;
-            project.Company = company;
-            project.FullText = fullText;
-            return project;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Id
-        {
-            get
-            {
-                return _Id;
-            }
-            set
-            {
-                if (_Id != value)
-                {
-                    OnIdChanging(value);
-                    ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Id");
-                    OnIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _Id;
-        partial void OnIdChanging(global::System.Int32 value);
-        partial void OnIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Summary
-        {
-            get
-            {
-                return _Summary;
-            }
-            set
-            {
-                OnSummaryChanging(value);
-                ReportPropertyChanging("Summary");
-                _Summary = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Summary");
-                OnSummaryChanged();
-            }
-        }
-        private global::System.String _Summary;
-        partial void OnSummaryChanging(global::System.String value);
-        partial void OnSummaryChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Title
-        {
-            get
-            {
-                return _Title;
-            }
-            set
-            {
-                OnTitleChanging(value);
-                ReportPropertyChanging("Title");
-                _Title = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Title");
-                OnTitleChanged();
-            }
-        }
-        private global::System.String _Title;
-        partial void OnTitleChanging(global::System.String value);
-        partial void OnTitleChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime Date
-        {
-            get
-            {
-                return _Date;
-            }
-            set
-            {
-                OnDateChanging(value);
-                ReportPropertyChanging("Date");
-                _Date = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Date");
-                OnDateChanged();
-            }
-        }
-        private global::System.DateTime _Date;
-        partial void OnDateChanging(global::System.DateTime value);
-        partial void OnDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Company
-        {
-            get
-            {
-                return _Company;
-            }
-            set
-            {
-                OnCompanyChanging(value);
-                ReportPropertyChanging("Company");
-                _Company = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Company");
-                OnCompanyChanged();
-            }
-        }
-        private global::System.String _Company;
-        partial void OnCompanyChanging(global::System.String value);
-        partial void OnCompanyChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String FullText
-        {
-            get
-            {
-                return _FullText;
-            }
-            set
-            {
-                OnFullTextChanging(value);
-                ReportPropertyChanging("FullText");
-                _FullText = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("FullText");
-                OnFullTextChanged();
-            }
-        }
-        private global::System.String _FullText;
-        partial void OnFullTextChanging(global::System.String value);
-        partial void OnFullTextChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ProjectAssets", "Asset")]
-        public EntityCollection<Asset> Assets
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Asset>("GhostmonkMainSiteModel.ProjectAssets", "Asset");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Asset>("GhostmonkMainSiteModel.ProjectAssets", "Asset", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "UserProjects", "User")]
-        public User User
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserProjects", "User").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserProjects", "User").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<User> UserReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserProjects", "User");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GhostmonkMainSiteModel.UserProjects", "User", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "WorkExperienceProject", "WorkExperience")]
-        public WorkExperience WorkExperience
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkExperience>("GhostmonkMainSiteModel.WorkExperienceProject", "WorkExperience").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkExperience>("GhostmonkMainSiteModel.WorkExperienceProject", "WorkExperience").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<WorkExperience> WorkExperienceReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkExperience>("GhostmonkMainSiteModel.WorkExperienceProject", "WorkExperience");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<WorkExperience>("GhostmonkMainSiteModel.WorkExperienceProject", "WorkExperience", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "SkillsProjects", "Skill")]
-        public EntityCollection<Skill> Skills
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Skill>("GhostmonkMainSiteModel.SkillsProjects", "Skill");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Skill>("GhostmonkMainSiteModel.SkillsProjects", "Skill", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ProjectComments", "Comment")]
-        public EntityCollection<Comment> Comments
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Comment>("GhostmonkMainSiteModel.ProjectComments", "Comment");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Comment>("GhostmonkMainSiteModel.ProjectComments", "Comment", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Article>("GhostmonkMainSiteModel.JournalArticle", "Article", value);
                 }
             }
         }
@@ -2310,16 +1856,16 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticlePullQuotes", "Article")]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticlePullQuote", "Article")]
         public Article Article
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticlePullQuotes", "Article").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticlePullQuote", "Article").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticlePullQuotes", "Article").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticlePullQuote", "Article").Value = value;
             }
         }
         /// <summary>
@@ -2331,13 +1877,13 @@ namespace GhostmonkMainSiteModel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticlePullQuotes", "Article");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticlePullQuote", "Article");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Article>("GhostmonkMainSiteModel.ArticlePullQuotes", "Article", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Article>("GhostmonkMainSiteModel.ArticlePullQuote", "Article", value);
                 }
             }
         }
@@ -2454,28 +2000,6 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "SkillsProjects", "Project")]
-        public EntityCollection<Project> Project
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Project>("GhostmonkMainSiteModel.SkillsProjects", "Project");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Project>("GhostmonkMainSiteModel.SkillsProjects", "Project", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "CVSkills", "CV")]
         public CV CV
         {
@@ -2504,6 +2028,124 @@ namespace GhostmonkMainSiteModel
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<CV>("GhostmonkMainSiteModel.CVSkills", "CV", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GhostmonkMainSiteModel", Name="Slideshow")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Slideshow : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Slideshow object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        public static Slideshow CreateSlideshow(global::System.Int32 id)
+        {
+            Slideshow slideshow = new Slideshow();
+            slideshow.Id = id;
+            return slideshow;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleSlideshow", "Article")]
+        public Article Article
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleSlideshow", "Article").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleSlideshow", "Article").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Article> ArticleReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleSlideshow", "Article");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Article>("GhostmonkMainSiteModel.ArticleSlideshow", "Article", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "SlideshowImage", "Image")]
+        public EntityCollection<Image> Images
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Image>("GhostmonkMainSiteModel.SlideshowImage", "Image");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Image>("GhostmonkMainSiteModel.SlideshowImage", "Image", value);
                 }
             }
         }
@@ -2604,18 +2246,18 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticlesTags", "Article")]
-        public EntityCollection<Article> Articles
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleTag", "Article")]
+        public EntityCollection<Article> Article
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Article>("GhostmonkMainSiteModel.ArticlesTags", "Article");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Article>("GhostmonkMainSiteModel.ArticleTag", "Article");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Article>("GhostmonkMainSiteModel.ArticlesTags", "Article", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Article>("GhostmonkMainSiteModel.ArticleTag", "Article", value);
                 }
             }
         }
@@ -2989,43 +2631,114 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "UserProjects", "Project")]
-        public EntityCollection<Project> Projects
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "UserArticle", "Article")]
+        public EntityCollection<Article> Articles
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Project>("GhostmonkMainSiteModel.UserProjects", "Project");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Article>("GhostmonkMainSiteModel.UserArticle", "Article");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Project>("GhostmonkMainSiteModel.UserProjects", "Project", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Article>("GhostmonkMainSiteModel.UserArticle", "Article", value);
                 }
             }
         }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GhostmonkMainSiteModel", Name="Video")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Video : EntityObject
+    {
+        #region Factory Method
     
         /// <summary>
-        /// 
+        /// Create a new Video object.
         /// </summary>
-        /// <LongDescription>
-        /// A user&apos;s comments are associated to a user.
-        /// </LongDescription>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
+        /// <param name="id">Initial value of the Id property.</param>
+        public static Video CreateVideo(global::System.Int32 id)
+        {
+            Video video = new Video();
+            video.Id = id;
+            return video;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "UserComments", "Comment")]
-        public EntityCollection<Comment> Comments
+        public global::System.Int32 Id
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Comment>("GhostmonkMainSiteModel.UserComments", "Comment");
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "ArticleVideo", "Article")]
+        public Article Article
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleVideo", "Article").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleVideo", "Article").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Article> ArticleReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("GhostmonkMainSiteModel.ArticleVideo", "Article");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Comment>("GhostmonkMainSiteModel.UserComments", "Comment", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Article>("GhostmonkMainSiteModel.ArticleVideo", "Article", value);
                 }
             }
         }
@@ -3270,28 +2983,6 @@ namespace GhostmonkMainSiteModel
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Skill>("GhostmonkMainSiteModel.WorkExperiencesSkills", "Skill", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "WorkExperienceProject", "Project")]
-        public EntityCollection<Project> Projects
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Project>("GhostmonkMainSiteModel.WorkExperienceProject", "Project");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Project>("GhostmonkMainSiteModel.WorkExperienceProject", "Project", value);
                 }
             }
         }

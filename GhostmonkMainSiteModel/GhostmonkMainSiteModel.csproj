@@ -54,24 +54,47 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DataAnnotationsExtensions">
+      <HintPath>..\packages\DataAnnotationsExtensions.1.1.0.0\lib\NETFramework40\DataAnnotationsExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAnnotationsExtensions.ClientValidation">
+      <HintPath>..\packages\DataAnnotationsExtensions.MVC3.1.1.0.0\lib\NETFramework40\DataAnnotationsExtensions.ClientValidation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.2.0.0\lib\NETFramework40\WebActivator.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\RegisterClientValidationExtensions.cs" />
     <Compile Include="GhostmonkMainSiteModelContainer.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GhostmonkMainSiteModelContainer.edmx</DependentUpon>
     </Compile>
+    <Compile Include="MetadataDeclarations.cs" />
+    <Compile Include="Metadata\Article.cs" />
+    <Compile Include="Metadata\CategoryMetadata.cs" />
+    <Compile Include="Metadata\CommentMetadata.cs" />
+    <Compile Include="Metadata\ImageMetadata.cs" />
+    <Compile Include="Metadata\JournalMetadata.cs" />
+    <Compile Include="Metadata\PullQuoteMetadata.cs" />
+    <Compile Include="Metadata\SlideshowMetadata.cs" />
+    <Compile Include="Metadata\TagMetadata.cs" />
+    <Compile Include="Metadata\VideoMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Metadata\UserMetadata.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="GhostmonkMainSiteModelContainer.edmx">
@@ -81,26 +104,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClearDB.sql" />
     <Content Include="GhostmonkMainSiteModelContainer.edmx.sql" />
-    <Content Include="inserts\2-categories.sql" />
-    <Content Include="inserts\3-cvs.sql" />
-    <Content Include="inserts\2-articles.sql" />
-    <Content Include="inserts\1-journals.sql" />
-    <Content Include="inserts\4-skills.sql" />
-    <Content Include="inserts\2-tags.sql" />
-    <Content Include="inserts\2-users.sql" />
-    <Content Include="inserts\4-work-experiences.sql" />
-    <Content Include="inserts\5-work-experiences-skills.sql" />
-    <Content Include="inserts\6-assets.sql" />
-    <Content Include="inserts\6-comments.sql" />
-    <Content Include="inserts\5-projects.sql" />
-    <Content Include="inserts\3-pull-quotes.sql" />
-    <Content Include="inserts\6-skills-projects.sql" />
-    <Content Include="inserts\3-articles-tags.sql" />
-    <Content Include="inserts\3-categories-articles.sql" />
+    <Content Include="Inserts\2-categories.sql" />
+    <Content Include="Inserts\3-cvs.sql" />
+    <Content Include="Inserts\2-articles.sql" />
+    <Content Include="Inserts\1-journals.sql" />
+    <Content Include="Inserts\4-skills.sql" />
+    <Content Include="Inserts\2-tags.sql" />
+    <Content Include="Inserts\2-users.sql" />
+    <Content Include="Inserts\4-work-experiences.sql" />
+    <Content Include="Inserts\5-work-experiences-skills.sql" />
+    <Content Include="Inserts\6-assets.sql" />
+    <Content Include="Inserts\6-comments.sql" />
+    <Content Include="Inserts\5-projects.sql" />
+    <Content Include="Inserts\3-pull-quotes.sql" />
+    <Content Include="Inserts\6-skills-projects.sql" />
+    <Content Include="Inserts\3-articles-tags.sql" />
+    <Content Include="Inserts\3-categories-articles.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

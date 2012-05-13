@@ -1,0 +1,41 @@
+﻿@model GhostmonkMainSiteModel.Article
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Article</legend>
+
+    <div class="display-label">Title</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">Body</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Body)
+    </div>
+
+    <div class="display-label">PublishDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PublishDate)
+    </div>
+
+    <div class="display-label">Summary</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Summary)
+    </div>
+
+    <div class="display-label">LinkText</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LinkText)
+    </div>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

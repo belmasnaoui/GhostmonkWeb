@@ -160,6 +160,7 @@
     <Content Include="Content\Styles\blueprint\screen.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="html5example.html" />
     <Content Include="Scripts\cufon-yui.js" />
     <Content Include="Scripts\HelveticaNeue_LT_57_Cn_400.font.js" />
     <Content Include="Scripts\navigationEffect.js" />

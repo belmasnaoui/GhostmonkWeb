@@ -45,96 +45,60 @@
 
 <body>
 
-    <div id="TopStretch"></div>
-
-    <div id="OuterContainer" class="container">
-        
-        <div id="Navigation" class="span-27 last">
+    <header>
+        <nav id="Navigation">
             <ul>
-                <li class="current"><%: Html.ActionLink( "Ghostmonk", "Index", "Home" ) %></li>
-                <li><%: Html.ActionLink( "Inspiration", "FullArticle", "Article", new { category = "Page", linkText = "inspiration" }, null ) %></li>
-                <li><%: Html.ActionLink( "Mood", "FullArticle", "Article", new { category = "Page", linkText = "mood-board" }, null )%></li>
-                <li><%: Html.ActionLink( "Features", "FullArticle", "Article", new { category = "Page", linkText = "features" }, null )%></li>
-                <li><%: Html.ActionLink( "About", "FullArticle", "Article", new { category = "Page", linkText = "about" }, null )%></li>
-                <li><%: Html.ActionLink( "Contact", "FullArticle", "Article", new { category = "Page", linkText = "contact" }, null )%></li>
+                <li><%: Html.ActionLink( "Journal", "FullArticle", "Article", new { category = "Journal", linkText = "inspiration" }, null ) %></li>
+                <li><%: Html.ActionLink( "Projects", "FullArticle", "Article", new { category = "Projects", linkText = "mood-board" }, null )%></li>
+                <li><%: Html.ActionLink( "Experiments", "FullArticle", "Article", new { category = "Experiments", linkText = "features" }, null )%></li>
             </ul>
-        </div>
-        
-        <div id="TopEdge" class="span-26 prepend-1 last"><%: Html.Image( "~/App_Themes/Ghostmonk/Images/structure/top-bg-border.jpg", "border" )%></div>
+        </nav>
+    </header>
 
-        <div class="span-1"><%: Html.Image( "~/App_Themes/Ghostmonk/Images/structure/spacer.gif", "spacer" )%></div>
-        <div id="MainSiteBody" class="container span-25 last">
+    <article id="MainArticleColumn" class="span-17">
+                
+        <div id="Featured" class="span-12 push-3 last">
             
-            <div id="MainArticleColumn" class="span-17">
-                
-                <div id="Featured" class="span-12 push-3 last">
-                    <br /><br />
-                    <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
         
-                </div>
-                
-                <div id="ProgrammingArticles" class="span-8 push-half"></div>
+        </div>
+        
+    </article>
 
-                <div id="Experiments" class="span-8 last"></div>
+    <aside id="Twitter" class="push-half">
+        <h2>Twitter</h2>
+        <% Html.RenderAction( "TwitterFeed", "Home" ); %>
+    </aside>
 
-                <div id="BookReviews" class="span-8 push-half"></div>
+    <aside id="CurrentWork" class="push-half">
+        <h2>Currently I am...</h2>
+        <p>Playing with ASP.NET and trying to understand the architectural decisions made by the engineers at Microsoft.</p>
+    </aside>
 
-                <div id="LatesImage" class="span-8 last"></div>
+    <aside id="BlogRoll" class="push-half">
+        <% Html.RenderPartial( "BlogRoll" ); %>
+    </aside>
 
-            </div>
-
-            <div id="ModuleColumn" class="span-7">
-
-                <div id="Twitter" class="push-half">
-                    <h2>Twitter</h2>
-                    <% Html.RenderAction( "TwitterFeed", "Home" ); %>
-                </div>
-
-                <div id="CurrentWork" class="push-half">
-                    <h2>Currently I am...</h2>
-                    <p>Playing with ASP.NET and trying to understand the architectural decisions made by the engineers at Microsoft.</p>
-                </div>
-
-                <div id="BlogRoll" class="push-half">
-                    <% Html.RenderPartial( "BlogRoll" ); %>
-                </div>
-
-                <div id="GoodReads" class="push-half">
+    <aside id="GoodReads" class="push-half">
                         
-                </div>
+    </aside>
 
-                <div id="socialWidget">
+    <aside id="socialWidget">
 
-                    <div id="SocialMedia" class="push-half">
-                        <% Html.RenderPartial( "SocialMediaLinks" ); %>
-                    </div>
-
-                </div>
-
-            </div>
-
+        <div id="SocialMedia" class="push-half">
+            <% Html.RenderPartial( "SocialMediaLinks" ); %>
         </div>
 
-    </div>
+    </aside>
 
-    <div id="BottomStretch">
+    <footer id="BottomStretch">
 
         <div class="container">
-            
             <div id="Tags"></div>
-            
-            <div id="Archives">
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-            </div>
+            <div id="Archives"></div>
         </div>
-    </div>
+
+    </footer>
+
 </body>
 </html>
