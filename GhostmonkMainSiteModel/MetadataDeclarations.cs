@@ -6,8 +6,8 @@ namespace GhostmonkMainSiteModel
     [MetadataType( typeof(JournalMetadata) )]
     public partial class Journal {}
 
-    [MetadataType(typeof(UserMetadata))]
-    public partial class User
+    [MetadataType(typeof(aspnet_UserMetadata))]
+    public partial class aspnet_User
     {
         public string ConfirmPassword { get; set; }
         public string ConfirmEmail { get; set; }

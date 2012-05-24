@@ -5,7 +5,7 @@ using DataAnnotationsExtensions;
 
 namespace GhostmonkMainSiteModel.Metadata
 {
-    public class UserMetadata
+    public class aspnet_UserMetadata
     {
         [Required]
         [StringLength( 50 )]

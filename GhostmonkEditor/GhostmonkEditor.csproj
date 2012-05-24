@@ -72,7 +72,6 @@
     <Compile Include="Controllers\ArticleEditorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JournalEditorController.cs" />
-    <Compile Include="Controllers\UserEditorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -118,7 +117,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -174,21 +175,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ArticleEditor\Delete.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UserEditor\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UserEditor\Details.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UserEditor\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UserEditor\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UserEditor\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\JournalEditor\Index.cshtml" />
