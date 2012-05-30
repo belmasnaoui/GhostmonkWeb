@@ -203,6 +203,7 @@
     <None Include="Content\Images\features\template.psd" />
     <Content Include="Web.Integration.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -32,9 +32,10 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalCategory", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Category))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalTag", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "Tag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Tag))]
 [assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "JournalArticle", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal), "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Article))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "aspnet_UsersArticle", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User), "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Article))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "Journalaspnet_Users", "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Journal), "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.User))]
-[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "aspnet_UsersCV", "aspnet_Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User), "CV", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GhostmonkMainSiteModel.CV))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "UserArticle", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User), "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GhostmonkMainSiteModel.Article))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "UserJournal", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User), "Journal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.Journal))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "UserCV", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User), "CV", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.CV))]
+[assembly: EdmRelationshipAttribute("GhostmonkMainSiteModel", "UserLoginCredential", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.User), "LoginCredential", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GhostmonkMainSiteModel.LoginCredential))]
 
 #endregion
 
@@ -293,6 +294,22 @@ namespace GhostmonkMainSiteModel
             }
         }
         private ObjectSet<User> _Users;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<LoginCredential> LoginCredentials
+        {
+            get
+            {
+                if ((_LoginCredentials == null))
+                {
+                    _LoginCredentials = base.CreateObjectSet<LoginCredential>("LoginCredentials");
+                }
+                return _LoginCredentials;
+            }
+        }
+        private ObjectSet<LoginCredential> _LoginCredentials;
 
         #endregion
         #region AddTo Methods
@@ -399,6 +416,14 @@ namespace GhostmonkMainSiteModel
         public void AddToUsers(User user)
         {
             base.AddObject("Users", user);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the LoginCredentials EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLoginCredentials(LoginCredential loginCredential)
+        {
+            base.AddObject("LoginCredentials", loginCredential);
         }
 
         #endregion
@@ -808,16 +833,16 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "aspnet_UsersArticle", "aspnet_Users")]
-        public User aspnet_Users
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "UserArticle", "User")]
+        public User User
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.aspnet_UsersArticle", "aspnet_Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserArticle", "User").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.aspnet_UsersArticle", "aspnet_Users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserArticle", "User").Value = value;
             }
         }
         /// <summary>
@@ -825,17 +850,17 @@ namespace GhostmonkMainSiteModel
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> aspnet_UsersReference
+        public EntityReference<User> UserReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.aspnet_UsersArticle", "aspnet_Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserArticle", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GhostmonkMainSiteModel.aspnet_UsersArticle", "aspnet_Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GhostmonkMainSiteModel.UserArticle", "User", value);
                 }
             }
         }
@@ -1408,16 +1433,16 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "aspnet_UsersCV", "aspnet_Users")]
-        public User aspnet_Users
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "UserCV", "User")]
+        public User User
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.aspnet_UsersCV", "aspnet_Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserCV", "User").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.aspnet_UsersCV", "aspnet_Users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserCV", "User").Value = value;
             }
         }
         /// <summary>
@@ -1425,17 +1450,17 @@ namespace GhostmonkMainSiteModel
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> aspnet_UsersReference
+        public EntityReference<User> UserReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.aspnet_UsersCV", "aspnet_Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserCV", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GhostmonkMainSiteModel.aspnet_UsersCV", "aspnet_Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GhostmonkMainSiteModel.UserCV", "User", value);
                 }
             }
         }
@@ -1717,18 +1742,234 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "Journalaspnet_Users", "aspnet_Users")]
-        public EntityCollection<User> aspnet_Users
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "UserJournal", "User")]
+        public User User
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("GhostmonkMainSiteModel.Journalaspnet_Users", "aspnet_Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserJournal", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserJournal", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserJournal", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("GhostmonkMainSiteModel.Journalaspnet_Users", "aspnet_Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GhostmonkMainSiteModel.UserJournal", "User", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GhostmonkMainSiteModel", Name="LoginCredential")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class LoginCredential : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new LoginCredential object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="password">Initial value of the Password property.</param>
+        /// <param name="passwordQuestion">Initial value of the PasswordQuestion property.</param>
+        /// <param name="passwordAnswer">Initial value of the PasswordAnswer property.</param>
+        /// <param name="userName">Initial value of the UserName property.</param>
+        public static LoginCredential CreateLoginCredential(global::System.Int32 id, global::System.String password, global::System.String passwordQuestion, global::System.String passwordAnswer, global::System.String userName)
+        {
+            LoginCredential loginCredential = new LoginCredential();
+            loginCredential.Id = id;
+            loginCredential.Password = password;
+            loginCredential.PasswordQuestion = passwordQuestion;
+            loginCredential.PasswordAnswer = passwordAnswer;
+            loginCredential.UserName = userName;
+            return loginCredential;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Password
+        {
+            get
+            {
+                return _Password;
+            }
+            set
+            {
+                OnPasswordChanging(value);
+                ReportPropertyChanging("Password");
+                _Password = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Password");
+                OnPasswordChanged();
+            }
+        }
+        private global::System.String _Password;
+        partial void OnPasswordChanging(global::System.String value);
+        partial void OnPasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String PasswordQuestion
+        {
+            get
+            {
+                return _PasswordQuestion;
+            }
+            set
+            {
+                OnPasswordQuestionChanging(value);
+                ReportPropertyChanging("PasswordQuestion");
+                _PasswordQuestion = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("PasswordQuestion");
+                OnPasswordQuestionChanged();
+            }
+        }
+        private global::System.String _PasswordQuestion;
+        partial void OnPasswordQuestionChanging(global::System.String value);
+        partial void OnPasswordQuestionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String PasswordAnswer
+        {
+            get
+            {
+                return _PasswordAnswer;
+            }
+            set
+            {
+                OnPasswordAnswerChanging(value);
+                ReportPropertyChanging("PasswordAnswer");
+                _PasswordAnswer = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("PasswordAnswer");
+                OnPasswordAnswerChanged();
+            }
+        }
+        private global::System.String _PasswordAnswer;
+        partial void OnPasswordAnswerChanging(global::System.String value);
+        partial void OnPasswordAnswerChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+            set
+            {
+                OnUserNameChanging(value);
+                ReportPropertyChanging("UserName");
+                _UserName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("UserName");
+                OnUserNameChanged();
+            }
+        }
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "UserLoginCredential", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserLoginCredential", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserLoginCredential", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GhostmonkMainSiteModel.UserLoginCredential", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GhostmonkMainSiteModel.UserLoginCredential", "User", value);
                 }
             }
         }
@@ -2320,13 +2561,17 @@ namespace GhostmonkMainSiteModel
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="lastName">Initial value of the LastName property.</param>
         /// <param name="screenName">Initial value of the ScreenName property.</param>
-        public static User CreateUser(global::System.Guid id, global::System.String firstName, global::System.String lastName, global::System.String screenName)
+        /// <param name="email">Initial value of the Email property.</param>
+        /// <param name="isOnline">Initial value of the IsOnline property.</param>
+        public static User CreateUser(global::System.Guid id, global::System.String firstName, global::System.String lastName, global::System.String screenName, global::System.String email, global::System.Boolean isOnline)
         {
             User user = new User();
             user.Id = id;
             user.FirstName = firstName;
             user.LastName = lastName;
             user.ScreenName = screenName;
+            user.Email = email;
+            user.IsOnline = isOnline;
             return user;
         }
 
@@ -2431,6 +2676,54 @@ namespace GhostmonkMainSiteModel
         private global::System.String _ScreenName;
         partial void OnScreenNameChanging(global::System.String value);
         partial void OnScreenNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsOnline
+        {
+            get
+            {
+                return _IsOnline;
+            }
+            set
+            {
+                OnIsOnlineChanging(value);
+                ReportPropertyChanging("IsOnline");
+                _IsOnline = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsOnline");
+                OnIsOnlineChanged();
+            }
+        }
+        private global::System.Boolean _IsOnline;
+        partial void OnIsOnlineChanging(global::System.Boolean value);
+        partial void OnIsOnlineChanged();
 
         #endregion
     
@@ -2442,18 +2735,18 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "aspnet_UsersArticle", "Article")]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "UserArticle", "Article")]
         public EntityCollection<Article> Articles
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Article>("GhostmonkMainSiteModel.aspnet_UsersArticle", "Article");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Article>("GhostmonkMainSiteModel.UserArticle", "Article");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Article>("GhostmonkMainSiteModel.aspnet_UsersArticle", "Article", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Article>("GhostmonkMainSiteModel.UserArticle", "Article", value);
                 }
             }
         }
@@ -2464,18 +2757,34 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "Journalaspnet_Users", "Journal")]
-        public EntityCollection<Journal> Journal
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "UserJournal", "Journal")]
+        public Journal Journals
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Journal>("GhostmonkMainSiteModel.Journalaspnet_Users", "Journal");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.UserJournal", "Journal").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.UserJournal", "Journal").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Journal> JournalsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Journal>("GhostmonkMainSiteModel.UserJournal", "Journal");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Journal>("GhostmonkMainSiteModel.Journalaspnet_Users", "Journal", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Journal>("GhostmonkMainSiteModel.UserJournal", "Journal", value);
                 }
             }
         }
@@ -2486,16 +2795,16 @@ namespace GhostmonkMainSiteModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "aspnet_UsersCV", "CV")]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "UserCV", "CV")]
         public CV CVs
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CV>("GhostmonkMainSiteModel.aspnet_UsersCV", "CV").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CV>("GhostmonkMainSiteModel.UserCV", "CV").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CV>("GhostmonkMainSiteModel.aspnet_UsersCV", "CV").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CV>("GhostmonkMainSiteModel.UserCV", "CV").Value = value;
             }
         }
         /// <summary>
@@ -2507,13 +2816,51 @@ namespace GhostmonkMainSiteModel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CV>("GhostmonkMainSiteModel.aspnet_UsersCV", "CV");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CV>("GhostmonkMainSiteModel.UserCV", "CV");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<CV>("GhostmonkMainSiteModel.aspnet_UsersCV", "CV", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<CV>("GhostmonkMainSiteModel.UserCV", "CV", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GhostmonkMainSiteModel", "UserLoginCredential", "LoginCredential")]
+        public LoginCredential LoginCredentials
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LoginCredential>("GhostmonkMainSiteModel.UserLoginCredential", "LoginCredential").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LoginCredential>("GhostmonkMainSiteModel.UserLoginCredential", "LoginCredential").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<LoginCredential> LoginCredentialsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LoginCredential>("GhostmonkMainSiteModel.UserLoginCredential", "LoginCredential");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LoginCredential>("GhostmonkMainSiteModel.UserLoginCredential", "LoginCredential", value);
                 }
             }
         }

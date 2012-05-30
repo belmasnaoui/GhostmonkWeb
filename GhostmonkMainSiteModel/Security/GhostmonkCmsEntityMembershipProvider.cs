@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Configuration.Provider;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Configuration;
@@ -64,12 +65,12 @@ namespace GhostmonkMainSiteModel.Security
             this.config = config;
 
             if( string.IsNullOrEmpty( name ) )
-                name = "OdbcMembershipProvider";
+                name = "GhostmonkMembershipProvider";
 
             if( string.IsNullOrEmpty( config[ "description" ] ) )
             {
                 config.Remove( "description" );
-                config.Add( "description", "Sample ODBC Membership provider" );
+                config.Add( "description", "Ghostmonk Membership provider" );
             }
 
             base.Initialize( name, config );
@@ -85,9 +86,7 @@ namespace GhostmonkMainSiteModel.Security
             ConnectionStringSettings connectionStringSettings = ConfigurationManager.ConnectionStrings[ config[ "connectionStringName" ] ];
 
             if( connectionStringSettings == null || connectionStringSettings.ConnectionString.Trim() == "" )
-            {
                 throw new ProviderException( "Connection string cannot be blank." );
-            }
 
             connectionString = connectionStringSettings.ConnectionString;
 
@@ -108,26 +107,31 @@ namespace GhostmonkMainSiteModel.Security
             if( args.Cancel )
                 throw args.FailureInformation ?? new MembershipPasswordException( "Change password canceled due to new password validation failure." );
 
-            bool success = false;
             using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
             {
+                User user = GetUser( container, username, EncodePassword( oldPwd ) );
                 
-            }
+                if( user == null ) return false;
 
-            return success;
+                user.LoginCredentials.Password = EncodePassword( newPwd );
+                container.AcceptAllChanges();
+                container.SaveChanges();
+                return true;
+            }
         }
 
         public override bool ChangePasswordQuestionAndAnswer( string username, string password, string newPwdQuestion, string newPwdAnswer )
         {
             if( !ValidateUser( username, password ) ) return false;
 
-            bool success = false;
             using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
             {
-
+                User user = GetUser( container, username, password );
+                user.LoginCredentials.PasswordQuestion = newPwdQuestion;
+                user.LoginCredentials.PasswordAnswer = newPwdAnswer;
+                container.AcceptAllChanges();
+                return container.SaveChanges() > 0;
             }
-
-            return success;
         }
 
         public override MembershipUser CreateUser( string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status )
@@ -146,10 +150,8 @@ namespace GhostmonkMainSiteModel.Security
                 status = MembershipCreateStatus.DuplicateEmail;
                 return null;
             }
-
-            MembershipUser user = GetUser( username, false );
-
-            if( user != null )
+            
+            if( GetUser( username, false ) != null )
             {
                 status = MembershipCreateStatus.DuplicateUserName;
                 return null;
@@ -157,43 +159,42 @@ namespace GhostmonkMainSiteModel.Security
 
             using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
             {
-
+                container.AddToUsers( new User(){  } );
+                status = MembershipCreateStatus.Success;
+                return GetUser( username, false );
             }
-
-            status = MembershipCreateStatus.Success;
-            return GetUser( username, false );
         }
 
         public override bool DeleteUser( string username, bool deleteAllRelatedData )
         {
-            bool success = false;
             using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
             {
-
+                User user = (from u in container.Users where u.LoginCredentials.UserName == username select u).FirstOrDefault();
+                if( user == null ) return false;
+                container.DeleteObject( user.LoginCredentials );
+                container.DeleteObject( user );
+                container.AcceptAllChanges();
+                return container.SaveChanges() > 0;
             }
-
-            return success;
         }
 
         public override MembershipUserCollection GetAllUsers( int pageIndex, int pageSize, out int totalRecords )
         {
-            MembershipUserCollection users = new MembershipUserCollection();
-            totalRecords = 0;
             using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
             {
-
+                totalRecords = container.Users.Count();
+                GhostmonkMembershipUser user = new GhostmonkMembershipUser( "", "", "", "", "", "", true, false, DateTime.Now(),  );
+                
+                return new MembershipUserCollection();
             }
-            return users;
         }
 
         public override int GetNumberOfUsersOnline()
         {
-            int numOnline = 0;
             using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
             {
-
+                return 0;
             }
-            return numOnline;
         }
 
         public override string GetPassword( string username, string answer )
@@ -204,70 +205,58 @@ namespace GhostmonkMainSiteModel.Security
             if( PasswordFormat == MembershipPasswordFormat.Hashed )
                 throw new ProviderException( "Cannot retrieve Hashed passwords." );
 
-            string password = string.Empty;
-            string passwordAnswer = string.Empty;
-
-            if( RequiresQuestionAndAnswer && !CheckPassword( answer, passwordAnswer ) )
-            {
-                UpdateFailureCount( username, "passwordAnswer" );
-                throw new MembershipPasswordException( "Incorrect password answer." );
-            }
-
-            if( PasswordFormat == MembershipPasswordFormat.Encrypted )
-                password = UnEncodePassword( password );
-
             using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
             {
+                User user = ( from u in container.Users
+                              where u.LoginCredentials.UserName == username 
+                              select u ).FirstOrDefault();
 
+                if( user == null )
+                    throw new MembershipPasswordException( "Cannot find user" );
+
+                if( user.LoginCredentials.PasswordAnswer != answer )
+                {
+                    UpdateFailureCount( username, "Incorrect Answer" );
+                    throw new MembershipPasswordException( "Provided answer does not match our record." );
+                }
+                return PasswordFormat == MembershipPasswordFormat.Encrypted 
+                    ? UnEncodePassword( user.LoginCredentials.Password ) 
+                    : user.LoginCredentials.Password;
             }
-
-            return password;
         }
 
         public override MembershipUser GetUser( string username, bool userIsOnline )
         {
-            MembershipUser user = null;
-
             using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
             {
-
+                return null;
             }
-
-            return user;
         }
 
         public override MembershipUser GetUser( object providerUserKey, bool userIsOnline )
         {
-            MembershipUser user = null;
-
             using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
             {
-
+                return null;
             }
-
-            return user;
         }
 
         public override bool UnlockUser( string username )
         {
             using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
             {
-
+                return false;
             }
-
-            return true;
         }
 
         public override string GetUserNameByEmail( string email )
         {
-            string username = null;
-
             using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
             {
-
+                return (from user in container.Users 
+                        where user.Email == email 
+                        select user.LoginCredentials.UserName).FirstOrDefault();
             }
-
-            return username;
         }
         
         public override string ResetPassword( string username, string answer )
@@ -289,14 +278,10 @@ namespace GhostmonkMainSiteModel.Security
             if( args.Cancel )
                 throw args.FailureInformation ?? new MembershipPasswordException( "Reset password canceled due to password validation failure." );
 
-            string passwordAnswer = "";
-
             using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
             {
-
+                return string.Empty;
             }
-
-            return passwordAnswer;
         }
 
         public override void UpdateUser( MembershipUser user )
@@ -309,40 +294,41 @@ namespace GhostmonkMainSiteModel.Security
 
         public override bool ValidateUser( string username, string password )
         {
-            bool isValid = false;
-
-            using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
-            {
-
-            }
-
-            return isValid;
+            return GetUser( username, password ) != null;
         }
 
         public override MembershipUserCollection FindUsersByName( string usernameToMatch, int pageIndex, int pageSize, out int totalRecords )
         {
-            MembershipUserCollection users = new MembershipUserCollection();
-            totalRecords = 0;
-
             using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
             {
-
+                totalRecords = 0;
+                return  new MembershipUserCollection();
             }
-
-            return users;
         }
 
         public override MembershipUserCollection FindUsersByEmail( string emailToMatch, int pageIndex, int pageSize, out int totalRecords )
         {
-            MembershipUserCollection users = new MembershipUserCollection();
-            totalRecords = 0;
-
             using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
             {
-
+                totalRecords = 0;
+                return new MembershipUserCollection();
             }
+        }
 
-            return users;
+        private User GetUser( string username, string password )
+        {
+            using( GhostmonkMainSiteModelContainer container = new GhostmonkMainSiteModelContainer( connectionString ) )
+            {
+                return GetUser( container, username, password );
+            }
+        }
+
+        private User GetUser( GhostmonkMainSiteModelContainer container, string username, string password )
+        {
+            string encodedPassword = EncodePassword( password );
+            return ( from user in container.Users
+                        where user.LoginCredentials.UserName == username && user.LoginCredentials.Password == encodedPassword
+                        select user ).FirstOrDefault();
         }
 
         private void UpdateFailureCount( string username, string failureType )
@@ -375,13 +361,11 @@ namespace GhostmonkMainSiteModel.Security
                 case MembershipPasswordFormat.Clear:
                     break;
                 case MembershipPasswordFormat.Encrypted:
-                    encodedPassword =
-                        Convert.ToBase64String( EncryptPassword( Encoding.Unicode.GetBytes( password ) ) );
+                    encodedPassword = Convert.ToBase64String( EncryptPassword( Encoding.Unicode.GetBytes( password ) ) );
                     break;
                 case MembershipPasswordFormat.Hashed:
                     var hash = new HMACSHA1 { Key = HexToByte( machineKey.ValidationKey ) };
-                    encodedPassword =
-                        Convert.ToBase64String( hash.ComputeHash( Encoding.Unicode.GetBytes( password ) ) );
+                    encodedPassword = Convert.ToBase64String( hash.ComputeHash( Encoding.Unicode.GetBytes( password ) ) );
                     break;
                 default:
                     throw new ProviderException( "Unsupported password format." );
@@ -399,8 +383,7 @@ namespace GhostmonkMainSiteModel.Security
                 case MembershipPasswordFormat.Clear:
                     break;
                 case MembershipPasswordFormat.Encrypted:
-                    password =
-                        Encoding.Unicode.GetString( DecryptPassword( Convert.FromBase64String( password ) ) );
+                    password = Encoding.Unicode.GetString( DecryptPassword( Convert.FromBase64String( password ) ) );
                     break;
                 case MembershipPasswordFormat.Hashed:
                     throw new ProviderException( "Cannot unencode a hashed password." );

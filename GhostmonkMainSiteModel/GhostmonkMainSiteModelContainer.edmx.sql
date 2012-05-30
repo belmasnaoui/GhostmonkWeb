@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 05/21/2012 18:46:28
+-- Date Created: 05/26/2012 13:48:13
 -- Generated from EDMX file: D:\Projects\ghostmonk\GhostmonkWeb\GhostmonkMainSiteModel\GhostmonkMainSiteModelContainer.edmx
 -- --------------------------------------------------
 
@@ -71,6 +71,18 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_JournalArticle]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Articles] DROP CONSTRAINT [FK_JournalArticle];
 GO
+IF OBJECT_ID(N'[dbo].[FK_UserLoginInfo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_UserLoginInfo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserArticle]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Articles] DROP CONSTRAINT [FK_UserArticle];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserJournal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_UserJournal];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserCV]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_UserCV];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -112,6 +124,12 @@ GO
 IF OBJECT_ID(N'[dbo].[Videos]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Videos];
 GO
+IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users];
+GO
+IF OBJECT_ID(N'[dbo].[LoginCredentials]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[LoginCredentials];
+GO
 IF OBJECT_ID(N'[dbo].[WorkExperiencesSkills]', 'U') IS NOT NULL
     DROP TABLE [dbo].[WorkExperiencesSkills];
 GO
@@ -138,7 +156,7 @@ CREATE TABLE [dbo].[Articles] (
     [Summary] nvarchar(max)  NULL,
     [LinkText] nvarchar(max)  NOT NULL,
     [Journal_Id] int  NOT NULL,
-    [aspnet_Users_UserId] uniqueidentifier  NOT NULL
+    [User_Id] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -171,8 +189,7 @@ CREATE TABLE [dbo].[CVs] (
     [City] nvarchar(max)  NOT NULL,
     [Area] nvarchar(max)  NOT NULL,
     [Country] nvarchar(max)  NOT NULL,
-    [Summary] nvarchar(max)  NOT NULL,
-    [aspnet_Users_UserId] uniqueidentifier  NOT NULL
+    [Summary] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -237,128 +254,26 @@ CREATE TABLE [dbo].[Videos] (
 );
 GO
 
--- Creating table 'aspnet_Applications'
-CREATE TABLE [dbo].[aspnet_Applications] (
-    [ApplicationName] nvarchar(256)  NOT NULL,
-    [LoweredApplicationName] nvarchar(256)  NOT NULL,
-    [ApplicationId] uniqueidentifier  NOT NULL,
-    [Description] nvarchar(256)  NULL
-);
-GO
-
--- Creating table 'aspnet_Membership'
-CREATE TABLE [dbo].[aspnet_Membership] (
-    [ApplicationId] uniqueidentifier  NOT NULL,
-    [UserId] uniqueidentifier  NOT NULL,
-    [Password] nvarchar(128)  NOT NULL,
-    [PasswordFormat] int  NOT NULL,
-    [PasswordSalt] nvarchar(128)  NOT NULL,
-    [MobilePIN] nvarchar(16)  NULL,
-    [Email] nvarchar(256)  NULL,
-    [LoweredEmail] nvarchar(256)  NULL,
-    [PasswordQuestion] nvarchar(256)  NULL,
-    [PasswordAnswer] nvarchar(128)  NULL,
-    [IsApproved] bit  NOT NULL,
-    [IsLockedOut] bit  NOT NULL,
-    [CreateDate] datetime  NOT NULL,
-    [LastLoginDate] datetime  NOT NULL,
-    [LastPasswordChangedDate] datetime  NOT NULL,
-    [LastLockoutDate] datetime  NOT NULL,
-    [FailedPasswordAttemptCount] int  NOT NULL,
-    [FailedPasswordAttemptWindowStart] datetime  NOT NULL,
-    [FailedPasswordAnswerAttemptCount] int  NOT NULL,
-    [FailedPasswordAnswerAttemptWindowStart] datetime  NOT NULL,
-    [Comment] nvarchar(max)  NULL
-);
-GO
-
--- Creating table 'aspnet_Paths'
-CREATE TABLE [dbo].[aspnet_Paths] (
-    [ApplicationId] uniqueidentifier  NOT NULL,
-    [PathId] uniqueidentifier  NOT NULL,
-    [Path] nvarchar(256)  NOT NULL,
-    [LoweredPath] nvarchar(256)  NOT NULL
-);
-GO
-
--- Creating table 'aspnet_PersonalizationAllUsers'
-CREATE TABLE [dbo].[aspnet_PersonalizationAllUsers] (
-    [PathId] uniqueidentifier  NOT NULL,
-    [PageSettings] varbinary(max)  NOT NULL,
-    [LastUpdatedDate] datetime  NOT NULL
-);
-GO
-
--- Creating table 'aspnet_PersonalizationPerUser'
-CREATE TABLE [dbo].[aspnet_PersonalizationPerUser] (
+-- Creating table 'Users'
+CREATE TABLE [dbo].[Users] (
     [Id] uniqueidentifier  NOT NULL,
-    [PathId] uniqueidentifier  NULL,
-    [UserId] uniqueidentifier  NULL,
-    [PageSettings] varbinary(max)  NOT NULL,
-    [LastUpdatedDate] datetime  NOT NULL
-);
-GO
-
--- Creating table 'aspnet_Profile'
-CREATE TABLE [dbo].[aspnet_Profile] (
-    [UserId] uniqueidentifier  NOT NULL,
-    [PropertyNames] nvarchar(max)  NOT NULL,
-    [PropertyValuesString] nvarchar(max)  NOT NULL,
-    [PropertyValuesBinary] varbinary(max)  NOT NULL,
-    [LastUpdatedDate] datetime  NOT NULL
-);
-GO
-
--- Creating table 'aspnet_Roles'
-CREATE TABLE [dbo].[aspnet_Roles] (
-    [ApplicationId] uniqueidentifier  NOT NULL,
-    [RoleId] uniqueidentifier  NOT NULL,
-    [RoleName] nvarchar(256)  NOT NULL,
-    [LoweredRoleName] nvarchar(256)  NOT NULL,
-    [Description] nvarchar(256)  NULL
-);
-GO
-
--- Creating table 'aspnet_SchemaVersions'
-CREATE TABLE [dbo].[aspnet_SchemaVersions] (
-    [Feature] nvarchar(128)  NOT NULL,
-    [CompatibleSchemaVersion] nvarchar(128)  NOT NULL,
-    [IsCurrentVersion] bit  NOT NULL
-);
-GO
-
--- Creating table 'aspnet_Users'
-CREATE TABLE [dbo].[aspnet_Users] (
-    [ApplicationId] uniqueidentifier  NOT NULL,
-    [UserId] uniqueidentifier  NOT NULL,
-    [UserName] nvarchar(256)  NOT NULL,
-    [LoweredUserName] nvarchar(256)  NOT NULL,
-    [MobileAlias] nvarchar(16)  NULL,
-    [IsAnonymous] bit  NOT NULL,
-    [LastActivityDate] datetime  NOT NULL,
     [FirstName] nvarchar(max)  NOT NULL,
     [LastName] nvarchar(max)  NOT NULL,
-    [ScreenName] nvarchar(max)  NOT NULL
+    [ScreenName] nvarchar(max)  NOT NULL,
+    [Email] nvarchar(max)  NOT NULL,
+    [Journals_Id] int  NOT NULL,
+    [CVs_Id] int  NOT NULL,
+    [LoginCredentials_Id] int  NOT NULL
 );
 GO
 
--- Creating table 'aspnet_WebEvent_Events'
-CREATE TABLE [dbo].[aspnet_WebEvent_Events] (
-    [EventId] char(32)  NOT NULL,
-    [EventTimeUtc] datetime  NOT NULL,
-    [EventTime] datetime  NOT NULL,
-    [EventType] nvarchar(256)  NOT NULL,
-    [EventSequence] decimal(19,0)  NOT NULL,
-    [EventOccurrence] decimal(19,0)  NOT NULL,
-    [EventCode] int  NOT NULL,
-    [EventDetailCode] int  NOT NULL,
-    [Message] nvarchar(1024)  NULL,
-    [ApplicationPath] nvarchar(256)  NULL,
-    [ApplicationVirtualPath] nvarchar(256)  NULL,
-    [MachineName] nvarchar(256)  NOT NULL,
-    [RequestUrl] nvarchar(1024)  NULL,
-    [ExceptionType] nvarchar(256)  NULL,
-    [Details] nvarchar(max)  NULL
+-- Creating table 'LoginCredentials'
+CREATE TABLE [dbo].[LoginCredentials] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Password] nvarchar(max)  NOT NULL,
+    [PasswordQuestion] nvarchar(max)  NOT NULL,
+    [PasswordAnswer] nvarchar(max)  NOT NULL,
+    [UserName] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -387,20 +302,6 @@ GO
 CREATE TABLE [dbo].[SlideshowImage] (
     [Slideshow_Id] int  NOT NULL,
     [Images_Id] int  NOT NULL
-);
-GO
-
--- Creating table 'aspnet_UsersInRoles'
-CREATE TABLE [dbo].[aspnet_UsersInRoles] (
-    [aspnet_Roles_RoleId] uniqueidentifier  NOT NULL,
-    [aspnet_Users_UserId] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'Journalaspnet_Users'
-CREATE TABLE [dbo].[Journalaspnet_Users] (
-    [Journal_Id] int  NOT NULL,
-    [aspnet_Users_UserId] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -480,64 +381,16 @@ ADD CONSTRAINT [PK_Videos]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [ApplicationId] in table 'aspnet_Applications'
-ALTER TABLE [dbo].[aspnet_Applications]
-ADD CONSTRAINT [PK_aspnet_Applications]
-    PRIMARY KEY CLUSTERED ([ApplicationId] ASC);
-GO
-
--- Creating primary key on [UserId] in table 'aspnet_Membership'
-ALTER TABLE [dbo].[aspnet_Membership]
-ADD CONSTRAINT [PK_aspnet_Membership]
-    PRIMARY KEY CLUSTERED ([UserId] ASC);
-GO
-
--- Creating primary key on [PathId] in table 'aspnet_Paths'
-ALTER TABLE [dbo].[aspnet_Paths]
-ADD CONSTRAINT [PK_aspnet_Paths]
-    PRIMARY KEY CLUSTERED ([PathId] ASC);
-GO
-
--- Creating primary key on [PathId] in table 'aspnet_PersonalizationAllUsers'
-ALTER TABLE [dbo].[aspnet_PersonalizationAllUsers]
-ADD CONSTRAINT [PK_aspnet_PersonalizationAllUsers]
-    PRIMARY KEY CLUSTERED ([PathId] ASC);
-GO
-
--- Creating primary key on [Id] in table 'aspnet_PersonalizationPerUser'
-ALTER TABLE [dbo].[aspnet_PersonalizationPerUser]
-ADD CONSTRAINT [PK_aspnet_PersonalizationPerUser]
+-- Creating primary key on [Id] in table 'Users'
+ALTER TABLE [dbo].[Users]
+ADD CONSTRAINT [PK_Users]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [UserId] in table 'aspnet_Profile'
-ALTER TABLE [dbo].[aspnet_Profile]
-ADD CONSTRAINT [PK_aspnet_Profile]
-    PRIMARY KEY CLUSTERED ([UserId] ASC);
-GO
-
--- Creating primary key on [RoleId] in table 'aspnet_Roles'
-ALTER TABLE [dbo].[aspnet_Roles]
-ADD CONSTRAINT [PK_aspnet_Roles]
-    PRIMARY KEY CLUSTERED ([RoleId] ASC);
-GO
-
--- Creating primary key on [Feature], [CompatibleSchemaVersion] in table 'aspnet_SchemaVersions'
-ALTER TABLE [dbo].[aspnet_SchemaVersions]
-ADD CONSTRAINT [PK_aspnet_SchemaVersions]
-    PRIMARY KEY CLUSTERED ([Feature], [CompatibleSchemaVersion] ASC);
-GO
-
--- Creating primary key on [UserId] in table 'aspnet_Users'
-ALTER TABLE [dbo].[aspnet_Users]
-ADD CONSTRAINT [PK_aspnet_Users]
-    PRIMARY KEY CLUSTERED ([UserId] ASC);
-GO
-
--- Creating primary key on [EventId] in table 'aspnet_WebEvent_Events'
-ALTER TABLE [dbo].[aspnet_WebEvent_Events]
-ADD CONSTRAINT [PK_aspnet_WebEvent_Events]
-    PRIMARY KEY CLUSTERED ([EventId] ASC);
+-- Creating primary key on [Id] in table 'LoginCredentials'
+ALTER TABLE [dbo].[LoginCredentials]
+ADD CONSTRAINT [PK_LoginCredentials]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [WorkExperience_Id], [Skill_Id] in table 'WorkExperiencesSkills'
@@ -562,18 +415,6 @@ GO
 ALTER TABLE [dbo].[SlideshowImage]
 ADD CONSTRAINT [PK_SlideshowImage]
     PRIMARY KEY NONCLUSTERED ([Slideshow_Id], [Images_Id] ASC);
-GO
-
--- Creating primary key on [aspnet_Roles_RoleId], [aspnet_Users_UserId] in table 'aspnet_UsersInRoles'
-ALTER TABLE [dbo].[aspnet_UsersInRoles]
-ADD CONSTRAINT [PK_aspnet_UsersInRoles]
-    PRIMARY KEY NONCLUSTERED ([aspnet_Roles_RoleId], [aspnet_Users_UserId] ASC);
-GO
-
--- Creating primary key on [Journal_Id], [aspnet_Users_UserId] in table 'Journalaspnet_Users'
-ALTER TABLE [dbo].[Journalaspnet_Users]
-ADD CONSTRAINT [PK_Journalaspnet_Users]
-    PRIMARY KEY NONCLUSTERED ([Journal_Id], [aspnet_Users_UserId] ASC);
 GO
 
 -- --------------------------------------------------
@@ -812,189 +653,60 @@ ON [dbo].[Articles]
     ([Journal_Id]);
 GO
 
--- Creating foreign key on [ApplicationId] in table 'aspnet_Membership'
-ALTER TABLE [dbo].[aspnet_Membership]
-ADD CONSTRAINT [FK__aspnet_Me__Appli__21B6055D]
-    FOREIGN KEY ([ApplicationId])
-    REFERENCES [dbo].[aspnet_Applications]
-        ([ApplicationId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK__aspnet_Me__Appli__21B6055D'
-CREATE INDEX [IX_FK__aspnet_Me__Appli__21B6055D]
-ON [dbo].[aspnet_Membership]
-    ([ApplicationId]);
-GO
-
--- Creating foreign key on [ApplicationId] in table 'aspnet_Paths'
-ALTER TABLE [dbo].[aspnet_Paths]
-ADD CONSTRAINT [FK__aspnet_Pa__Appli__5AEE82B9]
-    FOREIGN KEY ([ApplicationId])
-    REFERENCES [dbo].[aspnet_Applications]
-        ([ApplicationId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK__aspnet_Pa__Appli__5AEE82B9'
-CREATE INDEX [IX_FK__aspnet_Pa__Appli__5AEE82B9]
-ON [dbo].[aspnet_Paths]
-    ([ApplicationId]);
-GO
-
--- Creating foreign key on [ApplicationId] in table 'aspnet_Roles'
-ALTER TABLE [dbo].[aspnet_Roles]
-ADD CONSTRAINT [FK__aspnet_Ro__Appli__440B1D61]
-    FOREIGN KEY ([ApplicationId])
-    REFERENCES [dbo].[aspnet_Applications]
-        ([ApplicationId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK__aspnet_Ro__Appli__440B1D61'
-CREATE INDEX [IX_FK__aspnet_Ro__Appli__440B1D61]
-ON [dbo].[aspnet_Roles]
-    ([ApplicationId]);
-GO
-
--- Creating foreign key on [ApplicationId] in table 'aspnet_Users'
-ALTER TABLE [dbo].[aspnet_Users]
-ADD CONSTRAINT [FK__aspnet_Us__Appli__0DAF0CB0]
-    FOREIGN KEY ([ApplicationId])
-    REFERENCES [dbo].[aspnet_Applications]
-        ([ApplicationId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK__aspnet_Us__Appli__0DAF0CB0'
-CREATE INDEX [IX_FK__aspnet_Us__Appli__0DAF0CB0]
-ON [dbo].[aspnet_Users]
-    ([ApplicationId]);
-GO
-
--- Creating foreign key on [UserId] in table 'aspnet_Membership'
-ALTER TABLE [dbo].[aspnet_Membership]
-ADD CONSTRAINT [FK__aspnet_Me__UserI__22AA2996]
-    FOREIGN KEY ([UserId])
-    REFERENCES [dbo].[aspnet_Users]
-        ([UserId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [PathId] in table 'aspnet_PersonalizationAllUsers'
-ALTER TABLE [dbo].[aspnet_PersonalizationAllUsers]
-ADD CONSTRAINT [FK__aspnet_Pe__PathI__628FA481]
-    FOREIGN KEY ([PathId])
-    REFERENCES [dbo].[aspnet_Paths]
-        ([PathId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [PathId] in table 'aspnet_PersonalizationPerUser'
-ALTER TABLE [dbo].[aspnet_PersonalizationPerUser]
-ADD CONSTRAINT [FK__aspnet_Pe__PathI__68487DD7]
-    FOREIGN KEY ([PathId])
-    REFERENCES [dbo].[aspnet_Paths]
-        ([PathId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK__aspnet_Pe__PathI__68487DD7'
-CREATE INDEX [IX_FK__aspnet_Pe__PathI__68487DD7]
-ON [dbo].[aspnet_PersonalizationPerUser]
-    ([PathId]);
-GO
-
--- Creating foreign key on [UserId] in table 'aspnet_PersonalizationPerUser'
-ALTER TABLE [dbo].[aspnet_PersonalizationPerUser]
-ADD CONSTRAINT [FK__aspnet_Pe__UserI__693CA210]
-    FOREIGN KEY ([UserId])
-    REFERENCES [dbo].[aspnet_Users]
-        ([UserId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK__aspnet_Pe__UserI__693CA210'
-CREATE INDEX [IX_FK__aspnet_Pe__UserI__693CA210]
-ON [dbo].[aspnet_PersonalizationPerUser]
-    ([UserId]);
-GO
-
--- Creating foreign key on [UserId] in table 'aspnet_Profile'
-ALTER TABLE [dbo].[aspnet_Profile]
-ADD CONSTRAINT [FK__aspnet_Pr__UserI__38996AB5]
-    FOREIGN KEY ([UserId])
-    REFERENCES [dbo].[aspnet_Users]
-        ([UserId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [aspnet_Roles_RoleId] in table 'aspnet_UsersInRoles'
-ALTER TABLE [dbo].[aspnet_UsersInRoles]
-ADD CONSTRAINT [FK_aspnet_UsersInRoles_aspnet_Roles]
-    FOREIGN KEY ([aspnet_Roles_RoleId])
-    REFERENCES [dbo].[aspnet_Roles]
-        ([RoleId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [aspnet_Users_UserId] in table 'aspnet_UsersInRoles'
-ALTER TABLE [dbo].[aspnet_UsersInRoles]
-ADD CONSTRAINT [FK_aspnet_UsersInRoles_aspnet_Users]
-    FOREIGN KEY ([aspnet_Users_UserId])
-    REFERENCES [dbo].[aspnet_Users]
-        ([UserId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_aspnet_UsersInRoles_aspnet_Users'
-CREATE INDEX [IX_FK_aspnet_UsersInRoles_aspnet_Users]
-ON [dbo].[aspnet_UsersInRoles]
-    ([aspnet_Users_UserId]);
-GO
-
--- Creating foreign key on [aspnet_Users_UserId] in table 'Articles'
+-- Creating foreign key on [User_Id] in table 'Articles'
 ALTER TABLE [dbo].[Articles]
-ADD CONSTRAINT [FK_aspnet_UsersArticle]
-    FOREIGN KEY ([aspnet_Users_UserId])
-    REFERENCES [dbo].[aspnet_Users]
-        ([UserId])
+ADD CONSTRAINT [FK_UserArticle]
+    FOREIGN KEY ([User_Id])
+    REFERENCES [dbo].[Users]
+        ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_aspnet_UsersArticle'
-CREATE INDEX [IX_FK_aspnet_UsersArticle]
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserArticle'
+CREATE INDEX [IX_FK_UserArticle]
 ON [dbo].[Articles]
-    ([aspnet_Users_UserId]);
+    ([User_Id]);
 GO
 
--- Creating foreign key on [Journal_Id] in table 'Journalaspnet_Users'
-ALTER TABLE [dbo].[Journalaspnet_Users]
-ADD CONSTRAINT [FK_Journalaspnet_Users_Journal]
-    FOREIGN KEY ([Journal_Id])
+-- Creating foreign key on [Journals_Id] in table 'Users'
+ALTER TABLE [dbo].[Users]
+ADD CONSTRAINT [FK_UserJournal]
+    FOREIGN KEY ([Journals_Id])
     REFERENCES [dbo].[Journals]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserJournal'
+CREATE INDEX [IX_FK_UserJournal]
+ON [dbo].[Users]
+    ([Journals_Id]);
 GO
 
--- Creating foreign key on [aspnet_Users_UserId] in table 'Journalaspnet_Users'
-ALTER TABLE [dbo].[Journalaspnet_Users]
-ADD CONSTRAINT [FK_Journalaspnet_Users_aspnet_Users]
-    FOREIGN KEY ([aspnet_Users_UserId])
-    REFERENCES [dbo].[aspnet_Users]
-        ([UserId])
+-- Creating foreign key on [CVs_Id] in table 'Users'
+ALTER TABLE [dbo].[Users]
+ADD CONSTRAINT [FK_UserCV]
+    FOREIGN KEY ([CVs_Id])
+    REFERENCES [dbo].[CVs]
+        ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_Journalaspnet_Users_aspnet_Users'
-CREATE INDEX [IX_FK_Journalaspnet_Users_aspnet_Users]
-ON [dbo].[Journalaspnet_Users]
-    ([aspnet_Users_UserId]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserCV'
+CREATE INDEX [IX_FK_UserCV]
+ON [dbo].[Users]
+    ([CVs_Id]);
 GO
 
--- Creating foreign key on [aspnet_Users_UserId] in table 'CVs'
-ALTER TABLE [dbo].[CVs]
-ADD CONSTRAINT [FK_aspnet_UsersCV]
-    FOREIGN KEY ([aspnet_Users_UserId])
-    REFERENCES [dbo].[aspnet_Users]
-        ([UserId])
+-- Creating foreign key on [LoginCredentials_Id] in table 'Users'
+ALTER TABLE [dbo].[Users]
+ADD CONSTRAINT [FK_UserLoginCredential]
+    FOREIGN KEY ([LoginCredentials_Id])
+    REFERENCES [dbo].[LoginCredentials]
+        ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_aspnet_UsersCV'
-CREATE INDEX [IX_FK_aspnet_UsersCV]
-ON [dbo].[CVs]
-    ([aspnet_Users_UserId]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserLoginCredential'
+CREATE INDEX [IX_FK_UserLoginCredential]
+ON [dbo].[Users]
+    ([LoginCredentials_Id]);
 GO
 
 -- --------------------------------------------------
